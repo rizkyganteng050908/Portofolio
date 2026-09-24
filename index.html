@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mochammad Rizky Ramadhan - Web Developer Portfolio</title>
+    <!-- TEMPAT 1: Mengubah nama di Tab Browser -->
+    <title>Mochamad Rizky Ramadhan - Web Developer Portfolio</title>
     <meta name="google-site-verification" content="Sh2njlrFvj3e6tG1Jjo3tlO9cOv5TUlcwpwBrlynrv0" />
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -67,18 +68,17 @@
         <!-- Background Gradient Glow -->
         <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
 
-        <!-- Parent div modified with 'flex flex-col items-center' to center all content -->
         <div class="max-w-4xl text-center space-y-6 relative z-10 flex flex-col items-center">
             
-            <!-- ====== FOTO PROFIL (TAMBAHAN BARU) ====== -->
+            <!-- ====== FOTO PROFIL ====== -->
             <div class="relative group mb-4">
-                <!-- Efek Glow di belakang foto -->
+                <!-- Efek Glow -->
                 <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
                 
                 <!-- Tag Gambar -->
                 <img 
                     src="Orang Misterius.jpeg" 
-                    alt="Foto Profil Mochammad Rizky Ramadhan" 
+                    alt="Foto Profil Mochamad Rizky Ramadhan" 
                     class="relative w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-slate-800 shadow-2xl"
                 >
             </div>
@@ -88,8 +88,9 @@
                 <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span> Open for Freelance & Projects
             </div>
             
+            <!-- TEMPAT 2: Mengubah nama di Halaman Utama (Heading) -->
             <h1 class="text-4xl md:text-7xl font-extrabold text-white tracking-tight leading-tight">
-                Mochammad Rizky Ramadhan
+                Mochamad Rizky Ramadhan
             </h1>
             
             <p class="text-lg md:text-2xl text-slate-400 font-light max-w-2xl mx-auto leading-relaxed">
@@ -245,7 +246,7 @@
 
     <!-- Footer -->
     <footer class="py-8 border-t border-slate-950 text-center text-xs text-slate-500">
-        <p>&copy; 2026 Mochammad Rizky Ramadhan. Built with Tailwind CSS & Hosted on Vercel.</p>
+        <p>&copy; 2026 Mochamad Rizky Ramadhan. Built with Tailwind CSS & Hosted on Vercel.</p>
     </footer>
 
     <!-- Interactive Scripts -->
@@ -262,7 +263,6 @@
         function copyEmail() {
             const email = document.getElementById('email-text').innerText;
             navigator.clipboard.writeText(email);
-            // Simple alert, can be replaced with a toast notification
             alert('Email berhasil disalin ke clipboard!');
         }
 
@@ -271,16 +271,13 @@
             const cards = document.querySelectorAll('.project-card');
             const buttons = document.querySelectorAll('.filter-btn');
 
-            // Update button states
             buttons.forEach(btn => {
                 btn.classList.remove('bg-blue-600', 'text-white');
                 btn.classList.add('bg-slate-800', 'text-slate-400');
             });
-            // highlight active button
             event.target.classList.remove('bg-slate-800', 'text-slate-400');
             event.target.classList.add('bg-blue-600', 'text-white');
 
-            // Show/Hide cards
             cards.forEach(card => {
                 if (category === 'all' || card.classList.contains(category)) {
                     card.style.display = 'flex';
