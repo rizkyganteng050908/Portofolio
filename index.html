@@ -210,12 +210,12 @@
         </div>
     </section>
 
-    <!-- ====== FITUR BARU: INTERACTIVE TERMINAL WIDGET ====== -->
+    <!-- ====== FITUR: INTERACTIVE TERMINAL WIDGET (DENGAN PERINTAH LENGKAP) ====== -->
     <section id="terminal" class="py-20 px-6">
         <div class="max-w-4xl mx-auto space-y-6">
             <div class="text-center space-y-2">
                 <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">Developer CLI Terminal</h2>
-                <p class="text-xs md:text-sm text-slate-400">Ketik perintah seperti <code class="bg-slate-800 px-1.5 py-0.5 rounded text-blue-400 font-mono">help</code>, <code class="bg-slate-800 px-1.5 py-0.5 rounded text-blue-400 font-mono">skills</code>, atau <code class="bg-slate-800 px-1.5 py-0.5 rounded text-blue-400 font-mono">clear</code> untuk interaksi langsung.</p>
+                <p class="text-xs md:text-sm text-slate-400">Ketik perintah seperti <code class="bg-slate-800 px-1.5 py-0.5 rounded text-blue-400 font-mono">help</code>, <code class="bg-slate-800 px-1.5 py-0.5 rounded text-blue-400 font-mono">projects</code>, atau <code class="bg-slate-800 px-1.5 py-0.5 rounded text-blue-400 font-mono">clear</code> untuk interaksi langsung.</p>
             </div>
 
             <div class="bg-slate-900 rounded-2xl border border-slate-800 shadow-2xl overflow-hidden font-mono text-xs md:text-sm">
@@ -226,11 +226,11 @@
                         <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
                         <span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
                     </div>
-                    <span class="text-slate-500 text-xs">rzr-cli v1.0.0</span>
+                    <span class="text-slate-500 text-xs">rzr-cli v1.1.0</span>
                 </div>
 
                 <!-- Terminal Body -->
-                <div id="terminal-body" class="p-6 space-y-3 h-64 overflow-y-auto text-slate-300">
+                <div id="terminal-body" class="p-6 space-y-3 h-72 overflow-y-auto text-slate-300">
                     <p class="text-blue-400">Welcome to RZR Developer Terminal!</p>
                     <p class="text-slate-400">Type <span class="text-emerald-400">'help'</span> to see available commands.</p>
                 </div>
@@ -370,16 +370,29 @@
 
                     switch (command) {
                         case 'help':
-                            responseLine.innerHTML = 'Available commands: <span class="text-yellow-400">about</span>, <span class="text-yellow-400">skills</span>, <span class="text-yellow-400">contact</span>, <span class="text-yellow-400">clear</span>';
+                            responseLine.innerHTML = 'Available commands: <span class="text-yellow-400">about</span>, <span class="text-yellow-400">projects</span>, <span class="text-yellow-400">skills</span>, <span class="text-yellow-400">social</span>, <span class="text-yellow-400">contact</span>, <span class="text-yellow-400">date</span>, <span class="text-yellow-400">clear</span>';
                             break;
                         case 'about':
-                            responseLine.textContent = 'Mochamad Rizky Ramadhan - Web Developer & Digital Solutions Specialist.';
+                            responseLine.textContent = 'Mochamad Rizky Ramadhan - Web Developer & Digital Solutions Specialist yang berfokus membangun sistem web modern.';
+                            break;
+                        case 'projects':
+                            responseLine.innerHTML = `
+                                1. Absensi: <a href="https://absensi.rzr.my.id/" target="_blank" class="text-blue-400 underline">absensi.rzr.my.id</a><br>
+                                2. Tabungan: <a href="https://tabungan.rzr.my.id/" target="_blank" class="text-emerald-400 underline">tabungan.rzr.my.id</a><br>
+                                3. Jasa Web: <a href="https://jasa-pembuatan-website.rzr.my.id/" target="_blank" class="text-purple-400 underline">jasa-pembuatan-website.rzr.my.id</a>
+                            `;
                             break;
                         case 'skills':
-                            responseLine.textContent = 'HTML5, CSS3, JavaScript, Tailwind CSS, Supabase, Git, GitHub, Vercel.';
+                            responseLine.textContent = 'Tech Stack: HTML5, CSS3, JavaScript, Tailwind CSS, Supabase, Git, GitHub, Vercel.';
+                            break;
+                        case 'social':
+                            responseLine.innerHTML = 'GitHub: <a href="https://github.com/rizkyganteng050908" target="_blank" class="text-blue-400 underline">github.com/rizkyganteng050908</a>';
                             break;
                         case 'contact':
                             responseLine.textContent = 'Email: contact@rzr.my.id | WA: +62 895-4010-61300';
+                            break;
+                        case 'date':
+                            responseLine.textContent = new Date().toString();
                             break;
                         case 'clear':
                             terminalBody.innerHTML = '';
@@ -387,7 +400,7 @@
                         case '':
                             return;
                         default:
-                            responseLine.innerHTML = `<span class="text-red-400">Command not found: '${command}'. Type 'help' for options.</span>`;
+                            responseLine.innerHTML = `<span class="text-red-400">Command not found: '${command}'. Type 'help' for available options.</span>`;
                     }
 
                     terminalBody.appendChild(responseLine);
