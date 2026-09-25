@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- TEMPAT 1: Mengubah nama di Tab Browser -->
     <title>Mochamad Rizky Ramadhan - Web Developer Portfolio</title>
+    
+    <!-- FAVICON (FOTO PROFIL UNTUK HASIL PENCARIAN GOOGLE) -->
+    <link rel="icon" href="Orang Misterius.jpeg" type="image/jpeg">
+    <link rel="shortcut icon" href="Orang Misterius.jpeg" type="image/jpeg">
+    <link rel="apple-touch-icon" href="Orang Misterius.jpeg">
+
     <meta name="google-site-verification" content="Sh2njlrFvj3e6tG1Jjo3tlO9cOv5TUlcwpwBrlynrv0" />
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -71,24 +77,38 @@
         <div class="max-w-4xl text-center space-y-6 relative z-10 flex flex-col items-center">
             
             <!-- ====== FOTO PROFIL ====== -->
-            <div class="relative group mb-4">
+            <div class="relative group mb-2">
                 <!-- Efek Glow -->
                 <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
                 
                 <!-- Tag Gambar -->
                 <img 
-                    src="Orang Misterius.png" 
+                    src="Orang Misterius.jpeg" 
                     alt="Foto Profil Mochamad Rizky Ramadhan" 
                     class="relative w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-slate-800 shadow-2xl"
                 >
             </div>
             <!-- ====== SELESAI FOTO PROFIL ====== -->
 
-            <div class="inline-flex items-center gap-2 px-3 me-2 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold uppercase tracking-widest">
+            <!-- ====== FITUR REKOMENDASI ====== -->
+            <div id="recommendation-box" class="w-full max-w-lg bg-blue-600/10 border border-blue-500/20 text-blue-300 p-4 rounded-xl flex items-center gap-4 text-left shadow-lg backdrop-blur-sm relative transition-all">
+                <div class="w-10 h-10 bg-blue-500/20 text-blue-400 rounded-xl flex-shrink-0 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-lightbulb"></i>
+                </div>
+                <div class="flex-1">
+                    <h5 class="font-bold text-white text-sm">Rekomendasi Layanan</h5>
+                    <p class="text-xs text-slate-300">Butuh situs bisnis atau UMKM berkinerja tinggi? Coba layanan pembuatan website terintegrasi SEO kami.</p>
+                </div>
+                <button onclick="document.getElementById('recommendation-box').remove()" class="text-slate-400 hover:text-white p-1">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <!-- ====== SELESAI FITUR REKOMENDASI ====== -->
+
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold uppercase tracking-widest">
                 <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span> Open for Freelance & Projects
             </div>
             
-            <!-- TEMPAT 2: Mengubah nama di Halaman Utama (Heading) -->
             <h1 class="text-4xl md:text-7xl font-extrabold text-white tracking-tight leading-tight">
                 Mochamad Rizky Ramadhan
             </h1>
@@ -101,7 +121,7 @@
                 <a href="#projects" class="px-8 py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl shadow-lg shadow-blue-600/25 transition-all transform hover:-translate-y-0.5">
                     Lihat Portofolio <i class="fa-solid fa-arrow-down ml-2 text-sm"></i>
                 </a>
-                <a href="https://github.com" target="_blank" class="px-8 py-3.5 bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 font-semibold rounded-xl transition-all">
+                <a href="https://github.com/rizkyganteng050908" target="_blank" class="px-8 py-3.5 bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 font-semibold rounded-xl transition-all">
                     <i class="fa-brands fa-github mr-2"></i> GitHub Profile
                 </a>
             </div>
@@ -234,12 +254,28 @@
             <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">Mulai Proyek Bersama</h2>
             <p class="text-slate-400">Punya ide proyek web atau butuh sistem khusus? Mari berdiskusi untuk merealisasikannya.</p>
 
-            <div class="inline-flex items-center gap-3 bg-slate-950 border border-slate-800 p-2 pl-4 rounded-xl">
-                <i class="fa-regular fa-envelope text-slate-400"></i>
-                <span id="email-text" class="text-sm font-mono text-slate-200">contact@rzr.my.id</span>
-                <button onclick="copyEmail()" class="px-3 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-lg transition">
-                    <i class="fa-regular fa-copy"></i> Copy
-                </button>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <!-- Email Contact -->
+                <div class="inline-flex items-center gap-3 bg-slate-950 border border-slate-800 p-2 pl-4 rounded-xl w-full sm:w-auto justify-between">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-regular fa-envelope text-slate-400"></i>
+                        <span id="email-text" class="text-sm font-mono text-slate-200">contact@rzr.my.id</span>
+                    </div>
+                    <button onclick="copyText('email-text', 'Email')" class="px-3 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-lg transition">
+                        <i class="fa-regular fa-copy"></i> Copy
+                    </button>
+                </div>
+
+                <!-- Phone / WhatsApp Contact -->
+                <div class="inline-flex items-center gap-3 bg-slate-950 border border-slate-800 p-2 pl-4 rounded-xl w-full sm:w-auto justify-between">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-emerald-400"></i>
+                        <span id="phone-text" class="text-sm font-mono text-slate-200">+62 895-4010-61300</span>
+                    </div>
+                    <a href="https://wa.me/62895401061300" target="_blank" class="px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-lg transition flex items-center gap-1">
+                        <i class="fa-solid fa-paper-plane"></i> Chat
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -259,11 +295,11 @@
             mobileMenu.classList.toggle('hidden');
         });
 
-        // Copy Email Function
-        function copyEmail() {
-            const email = document.getElementById('email-text').innerText;
-            navigator.clipboard.writeText(email);
-            alert('Email berhasil disalin ke clipboard!');
+        // Copy Text Function
+        function copyText(elementId, label) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text);
+            alert(label + ' berhasil disalin ke clipboard!');
         }
 
         // Project Filter Function
