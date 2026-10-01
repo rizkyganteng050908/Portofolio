@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mochamad Rizky Ramadhan - Web Developer Portfolio</title>
     
-    <!-- FAVICON PNG (SESUAI NAMA FILE DI GITHUB) -->
+    <!-- FAVICON PNG -->
     <link rel="icon" type="image/png" sizes="192x192" href="Orang Misterius.png">
     <link rel="shortcut icon" type="image/png" href="Orang Misterius.png">
     <link rel="apple-touch-icon" href="Orang Misterius.png">
@@ -125,7 +125,7 @@
         <div class="max-w-6xl mx-auto space-y-12">
             <div class="text-center space-y-4">
                 <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">Proyek Pilihan</h2>
-                <p class="text-slate-400 max-w-xl mx-auto">Sistem web dan solusi digital yang dikembangkan untuk berbagai kebutuhan operasional dan layanan.</p>
+                <p class="text-slate-400 max-w-xl mx-auto">Sistem web dan solusi digital yang dikembangkan untuk berbagai kebutuhan operasional, produktivitas, dan interaksi pengguna.</p>
                 
                 <!-- Category Filter Buttons -->
                 <div class="flex flex-wrap justify-center gap-2 pt-4">
@@ -133,6 +133,7 @@
                     <button onclick="filterProjects('system')" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Sistem Web</button>
                     <button onclick="filterProjects('finance')" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Keuangan</button>
                     <button onclick="filterProjects('services')" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Layanan Jasa</button>
+                    <button onclick="filterProjects('tools')" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Tools & Media</button>
                 </div>
             </div>
 
@@ -206,11 +207,57 @@
                         </a>
                     </div>
                 </div>
+
+                <!-- Project 4 (Baru: Web Tools) -->
+                <div class="project-card tools group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-amber-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-amber-500/5">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-xl font-bold border border-amber-500/20">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">RZR Web Tools</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Kumpulan utilitas web serbaguna untuk membantu produktivitas harian, pengolahan data praktis, serta alat bantu teknis pengembang.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-amber-300">
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Utilities</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Web App</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">JavaScript</span>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800/80 mt-6">
+                        <a href="https://tools.rzr.my.id/" target="_blank" class="inline-flex items-center gap-2 text-sm text-amber-400 hover:text-amber-300 font-semibold group-hover:translate-x-1 transition-all">
+                            Buka Tools <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 5 (Baru: Photobox) -->
+                <div class="project-card tools group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-pink-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-pink-500/5">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 bg-pink-500/10 text-pink-400 rounded-xl flex items-center justify-center text-xl font-bold border border-pink-500/20">
+                            <i class="fa-solid fa-camera-retro"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-pink-400 transition-colors">Virtual Photobox Studio</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Aplikasi photobox berbasis web interaktif. Memungkinkan pengguna mengambil foto strip, menerapkan bingkai custom, dan mengunduh hasilnya secara langsung.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-pink-300">
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Webcam API</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Interactive</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Canvas</span>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800/80 mt-6">
+                        <a href="https://photobox.rzr.my.id/" target="_blank" class="inline-flex items-center gap-2 text-sm text-pink-400 hover:text-pink-300 font-semibold group-hover:translate-x-1 transition-all">
+                            Coba Photobox <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- ====== FITUR: INTERACTIVE TERMINAL WIDGET (DENGAN PERINTAH LENGKAP) ====== -->
+    <!-- ====== FITUR: INTERACTIVE TERMINAL WIDGET ====== -->
     <section id="terminal" class="py-20 px-6">
         <div class="max-w-4xl mx-auto space-y-6">
             <div class="text-center space-y-2">
@@ -226,7 +273,7 @@
                         <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
                         <span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
                     </div>
-                    <span class="text-slate-500 text-xs">rzr-cli v1.1.0</span>
+                    <span class="text-slate-500 text-xs">rzr-cli v1.2.0</span>
                 </div>
 
                 <!-- Terminal Body -->
@@ -379,7 +426,9 @@
                             responseLine.innerHTML = `
                                 1. Absensi: <a href="https://absensi.rzr.my.id/" target="_blank" class="text-blue-400 underline">absensi.rzr.my.id</a><br>
                                 2. Tabungan: <a href="https://tabungan.rzr.my.id/" target="_blank" class="text-emerald-400 underline">tabungan.rzr.my.id</a><br>
-                                3. Jasa Web: <a href="https://jasa-pembuatan-website.rzr.my.id/" target="_blank" class="text-purple-400 underline">jasa-pembuatan-website.rzr.my.id</a>
+                                3. Jasa Web: <a href="https://jasa-pembuatan-website.rzr.my.id/" target="_blank" class="text-purple-400 underline">jasa-pembuatan-website.rzr.my.id</a><br>
+                                4. Web Tools: <a href="https://tools.rzr.my.id/" target="_blank" class="text-amber-400 underline">tools.rzr.my.id</a><br>
+                                5. Photobox: <a href="https://photobox.rzr.my.id/" target="_blank" class="text-pink-400 underline">photobox.rzr.my.id</a>
                             `;
                             break;
                         case 'skills':
