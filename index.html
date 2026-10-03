@@ -134,7 +134,8 @@
                     <button onclick="filterProjects('finance')" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Keuangan</button>
                     <button onclick="filterProjects('services')" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Layanan Jasa</button>
                     <button onclick="filterProjects('tools')" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Tools & Media</button>
-                    <button onclick="filterProjects('game')" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Game & Premium</button>
+                    <button onclick="filterProjects('game')" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Game & Fun</button>
+                    <button onclick="filterProjects('premium')" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Digital Assets</button>
                 </div>
             </div>
 
@@ -278,32 +279,55 @@
                     </div>
                 </div>
 
-                <!-- Project 7 (Game Memory - Paid Product) -->
-                <div class="project-card game group relative bg-slate-900/80 rounded-2xl p-6 border border-emerald-500/40 hover:border-emerald-400 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-emerald-500/10">
+                <!-- Project 7 (Game Memory - Gratis) -->
+                <div class="project-card game group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-indigo-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-indigo-500/5">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 bg-indigo-500/10 text-indigo-400 rounded-xl flex items-center justify-center text-xl font-bold border border-indigo-500/20">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-indigo-400 transition-colors">Game Memory Card</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Permainan mencocokkan kartu memori interaktif berbasis web. Dirancang untuk melatih daya ingat dengan sistem pencatat langkah (moves), penghitung waktu, dan UI yang bersih.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-indigo-300">
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Memory Game</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Free to Play</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">JavaScript</span>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800/80 mt-6">
+                        <a href="https://game-memory.rzr.my.id/" target="_blank" class="inline-flex items-center gap-2 text-sm text-indigo-400 hover:text-indigo-300 font-semibold group-hover:translate-x-1 transition-all">
+                            Mainkan Gratis <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Item 8 (MediaFire File - Berbayar via WhatsApp) -->
+                <div class="project-card premium group relative bg-slate-900/80 rounded-2xl p-6 border border-emerald-500/40 hover:border-emerald-400 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-emerald-500/10">
                     <!-- Badge Premium / Paid -->
                     <div class="absolute -top-3 right-4 px-3 py-1 bg-emerald-500 text-slate-950 font-extrabold text-[10px] uppercase tracking-wider rounded-full shadow-md">
-                        <i class="fa-solid fa-lock mr-1"></i> Source Code Berbayar
+                        <i class="fa-solid fa-lock mr-1"></i> File Berbayar
                     </div>
 
                     <div class="space-y-4">
                         <div class="w-12 h-12 bg-emerald-500/10 text-emerald-400 rounded-xl flex items-center justify-center text-xl font-bold border border-emerald-500/20">
-                            <i class="fa-solid fa-brain"></i>
+                            <i class="fa-solid fa-file-zipper"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">Game Memory Card (Source Code)</h3>
+                        <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">Premium Project Source Code</h3>
                         <p class="text-sm text-slate-400 leading-relaxed">
-                            Source code lengkap proyek Game Memory Card berbasis web. Siap pakai, bersih, dan mudah disesuaikan untuk tugas akhir, portofolio, maupun pengembangan game web.
+                            Paket file proyek premium lengkap yang diunggah via MediaFire. Dilengkapi dokumentasi, aset penuh, dan instruksi pemasangan.
                         </p>
                         <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-emerald-300">
-                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Premium Script</span>
-                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Full Access</span>
-                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Zip Archive</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">MediaFire Link</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Premium Asset</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Full Source</span>
                         </div>
                     </div>
                     <div class="pt-6 border-t border-slate-800/80 mt-6 flex flex-col gap-2">
-                        <a href="https://wa.me/62895401061300?text=Halo%20Mochamad%20Rizky%20Ramadhan,%20saya%20tertarik%20untuk%20membeli%20source%20code%20Game%20Memory%20Card%20(MediaFire)." target="_blank" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm rounded-xl transition-all shadow-lg shadow-emerald-600/20">
+                        <a href="https://wa.me/62895401061300?text=Halo%20Mochamad%20Rizky%20Ramadhan,%20saya%20tertarik%20untuk%20membeli%20akses%20file%20MediaFire%20(4pbgp2f489oj5zf)." target="_blank" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm rounded-xl transition-all shadow-lg shadow-emerald-600/20">
                             <i class="fa-brands fa-whatsapp text-lg"></i> Beli via WhatsApp
                         </a>
-                        <p class="text-[11px] text-center text-slate-500">*Link MediaFire dikirimkan via WhatsApp setelah pembayaran.</p>
+                        <p class="text-[11px] text-center text-slate-500">*Link MediaFire diberikan setelah verifikasi pembayaran di WA.</p>
                     </div>
                 </div>
             </div>
@@ -483,7 +507,8 @@
                                 4. Web Tools: <a href="https://tools.rzr.my.id/" target="_blank" class="text-amber-400 underline">tools.rzr.my.id</a><br>
                                 5. Photobox: <a href="https://photobox.rzr.my.id/" target="_blank" class="text-pink-400 underline">photobox.rzr.my.id</a><br>
                                 6. Tebak Kata: <a href="https://tebak-kata.rzr.my.id/" target="_blank" class="text-cyan-400 underline">tebak-kata.rzr.my.id</a><br>
-                                7. Memory Game (Source Code Berbayar): <a href="https://wa.me/62895401061300?text=Halo%20Mochamad%20Rizky%20Ramadhan,%20saya%20tertarik%20untuk%20membeli%20source%20code%20Game%20Memory%20Card%20(MediaFire)." target="_blank" class="text-emerald-400 underline">Beli via WhatsApp</a>
+                                7. Memory Game (Free): <a href="https://game-memory.rzr.my.id/" target="_blank" class="text-indigo-400 underline">game-memory.rzr.my.id</a><br>
+                                8. MediaFire Premium Source Code: <a href="https://wa.me/62895401061300?text=Halo%20Mochamad%20Rizky%20Ramadhan,%20saya%20tertarik%20untuk%20membeli%20akses%20file%20MediaFire." target="_blank" class="text-emerald-400 underline">Beli via WhatsApp</a>
                             `;
                             break;
                         case 'skills':
