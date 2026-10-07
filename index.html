@@ -1,121 +1,607 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terminal Portfolio - Mochamad Rizky Ramadhan</title>
+    <title>Mochamad Rizky Ramadhan - Web Developer Portfolio</title>
+    
+    <!-- FAVICON PNG -->
+    <link rel="icon" type="image/png" sizes="192x192" href="Orang Misterius.png">
+    <link rel="shortcut icon" type="image/png" href="Orang Misterius.png">
+    <link rel="apple-touch-icon" href="Orang Misterius.png">
+
+    <meta name="google-site-verification" content="Sh2njlrFvj3e6tG1Jjo3tlO9cOv5TUlcwpwBrlynrv0" />
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Custom scrollbar untuk tampilan terminal */
-        #terminal-body::-webkit-scrollbar {
-            width: 6px;
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
         }
-        #terminal-body::-webkit-scrollbar-track {
-            background: #0f172a;
-        }
-        #terminal-body::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 3px;
-        }
-    </style>
+    </script>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex items-center justify-center p-4 font-sans">
+<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-blue-500 selection:text-white">
 
-    <!-- ====== SECTION TERMINAL WIDGET ====== -->
-    <section class="w-full max-w-3xl mx-auto">
-        <div class="bg-slate-900 border border-slate-800 rounded-xl shadow-2xl overflow-hidden">
+    <!-- Header / Navbar -->
+    <header class="fixed top-0 w-full bg-slate-950/80 backdrop-blur-md z-50 border-b border-slate-800/80">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-black tracking-wider text-white">
+                RZR<span class="text-blue-500">.DEV</span>
+            </a>
             
-            <!-- Header Terminal -->
-            <div class="bg-slate-800/80 px-4 py-3 flex items-center justify-between border-b border-slate-700/50">
-                <div class="flex items-center gap-2">
-                    <span class="w-3 h-3 bg-red-500 rounded-full inline-block"></span>
-                    <span class="w-3 h-3 bg-yellow-500 rounded-full inline-block"></span>
-                    <span class="w-3 h-3 bg-green-500 rounded-full inline-block"></span>
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
+                <a href="#about" class="hover:text-blue-400 transition-colors">Tentang</a>
+                <a href="#projects" class="hover:text-blue-400 transition-colors">Proyek</a>
+                <a href="#terminal" class="hover:text-blue-400 transition-colors">Terminal</a>
+                <a href="#skills" class="hover:text-blue-400 transition-colors">Keahlian</a>
+                <a href="#contact" class="hover:text-blue-400 transition-colors">Kontak</a>
+            </nav>
+
+            <a href="#contact" class="hidden md:inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-medium text-sm rounded-lg transition-all shadow-lg shadow-blue-600/20">
+                <i class="fa-regular fa-paper-plane"></i> Kontak Saya
+            </a>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-btn" class="md:hidden text-slate-300 hover:text-white focus:outline-none">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-b border-slate-800 px-6 py-4 space-y-3">
+            <a href="#about" class="block text-slate-300 hover:text-blue-400 font-medium">Tentang</a>
+            <a href="#projects" class="block text-slate-300 hover:text-blue-400 font-medium">Proyek</a>
+            <a href="#terminal" class="block text-slate-300 hover:text-blue-400 font-medium">Terminal</a>
+            <a href="#skills" class="block text-slate-300 hover:text-blue-400 font-medium">Keahlian</a>
+            <a href="#contact" class="block text-slate-300 hover:text-blue-400 font-medium">Kontak</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="about" class="relative min-h-screen flex items-center justify-center pt-24 pb-12 px-6 overflow-hidden">
+        <!-- Background Gradient Glow -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-4xl text-center space-y-6 relative z-10 flex flex-col items-center">
+            
+            <!-- ====== FOTO PROFIL ====== -->
+            <div class="relative group mb-2">
+                <!-- Efek Glow -->
+                <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
+                
+                <!-- Tag Gambar Profil -->
+                <img 
+                    src="Orang Misterius.png" 
+                    alt="Foto Profil Mochamad Rizky Ramadhan" 
+                    class="relative w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-slate-800 shadow-2xl"
+                >
+            </div>
+            <!-- ====== SELESAI FOTO PROFIL ====== -->
+
+            <!-- ====== INDIKATOR STATUS REAL-TIME ====== -->
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
+                <span class="relative flex h-2.5 w-2.5">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                </span>
+                Available for Freelance & Projects
+            </div>
+
+            <h1 class="text-4xl md:text-7xl font-extrabold text-white tracking-tight leading-tight">
+                Mochamad Rizky Ramadhan
+            </h1>
+            
+            <p class="text-lg md:text-2xl text-slate-400 font-light max-w-2xl mx-auto leading-relaxed">
+                Web Developer & Digital Solutions Specialist yang fokus membangun aplikasi web fungsional, responsif, dan terintegrasi basis data modern.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-4 pt-4">
+                <a href="#projects" class="px-8 py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl shadow-lg shadow-blue-600/25 transition-all transform hover:-translate-y-0.5">
+                    Lihat Portofolio <i class="fa-solid fa-arrow-down ml-2 text-sm"></i>
+                </a>
+                <a href="https://github.com/rizkyganteng050908" target="_blank" class="px-8 py-3.5 bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 font-semibold rounded-xl transition-all">
+                    <i class="fa-brands fa-github mr-2"></i> GitHub Profile
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 px-6 bg-slate-900/40 border-y border-slate-800/50">
+        <div class="max-w-6xl mx-auto space-y-12">
+            <div class="text-center space-y-4">
+                <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">Proyek Pilihan</h2>
+                <p class="text-slate-400 max-w-xl mx-auto">Sistem web dan solusi digital yang dikembangkan untuk berbagai kebutuhan operasional, produktivitas, hiburan, dan interaksi pengguna.</p>
+                
+                <!-- Category Filter Buttons -->
+                <div class="flex flex-wrap justify-center gap-2 pt-4">
+                    <button onclick="filterProjects('all', this)" class="filter-btn active px-4 py-1.5 rounded-full text-xs font-semibold bg-blue-600 text-white transition">Semua</button>
+                    <button onclick="filterProjects('system', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Sistem Web</button>
+                    <button onclick="filterProjects('finance', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Keuangan</button>
+                    <button onclick="filterProjects('services', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Layanan Jasa</button>
+                    <button onclick="filterProjects('tools', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Tools & Media</button>
+                    <button onclick="filterProjects('game', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Game & Fun</button>
+                    <button onclick="filterProjects('premium', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">File Berbayar</button>
                 </div>
-                <div class="text-xs text-slate-400 font-mono">visitor@rzr:~</div>
-                <div class="w-12"></div> <!-- Spacer untuk menjaga title tetap center -->
             </div>
 
-            <!-- Body Terminal -->
-            <div id="terminal-body" class="p-4 md:p-6 h-80 md:h-96 overflow-y-auto font-mono text-xs md:text-sm space-y-3 leading-relaxed">
-                <p class="text-blue-400">Welcome to RZR Developer Terminal!</p>
-                <p class="text-slate-400">Type <span class="text-emerald-400">'help'</span> to see available commands.</p>
+            <!-- Project Cards Grid -->
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card system group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-blue-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-blue-500/5">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 bg-blue-500/10 text-blue-400 rounded-xl flex items-center justify-center text-xl font-bold border border-blue-500/20">
+                            <i class="fa-solid fa-user-check"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">Sistem Absensi Digital</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Aplikasi pencatatan presensi berbasis web secara real-time. Memudahkan pemantauan riwayat kehadiran, rekapitulasi data otomatis, dan manajemen pengguna yang terstruktur.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-blue-300">
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">JavaScript</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Supabase</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Tailwind</span>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800/80 mt-6">
+                        <a href="https://absensi.rzr.my.id/" target="_blank" class="inline-flex items-center gap-2 text-sm text-blue-400 hover:text-blue-300 font-semibold group-hover:translate-x-1 transition-all">
+                            Buka Aplikasi <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2 (Web RPL) -->
+                <div class="project-card system group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-indigo-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-indigo-500/5">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 bg-indigo-500/10 text-indigo-400 rounded-xl flex items-center justify-center text-xl font-bold border border-indigo-500/20">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-indigo-400 transition-colors">Web Portal RPL</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Platform web khusus Rekayasa Perangkat Lunak (RPL) untuk pengelolaan materi, informasi akademik, serta portal pembelajaran terintegrasi.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-indigo-300">
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Portal RPL</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Web App</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Tailwind</span>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800/80 mt-6">
+                        <a href="https://web-rpl.rzr.my.id/" target="_blank" class="inline-flex items-center gap-2 text-sm text-indigo-400 hover:text-indigo-300 font-semibold group-hover:translate-x-1 transition-all">
+                            Buka Portal RPL <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card finance group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-emerald-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-emerald-500/5">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 bg-emerald-500/10 text-emerald-400 rounded-xl flex items-center justify-center text-xl font-bold border border-emerald-500/20">
+                            <i class="fa-solid fa-wallet"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">Manajemen Tabungan</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Platform pencatatan keuangan mandiri dan pelacakan target tabungan. Dilengkapi visualisasi grafik pemasukan/pengeluaran untuk membantu efisiensi finansial.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-emerald-300">
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Web App</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Database</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Chart UI</span>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800/80 mt-6">
+                        <a href="https://tabungan.rzr.my.id/" target="_blank" class="inline-flex items-center gap-2 text-sm text-emerald-400 hover:text-emerald-300 font-semibold group-hover:translate-x-1 transition-all">
+                            Buka Aplikasi <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card services group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-purple-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-purple-500/5">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 bg-purple-500/10 text-purple-400 rounded-xl flex items-center justify-center text-xl font-bold border border-purple-500/20">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-purple-400 transition-colors">Jasa Pembuatan Website</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Platform layanan pembuatan website kustom untuk UMKM, landing page pemasaran, hingga portofolio dengan performa cepat dan integrasi SEO.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-purple-300">
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Landing Page</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">SEO Ready</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Vercel</span>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800/80 mt-6">
+                        <a href="https://jasa-pembuatan-website.rzr.my.id/" target="_blank" class="inline-flex items-center gap-2 text-sm text-purple-400 hover:text-purple-300 font-semibold group-hover:translate-x-1 transition-all">
+                            Kunjungi Layanan <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 5 (Web Tools) -->
+                <div class="project-card tools group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-amber-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-amber-500/5">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-xl font-bold border border-amber-500/20">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">RZR Web Tools</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Kumpulan utilitas web serbaguna untuk membantu produktivitas harian, pengolahan data praktis, serta alat bantu teknis pengembang.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-amber-300">
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Utilities</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Web App</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">JavaScript</span>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800/80 mt-6">
+                        <a href="https://tools.rzr.my.id/" target="_blank" class="inline-flex items-center gap-2 text-sm text-amber-400 hover:text-amber-300 font-semibold group-hover:translate-x-1 transition-all">
+                            Buka Tools <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 6 (Tool Boost Pro) -->
+                <div class="project-card tools group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-violet-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-violet-500/5">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 bg-violet-500/10 text-violet-400 rounded-xl flex items-center justify-center text-xl font-bold border border-violet-500/20">
+                            <i class="fa-solid fa-rocket"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-violet-400 transition-colors">Tool Boost Pro</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Platform web alat bantu canggih yang dirancang untuk mengoptimalkan performa, alur kerja digital, dan efisiensi produktivitas secara praktis.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-violet-300">
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Productivity</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Netlify</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Web Tools</span>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800/80 mt-6">
+                        <a href="https://toolboostpro.netlify.app/" target="_blank" class="inline-flex items-center gap-2 text-sm text-violet-400 hover:text-violet-300 font-semibold group-hover:translate-x-1 transition-all">
+                            Buka Tool Boost Pro <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 7 (Photobox) -->
+                <div class="project-card tools group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-pink-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-pink-500/5">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 bg-pink-500/10 text-pink-400 rounded-xl flex items-center justify-center text-xl font-bold border border-pink-500/20">
+                            <i class="fa-solid fa-camera-retro"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-pink-400 transition-colors">Virtual Photobox Studio</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Aplikasi photobox berbasis web interaktif. Memungkinkan pengguna mengambil foto strip, menerapkan bingkai custom, dan mengunduh hasilnya secara langsung.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-pink-300">
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Webcam API</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Interactive</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Canvas</span>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800/80 mt-6">
+                        <a href="https://photobox.rzr.my.id/" target="_blank" class="inline-flex items-center gap-2 text-sm text-pink-400 hover:text-pink-300 font-semibold group-hover:translate-x-1 transition-all">
+                            Coba Photobox <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 8 (Game Tebak Kata) -->
+                <div class="project-card game group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-cyan-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-cyan-500/5">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 bg-cyan-500/10 text-cyan-400 rounded-xl flex items-center justify-center text-xl font-bold border border-cyan-500/20">
+                            <i class="fa-solid fa-gamepad"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">Game Tebak Kata</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Permainan asah otak interaktif berbasis web untuk menebak susunan kata. Dilengkapi sistem skor, petunjuk (hint), dan antarmuka pengguna yang responsif.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-cyan-300">
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Interactive Game</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">JavaScript</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Tailwind</span>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800/80 mt-6">
+                        <a href="https://tebak-kata.rzr.my.id/" target="_blank" class="inline-flex items-center gap-2 text-sm text-cyan-400 hover:text-cyan-300 font-semibold group-hover:translate-x-1 transition-all">
+                            Mainkan Game <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 9 (Game Memory - Gratis) -->
+                <div class="project-card game group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-indigo-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-indigo-500/5">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 bg-indigo-500/10 text-indigo-400 rounded-xl flex items-center justify-center text-xl font-bold border border-indigo-500/20">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-indigo-400 transition-colors">Game Memory Card</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Permainan mencocokkan kartu memori interaktif berbasis web. Dirancang untuk melatih daya ingat dengan sistem pencatat langkah (moves), penghitung waktu, dan UI yang bersih.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-indigo-300">
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Memory Game</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Gratis / Free</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">JavaScript</span>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800/80 mt-6">
+                        <a href="https://game-memory.rzr.my.id/" target="_blank" class="inline-flex items-center gap-2 text-sm text-indigo-400 hover:text-indigo-300 font-semibold group-hover:translate-x-1 transition-all">
+                            Mainkan Gratis <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 10 (File MediaFire Berbayar via WhatsApp) -->
+                <div class="project-card premium group relative bg-slate-900/80 rounded-2xl p-6 border border-emerald-500/40 hover:border-emerald-400 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-emerald-500/10">
+                    <!-- Badge Berbayar -->
+                    <div class="absolute -top-3 right-4 px-3 py-1 bg-emerald-500 text-slate-950 font-extrabold text-[10px] uppercase tracking-wider rounded-full shadow-md">
+                        <i class="fa-solid fa-lock mr-1"></i> File Berbayar
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 bg-emerald-500/10 text-emerald-400 rounded-xl flex items-center justify-center text-xl font-bold border border-emerald-500/20">
+                            <i class="fa-solid fa-file-zipper"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">Premium Source Code (MediaFire)</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Paket berkas/source code premium yang tersimpan di MediaFire. Pembelian dilakukan melalui konfirmasi WhatsApp untuk mendapatkan akses unduh.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-emerald-300">
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">MediaFire (4 MB)</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Akses Premium</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Full Project</span>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800/80 mt-6 flex flex-col gap-2">
+                        <a href="https://wa.me/62895401061300?text=Halo%20Mochamad%20Rizky%20Ramadhan,%20saya%20tertarik%20untuk%20membeli%20akses%20file%20MediaFire%20(4pbgp2f489oj5zf)." target="_blank" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm rounded-xl transition-all shadow-lg shadow-emerald-600/20">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> Beli via WhatsApp
+                        </a>
+                        <p class="text-[11px] text-center text-slate-500">*Akses link MediaFire akan dikirimkan setelah proses pembayaran di WhatsApp selesai.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== FITUR: INTERACTIVE TERMINAL WIDGET ====== -->
+    <section id="terminal" class="py-20 px-6">
+        <div class="max-w-4xl mx-auto space-y-6">
+            <div class="text-center space-y-2">
+                <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">Developer CLI Terminal</h2>
+                <p class="text-xs md:text-sm text-slate-400">Ketik perintah seperti <code class="bg-slate-800 px-1.5 py-0.5 rounded text-blue-400 font-mono">help</code>, <code class="bg-slate-800 px-1.5 py-0.5 rounded text-blue-400 font-mono">projects</code>, atau <code class="bg-slate-800 px-1.5 py-0.5 rounded text-blue-400 font-mono">clear</code> untuk interaksi langsung.</p>
             </div>
 
-            <!-- Input Bar -->
-            <div class="bg-slate-900/90 border-t border-slate-800 px-4 py-3">
-                <div class="flex items-center gap-2 font-mono text-xs md:text-sm">
+            <div class="bg-slate-900 rounded-2xl border border-slate-800 shadow-2xl overflow-hidden font-mono text-xs md:text-sm">
+                <!-- Terminal Header -->
+                <div class="bg-slate-950 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
+                    </div>
+                    <span class="text-slate-500 text-xs">rzr-cli v1.4.0</span>
+                </div>
+
+                <!-- Terminal Body -->
+                <div id="terminal-body" class="p-6 space-y-3 h-72 overflow-y-auto text-slate-300">
+                    <p class="text-blue-400">Welcome to RZR Developer Terminal!</p>
+                    <p class="text-slate-400">Type <span class="text-emerald-400">'help'</span> to see available commands.</p>
+                </div>
+
+                <!-- Terminal Input -->
+                <div class="px-6 py-3 bg-slate-950/50 border-t border-slate-800/80 flex items-center gap-2">
                     <span class="text-emerald-400 font-bold">visitor@rzr:~$</span>
                     <input type="text" id="terminal-input" class="bg-transparent text-slate-100 focus:outline-none flex-1 font-mono text-xs md:text-sm" placeholder="Ketik perintah di sini..." autocomplete="off">
                 </div>
             </div>
-
         </div>
     </section>
 
-    <!-- ====== SCRIPT TERMINAL INTERAKTIF ====== -->
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 px-6 bg-slate-900/40 border-t border-slate-800/50">
+        <div class="max-w-4xl mx-auto space-y-12 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">Keahlian & Tech Stack</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="p-5 bg-slate-900/60 rounded-xl border border-slate-800 hover:border-slate-700 transition">
+                    <i class="fa-brands fa-html5 text-4xl text-orange-500 mb-3"></i>
+                    <h4 class="font-bold text-sm text-white">HTML5 & CSS3</h4>
+                    <p class="text-xs text-slate-500 mt-1">Structured Layouts</p>
+                </div>
+                <div class="p-5 bg-slate-900/60 rounded-xl border border-slate-800 hover:border-slate-700 transition">
+                    <i class="fa-brands fa-js text-4xl text-yellow-400 mb-3"></i>
+                    <h4 class="font-bold text-sm text-white">JavaScript</h4>
+                    <p class="text-xs text-slate-500 mt-1">Interactivity & Logic</p>
+                </div>
+                <div class="p-5 bg-slate-900/60 rounded-xl border border-slate-800 hover:border-slate-700 transition">
+                    <i class="fa-solid fa-database text-4xl text-emerald-400 mb-3"></i>
+                    <h4 class="font-bold text-sm text-white">Supabase / SQL</h4>
+                    <p class="text-xs text-slate-500 mt-1">Cloud Database</p>
+                </div>
+                <div class="p-5 bg-slate-900/60 rounded-xl border border-slate-800 hover:border-slate-700 transition">
+                    <i class="fa-brands fa-github text-4xl text-slate-200 mb-3"></i>
+                    <h4 class="font-bold text-sm text-white">Git & GitHub</h4>
+                    <p class="text-xs text-slate-500 mt-1">Version Control</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 px-6 bg-slate-900/60 border-t border-slate-800/80">
+        <div class="max-w-2xl mx-auto text-center space-y-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">Mulai Proyek Bersama</h2>
+            <p class="text-slate-400">Punya ide proyek web atau butuh sistem khusus? Mari berdiskusi untuk merealisasikannya.</p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <!-- Email Contact -->
+                <div class="inline-flex items-center gap-3 bg-slate-950 border border-slate-800 p-2 pl-4 rounded-xl w-full sm:w-auto justify-between">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-regular fa-envelope text-slate-400"></i>
+                        <span id="email-text" class="text-sm font-mono text-slate-200">contact@rzr.my.id</span>
+                    </div>
+                    <button onclick="copyText('email-text', 'Email')" class="px-3 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-lg transition">
+                        <i class="fa-regular fa-copy"></i> Copy
+                    </button>
+                </div>
+
+                <!-- Phone / WhatsApp Contact -->
+                <div class="inline-flex items-center gap-3 bg-slate-950 border border-slate-800 p-2 pl-4 rounded-xl w-full sm:w-auto justify-between">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-emerald-400"></i>
+                        <span id="phone-text" class="text-sm font-mono text-slate-200">+62 895-4010-61300</span>
+                    </div>
+                    <a href="https://wa.me/62895401061300" target="_blank" class="px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-lg transition flex items-center gap-1">
+                        <i class="fa-solid fa-paper-plane"></i> Chat
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-slate-950 text-center text-xs text-slate-500">
+        <p>&copy; 2026 Mochamad Rizky Ramadhan. Built with Tailwind CSS & Hosted on Vercel.</p>
+    </footer>
+
+    <!-- Interactive Scripts -->
     <script>
-        const terminalBody = document.getElementById('terminal-body');
-        const terminalInput = document.getElementById('terminal-input');
+        // Mobile Navigation Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
 
-        // Daftar Perintah & Respon
-        const commands = {
-            help: `Perintah yang tersedia:<br>
-                   - <span class="text-blue-400">help</span>: Menampilkan daftar perintah<br>
-                   - <span class="text-blue-400">about</span>: Informasi singkat tentang developer<br>
-                   - <span class="text-blue-400">projects</span>: Daftar tautan proyek pilihan<br>
-                   - <span class="text-blue-400">skills</span>: Daftar keahlian & pemrograman<br>
-                   - <span class="text-blue-400">contact</span>: Kontak & media sosial<br>
-                   - <span class="text-blue-400">clear</span>: Membersihkan layar terminal`,
-            
-            about: `Mochamad Rizky Ramadhan - Web Developer & Digital Solutions Specialist.<br>Fokus pada pengembangan aplikasi web fungsional, responsif, dan terintegrasi basis data modern.`,
-            
-            projects: `1. Sistem Absensi Digital -> <a href="https://absensi.rzr.my.id/" target="_blank" class="text-blue-400 underline hover:text-blue-300">absensi.rzr.my.id</a><br>
-                       2. Web Portal RPL -> <a href="https://web-rpl.rzr.my.id/" target="_blank" class="text-blue-400 underline hover:text-blue-300">web-rpl.rzr.my.id</a><br>
-                       3. Manajemen Tabungan -> <a href="https://tabungan.rzr.my.id/" target="_blank" class="text-blue-400 underline hover:text-blue-300">tabungan.rzr.my.id</a><br>
-                       4. Jasa Pembuatan Website -> <a href="https://jasa-pembuatan-website.rzr.my.id/" target="_blank" class="text-blue-400 underline hover:text-blue-300">jasa-pembuatan-website.rzr.my.id</a><br>
-                       5. Virtual Photobox Studio -> <a href="https://photobox.rzr.my.id/" target="_blank" class="text-blue-400 underline hover:text-blue-300">photobox.rzr.my.id</a>`,
-            
-            skills: `Tech Stack:<br>- Frontend: HTML, CSS, JavaScript, Tailwind CSS, Next.js<br>- Backend: PHP Native, Laravel, Express.js, Python<br>- Database & Cloud: Supabase, MySQL, Vercel, Cloudflare`,
-            
-            contact: `WhatsApp: +62 895-4010-61300<br>GitHub: <a href="https://github.com/rizkyganteng050908" target="_blank" class="text-blue-400 underline hover:text-blue-300">github.com/rizkyganteng050908</a>`
-        };
-
-        // Handling Input Perintah
-        terminalInput.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter') {
-                const inputVal = this.value.trim().toLowerCase();
-                this.value = '';
-
-                if (!inputVal) return;
-
-                // Tampilkan perintah pengguna di terminal
-                const userLine = document.createElement('div');
-                userLine.className = 'flex items-center gap-2 mt-2';
-                userLine.innerHTML = `<span class="text-emerald-400 font-bold">visitor@rzr:~$</span> <span>${inputVal}</span>`;
-                terminalBody.appendChild(userLine);
-
-                // Eksekusi perintah
-                const responseLine = document.createElement('div');
-                responseLine.className = 'text-slate-300 ml-2 mb-2';
-
-                if (inputVal === 'clear') {
-                    terminalBody.innerHTML = `
-                        <p class="text-blue-400">Welcome to RZR Developer Terminal!</p>
-                        <p class="text-slate-400">Type <span class="text-emerald-400">'help'</span> to see available commands.</p>
-                    `;
-                    return;
-                } else if (commands[inputVal]) {
-                    responseLine.innerHTML = commands[inputVal];
-                } else {
-                    responseLine.innerHTML = `<span class="text-red-400">Command not recognized: '${inputVal}'. Type <span class="text-emerald-400">'help'</span> for assistance.</span>`;
-                }
-
-                terminalBody.appendChild(responseLine);
-                terminalBody.scrollTop = terminalBody.scrollHeight;
-            }
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
         });
+
+        // Copy Text Function
+        async function copyText(elementId, label) {
+            const text = document.getElementById(elementId).innerText;
+
+            try {
+                if (navigator.clipboard && window.isSecureContext) {
+                    await navigator.clipboard.writeText(text);
+                } else {
+                    const temp = document.createElement('textarea');
+                    temp.value = text;
+                    temp.style.position = 'fixed';
+                    temp.style.opacity = '0';
+                    document.body.appendChild(temp);
+                    temp.focus();
+                    temp.select();
+                    document.execCommand('copy');
+                    temp.remove();
+                }
+                alert(label + ' berhasil disalin ke clipboard!');
+            } catch (error) {
+                alert('Gagal menyalin ' + label + '. Silakan salin secara manual.');
+            }
+        }
+
+        // Project Filter Function
+        function filterProjects(category, clickedButton) {
+            const cards = document.querySelectorAll('.project-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white', 'active');
+                btn.classList.add('bg-slate-800', 'text-slate-400');
+            });
+
+            if (clickedButton) {
+                clickedButton.classList.remove('bg-slate-800', 'text-slate-400');
+                clickedButton.classList.add('bg-blue-600', 'text-white', 'active');
+            }
+
+            cards.forEach(card => {
+                const show = category === 'all' || card.classList.contains(category);
+                card.style.display = show ? 'flex' : 'none';
+            });
+        }
+
+        // ====== SCRIPT INTERACTIVE TERMINAL WIDGET ======
+        const terminalInput = document.getElementById('terminal-input');
+        const terminalBody = document.getElementById('terminal-body');
+
+        if (terminalInput) {
+            terminalInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    const command = this.value.trim().toLowerCase();
+                    this.value = '';
+
+                    // Print user command
+                    const userLine = document.createElement('p');
+                    userLine.innerHTML = `<span class="text-emerald-400 font-bold">visitor@rzr:~$</span> ${command}`;
+                    terminalBody.appendChild(userLine);
+
+                    // Response logic
+                    const responseLine = document.createElement('p');
+                    responseLine.className = 'text-slate-300';
+
+                    switch (command) {
+                        case 'help':
+                            responseLine.innerHTML = 'Available commands: <span class="text-yellow-400">about</span>, <span class="text-yellow-400">projects</span>, <span class="text-yellow-400">skills</span>, <span class="text-yellow-400">social</span>, <span class="text-yellow-400">contact</span>, <span class="text-yellow-400">date</span>, <span class="text-yellow-400">clear</span>';
+                            break;
+                        case 'about':
+                            responseLine.textContent = 'Mochamad Rizky Ramadhan - Web Developer & Digital Solutions Specialist yang berfokus membangun sistem web modern.';
+                            break;
+                        case 'projects':
+                            responseLine.innerHTML = `
+                                1. Absensi: <a href="https://absensi.rzr.my.id/" target="_blank" class="text-blue-400 underline">absensi.rzr.my.id</a><br>
+                                2. Web RPL: <a href="https://web-rpl.rzr.my.id/" target="_blank" class="text-indigo-400 underline">web-rpl.rzr.my.id</a><br>
+                                3. Tabungan: <a href="https://tabungan.rzr.my.id/" target="_blank" class="text-emerald-400 underline">tabungan.rzr.my.id</a><br>
+                                4. Jasa Web: <a href="https://jasa-pembuatan-website.rzr.my.id/" target="_blank" class="text-purple-400 underline">jasa-pembuatan-website.rzr.my.id</a><br>
+                                5. Web Tools: <a href="https://tools.rzr.my.id/" target="_blank" class="text-amber-400 underline">tools.rzr.my.id</a><br>
+                                6. Tool Boost Pro: <a href="https://toolboostpro.netlify.app/" target="_blank" class="text-violet-400 underline">toolboostpro.netlify.app</a><br>
+                                7. Photobox: <a href="https://photobox.rzr.my.id/" target="_blank" class="text-pink-400 underline">photobox.rzr.my.id</a><br>
+                                8. Tebak Kata: <a href="https://tebak-kata.rzr.my.id/" target="_blank" class="text-cyan-400 underline">tebak-kata.rzr.my.id</a><br>
+                                9. Memory Game (Free): <a href="https://game-memory.rzr.my.id/" target="_blank" class="text-indigo-400 underline">game-memory.rzr.my.id</a><br>
+                                10. MediaFire File Berbayar: <a href="https://wa.me/62895401061300?text=Halo%20Mochamad%20Rizky%20Ramadhan,%20saya%20tertarik%20untuk%20membeli%20akses%20file%20MediaFire." target="_blank" class="text-emerald-400 underline">Beli via WhatsApp</a>
+                            `;
+                            break;
+                        case 'skills':
+                            responseLine.textContent = 'Tech Stack: HTML5, CSS3, JavaScript, Tailwind CSS, Supabase, Git, GitHub, Vercel, Netlify.';
+                            break;
+                        case 'social':
+                            responseLine.innerHTML = 'GitHub: <a href="https://github.com/rizkyganteng050908" target="_blank" class="text-blue-400 underline">github.com/rizkyganteng050908</a>';
+                            break;
+                        case 'contact':
+                            responseLine.textContent = 'Email: contact@rzr.my.id | WA: +62 895-4010-61300';
+                            break;
+                        case 'date':
+                            responseLine.textContent = new Date().toString();
+                            break;
+                        case 'clear':
+                            terminalBody.innerHTML = '';
+                            return;
+                        case '':
+                            return;
+                        default:
+                            responseLine.innerHTML = `<span class="text-red-400">Command not found: '${command}'. Type 'help' for available options.</span>`;
+                    }
+
+                    terminalBody.appendChild(responseLine);
+                    terminalBody.scrollTop = terminalBody.scrollHeight;
+                }
+            });
+        }
     </script>
 </body>
 </html>
