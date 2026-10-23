@@ -544,6 +544,25 @@
                         </a>
                     </div>
                 </div>
+                <!-- Proyek tambahan: Website Video Link-ku -->
+                <div class="project-card tools group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-fuchsia-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-fuchsia-500/5">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 bg-fuchsia-500/10 text-fuchsia-400 rounded-xl flex items-center justify-center text-xl font-bold border border-fuchsia-500/20">
+                            <i class="fa-solid fa-video"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-fuchsia-400 transition-colors">Website Video Link-ku</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">Website untuk membuka proyek Video Link-ku. Kunjungi situsnya melalui tautan di bawah ini.</p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-fuchsia-300">
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Video</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Web App</span>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800/80 mt-6">
+                        <a href="https://website-video-link-ku.rzr.my.id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-fuchsia-400 hover:text-fuchsia-300 font-semibold group-hover:translate-x-1 transition-all">
+                            Buka Website Video Link-ku <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -757,7 +776,8 @@
                     [/pengingat pr/i, ['pengingat pr', 'pengingat tugas']],
                     [/absensi guru/i, ['absensi guru']],
                     [/exambrowser/i, ['exambrowser', 'exam browser']],
-                    [/sistem bk/i, ['sistem bk', 'bimbingan konseling']]
+                    [/sistem bk/i, ['sistem bk', 'bimbingan konseling']],
+                    [/website video link-ku/i, ['website video link-ku', 'video link-ku', 'video link ku', 'website video', 'video link']]
                 ];
                 for (const [pattern, words] of aliasRules) {
                     if (pattern.test(title)) aliases.push(...words);
