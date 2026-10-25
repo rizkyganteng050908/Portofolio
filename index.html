@@ -48,9 +48,6 @@
                 <a href="#chatbot" class="hover:text-blue-400 transition-colors">Chatbot AI</a>
                 <a href="#skills" class="hover:text-blue-400 transition-colors">Keahlian</a>
                 <a href="#contact" class="hover:text-blue-400 transition-colors">Kontak</a>
-                <a href="javascript:void(0)" onclick="openLoginModal()" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-white text-slate-900 hover:bg-slate-200 transition-all font-semibold text-xs shadow-md">
-                    <i class="fa-brands fa-google text-blue-600"></i> Login Google
-                </a>
             </nav>
             <a href="#contact" class="hidden md:inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-medium text-sm rounded-lg transition-all shadow-lg shadow-blue-600/20">
                 <i class="fa-regular fa-paper-plane"></i> Kontak Saya
@@ -67,9 +64,6 @@
             <a href="#chatbot" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-blue-400 font-medium">Chatbot AI</a>
             <a href="#skills" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-blue-400 font-medium">Keahlian</a>
             <a href="#contact" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-blue-400 font-medium">Kontak</a>
-            <a href="javascript:void(0)" onclick="openLoginModal(); toggleMobileMenu();" class="block text-blue-400 hover:text-white font-semibold pt-1">
-                <i class="fa-brands fa-google mr-2"></i> Login Google
-            </a>
         </div>
     </header>
 
@@ -131,7 +125,6 @@
                     <button onclick="filterProjects('services', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Layanan Jasa</button>
                     <button onclick="filterProjects('tools', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Tools & Media</button>
                     <button onclick="filterProjects('game', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Game & Fun</button>
-                    <button onclick="filterProjects('premium', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">File Berbayar</button>
                 </div>
             </div>
 
@@ -395,337 +388,28 @@
                     </div>
                 </div>
 
-                <!-- Project 10 (Kalkulator Digital) -->
-                <div class="project-card tools group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-blue-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-blue-500/5">
-                    <div class="space-y-4">
-                        <div class="w-12 h-12 bg-blue-500/10 text-blue-400 rounded-xl flex items-center justify-center text-xl font-bold border border-blue-500/20">
-                            <i class="fa-solid fa-calculator"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">Kalkulator Digital Modern</h3>
-                        <p class="text-sm text-slate-400 leading-relaxed">
-                            Aplikasi kalkulator web dengan antarmuka yang bersih, mendukung kalkulasi saintifik dasar, riwayat perhitungan, dan performa cepat.
-                        </p>
-                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-blue-300">
-                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Web Tool</span>
-                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">JavaScript</span>
-                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Responsive</span>
-                        </div>
-                    </div>
-                    <div class="pt-6 border-t border-slate-800/80 mt-6">
-                        <a href="https://kalkulator.rzr.my.id/" target="_blank" class="inline-flex items-center gap-2 text-sm text-blue-400 hover:text-blue-300 font-semibold group-hover:translate-x-1 transition-all">
-                            Buka Kalkulator <i class="fa-solid fa-arrow-right text-xs"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project 11 (File Berbayar / Premium) -->
-                <div class="project-card premium group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-amber-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-amber-500/5">
-                    <div class="space-y-4">
-                        <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-xl font-bold border border-amber-500/20">
-                            <i class="fa-solid fa-box-archive"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">File & Source Code Premium</h3>
-                        <p class="text-sm text-slate-400 leading-relaxed">
-                            Kumpulan template website, skrip utilitas, serta source code proyek siap pakai berkualitas tinggi untuk mempercepat pembuatan proyek web kamu.
-                        </p>
-                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-amber-300">
-                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Premium</span>
-                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Source Code</span>
-                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Digital Asset</span>
-                        </div>
-                    </div>
-                    <div class="pt-6 border-t border-slate-800/80 mt-6">
-                        <a href="https://wa.me/62895401061300?text=Halo%20RZR%2C%20saya%20tertarik%20membeli%20file/source%20code%20premium." target="_blank" class="inline-flex items-center gap-2 text-sm text-amber-400 hover:text-amber-300 font-semibold group-hover:translate-x-1 transition-all">
-                            Tanya File Premium <i class="fa-solid fa-arrow-right text-xs"></i>
-                        </a>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
 
-    <!-- Chatbot AI Section -->
-    <section id="chatbot" class="py-20 px-6">
-        <div class="max-w-4xl mx-auto space-y-8">
-            <div class="text-center space-y-3">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold">
-                    <i class="fa-solid fa-robot"></i> AI Assistant
-                </div>
-                <h2 class="text-3xl md:text-4xl font-bold text-white">RZR.AI Chatbot</h2>
-                <p class="text-slate-400 text-sm md:text-base max-w-lg mx-auto">Tanyakan seputar portofolio, layanan pembuatan website, atau proyek RZR secara langsung di sini.</p>
-            </div>
-
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl flex flex-col h-[450px]">
-                <div class="px-6 py-4 bg-slate-950/60 border-b border-slate-800 flex items-center justify-between">
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center text-white text-sm font-bold shadow-md shadow-blue-600/30">
-                            AI
-                        </div>
-                        <div>
-                            <h4 class="text-sm font-bold text-white">RZR Assistant</h4>
-                            <p class="text-xs text-emerald-400 flex items-center gap-1">
-                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Online
-                            </p>
-                        </div>
-                    </div>
-                    <span class="text-xs font-mono text-slate-500">v1.0</span>
-                </div>
-
-                <div id="chat-messages" class="flex-1 p-6 overflow-y-auto space-y-4 text-sm">
-                    <div class="flex gap-3">
-                        <div class="w-8 h-8 rounded-full bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xs shrink-0">
-                            <i class="fa-solid fa-robot"></i>
-                        </div>
-                        <div class="bg-slate-800/80 border border-slate-700/50 p-3.5 rounded-2xl rounded-tl-none max-w-[80%] text-slate-200">
-                            Halo! Saya asisten virtual RZR. Ada yang bisa saya bantu terkait layanan website, proyek, atau info kontak Mochamad Rizky Ramadhan?
-                        </div>
-                    </div>
-                </div>
-
-                <form id="chat-form" onsubmit="handleChatSubmit(event)" class="p-4 border-t border-slate-800 bg-slate-950/40 flex gap-2">
-                    <input 
-                        type="text" 
-                        id="chat-input" 
-                        placeholder="Ketik pertanyaan kamu di sini..." 
-                        class="flex-1 bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
-                        required
-                    >
-                    <button type="submit" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm rounded-xl transition-all shadow-md shadow-blue-600/20 flex items-center gap-2">
-                        <span>Kirim</span>
-                        <i class="fa-regular fa-paper-plane text-xs"></i>
-                    </button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Keahlian / Skills Section -->
-    <section id="skills" class="py-24 px-6 bg-slate-900/30 border-t border-slate-800/50">
-        <div class="max-w-6xl mx-auto space-y-12">
-            <div class="text-center space-y-3">
-                <h2 class="text-3xl md:text-4xl font-bold text-white">Keahlian & Teknologi</h2>
-                <p class="text-slate-400 max-w-lg mx-auto">Stack teknologi dan tools yang biasa saya gunakan dalam membangun produk digital.</p>
-            </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="p-5 bg-slate-900/80 border border-slate-800 rounded-xl text-center space-y-2 hover:border-blue-500/40 transition">
-                    <i class="fa-brands fa-html5 text-3xl text-orange-500"></i>
-                    <h4 class="font-bold text-white text-sm">HTML5 & CSS3</h4>
-                    <p class="text-xs text-slate-400">Struktur & Styling Modern</p>
-                </div>
-                <div class="p-5 bg-slate-900/80 border border-slate-800 rounded-xl text-center space-y-2 hover:border-blue-500/40 transition">
-                    <i class="fa-brands fa-js text-3xl text-yellow-400"></i>
-                    <h4 class="font-bold text-white text-sm">JavaScript (ES6+)</h4>
-                    <p class="text-xs text-slate-400">Logika & Interaktivitas Web</p>
-                </div>
-                <div class="p-5 bg-slate-900/80 border border-slate-800 rounded-xl text-center space-y-2 hover:border-blue-500/40 transition">
-                    <i class="fa-brands fa-css3-alt text-3xl text-cyan-400"></i>
-                    <h4 class="font-bold text-white text-sm">Tailwind CSS</h4>
-                    <p class="text-xs text-slate-400">Utility-First CSS</p>
-                </div>
-                <div class="p-5 bg-slate-900/80 border border-slate-800 rounded-xl text-center space-y-2 hover:border-blue-500/40 transition">
-                    <i class="fa-solid fa-database text-3xl text-emerald-400"></i>
-                    <h4 class="font-bold text-white text-sm">Supabase / SQL</h4>
-                    <p class="text-xs text-slate-400">Backend & Realtime Data</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-24 px-6 border-t border-slate-800/80">
-        <div class="max-w-4xl mx-auto space-y-12">
-            <div class="text-center space-y-3">
-                <h2 class="text-3xl md:text-4xl font-bold text-white">Hubungi Saya</h2>
-                <p class="text-slate-400 max-w-lg mx-auto">Tertarik bekerja sama atau butuh solusi web kustom? Kirim pesan secara langsung melalui WhatsApp atau Email.</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-6">
-                <a href="https://wa.me/62895401061300" target="_blank" class="p-6 bg-slate-900/80 border border-slate-800 hover:border-emerald-500/50 rounded-2xl flex items-center gap-4 transition group">
-                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-2xl group-hover:bg-emerald-500 group-hover:text-white transition">
-                        <i class="fa-brands fa-whatsapp"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-white text-base">WhatsApp</h4>
-                        <p class="text-sm text-slate-400">+62 895-4010-61300</p>
-                    </div>
-                </a>
-
-                <a href="https://github.com/rizkyganteng050908" target="_blank" class="p-6 bg-slate-900/80 border border-slate-800 hover:border-slate-500/50 rounded-2xl flex items-center gap-4 transition group">
-                    <div class="w-12 h-12 rounded-xl bg-slate-800 text-white flex items-center justify-center text-2xl group-hover:bg-white group-hover:text-slate-900 transition">
-                        <i class="fa-brands fa-github"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-white text-base">GitHub</h4>
-                        <p class="text-sm text-slate-400">@rizkyganteng050908</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-8 border-t border-slate-800/80 bg-slate-950 text-center text-slate-500 text-sm">
-        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p>© 2026 Mochamad Rizky Ramadhan. All rights reserved.</p>
-            <p class="font-mono text-xs">Domain Utama: <a href="https://rzr.my.id" class="text-blue-400 hover:underline">rzr.my.id</a></p>
-        </div>
-    </footer>
-
-    <!-- ====== MODAL LOGIN GOOGLE ====== -->
-    <div id="login-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4 transition-opacity duration-300 opacity-0">
-        <div class="relative w-full max-w-md bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl text-center space-y-6 transform scale-95 transition-all duration-300" id="login-modal-content">
-            
-            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg focus:outline-none">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-
-            <div class="space-y-2">
-                <div class="w-12 h-12 mx-auto bg-blue-500/10 text-blue-400 rounded-xl flex items-center justify-center text-2xl border border-blue-500/20">
-                    <i class="fa-brands fa-google"></i>
-                </div>
-                <h3 class="text-2xl font-bold text-white tracking-tight">Masuk ke RZR.DEV</h3>
-                <p class="text-sm text-slate-400">Gunakan Akun Google kamu untuk mengakses fitur eksklusif dan layanan portofolio.</p>
-            </div>
-
-            <div class="pt-2">
-                <button id="google-login-btn" onclick="handleGoogleLogin()" class="w-full flex items-center justify-center gap-3 px-4 py-3 bg-white hover:bg-slate-100 text-slate-900 font-bold rounded-xl transition-all shadow-lg shadow-white/10 active:scale-98">
-                    <svg class="w-5 h-5" viewBox="0 0 24 24">
-                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-                    </svg>
-                    <span>Lanjutkan dengan Google</span>
-                </button>
-            </div>
-
-            <div id="login-status" class="hidden p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
-                <i class="fa-solid fa-circle-check mr-1"></i> Berhasil terhubung!
-            </div>
-
-            <p class="text-xs text-slate-500 leading-relaxed pt-2">
-                Dengan masuk, Anda menyetujui Ketentuan Layanan & Kebijakan Privasi <span class="text-slate-400 font-medium">RZR.DEV</span>.
-            </p>
-        </div>
-    </div>
-
-    <!-- JavaScript Logika & Firebase Auth SDK (Project: portofolio-m-rizky-r) -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyA4mRfteuBcAsQ4T7ys5xKPj7PEoT1Kb-s",
-            authDomain: "portofolio-m-rizky-r.firebaseapp.com",
-            projectId: "portofolio-m-rizky-r",
-            storageBucket: "portofolio-m-rizky-r.firebasestorage.app",
-            messagingSenderId: "738949706225",
-            appId: "1:738949706225:web:59dc5f46b26afc105d5450",
-            measurementId: "G-D5120LZY80"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        const auth = getAuth(app);
-        const googleProvider = new GoogleAuthProvider();
-
-        window.openLoginModal = function() {
-            const modal = document.getElementById('login-modal');
-            const content = document.getElementById('login-modal-content');
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                modal.classList.remove('opacity-0');
-                content.classList.remove('scale-95');
-                content.classList.add('scale-100');
-            }, 10);
-        }
-
-        window.closeLoginModal = function() {
-            const modal = document.getElementById('login-modal');
-            const content = document.getElementById('login-modal-content');
-            modal.classList.add('opacity-0');
-            content.classList.remove('scale-100');
-            content.classList.add('scale-95');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 300);
-        }
-
-        window.handleGoogleLogin = async function() {
-            const btn = document.getElementById('google-login-btn');
-            const status = document.getElementById('login-status');
-            
-            btn.disabled = true;
-            btn.innerHTML = `<i class="fa-solid fa-circle-notch animate-spin text-blue-600"></i> Menghubungkan Google...`;
-
-            try {
-                const result = await signInWithPopup(auth, googleProvider);
-                const user = result.user;
-                console.log("Login Berhasil:", user.displayName, user.email);
-
-                btn.classList.add('hidden');
-                status.classList.remove('hidden', 'bg-rose-500/10', 'border-rose-500/30', 'text-rose-400');
-                status.classList.add('bg-emerald-500/10', 'border-emerald-500/30', 'text-emerald-400');
-                status.innerHTML = `<i class="fa-solid fa-circle-check mr-1"></i> Selamat datang, ${user.displayName}!`;
-
-                setTimeout(() => {
-                    closeLoginModal();
-                    setTimeout(() => {
-                        btn.classList.remove('hidden');
-                        btn.disabled = false;
-                        btn.innerHTML = `
-                            <svg class="w-5 h-5" viewBox="0 0 24 24">
-                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-                            </svg>
-                            <span>Lanjutkan dengan Google</span>`;
-                        status.classList.add('hidden');
-                    }, 500);
-                }, 1500);
-
-            } catch (error) {
-                console.error("Error Login:", error.code, error.message);
-                btn.disabled = false;
-                btn.innerHTML = `
-                    <svg class="w-5 h-5" viewBox="0 0 24 24">
-                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-                    </svg>
-                    <span>Lanjutkan dengan Google</span>`;
-                
-                status.classList.remove('hidden', 'bg-emerald-500/10', 'border-emerald-500/30', 'text-emerald-400');
-                status.classList.add('bg-rose-500/10', 'border-rose-500/30', 'text-rose-400');
-                status.innerHTML = `<i class="fa-solid fa-triangle-exclamation mr-1"></i> Gagal masuk: ${error.message}`;
-            }
-        }
-    </script>
-
-    <!-- Script Pendukung Non-Module -->
+    <!-- JavaScript untuk Filter & Mobile Menu -->
     <script>
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
         }
 
-        function filterProjects(category, button) {
-            const cards = document.querySelectorAll('.project-card');
-            const buttons = document.querySelectorAll('.filter-btn');
-
-            buttons.forEach(btn => {
-                btn.classList.remove('bg-blue-600', 'text-white', 'active');
-                btn.classList.add('bg-slate-800', 'text-slate-400');
+        function filterProjects(category, btn) {
+            // Update active button state
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                b.classList.remove('bg-blue-600', 'text-white');
+                b.classList.add('bg-slate-800', 'text-slate-400');
             });
+            btn.classList.remove('bg-slate-800', 'text-slate-400');
+            btn.classList.add('bg-blue-600', 'text-white');
 
-            button.classList.remove('bg-slate-800', 'text-slate-400');
-            button.classList.add('bg-blue-600', 'text-white', 'active');
-
-            cards.forEach(card => {
+            // Filter project cards
+            document.querySelectorAll('.project-card').forEach(card => {
                 if (category === 'all' || card.classList.contains(category)) {
                     card.style.display = 'flex';
                 } else {
@@ -733,65 +417,6 @@
                 }
             });
         }
-
-        function handleChatSubmit(e) {
-            e.preventDefault();
-            const input = document.getElementById('chat-input');
-            const messagesContainer = document.getElementById('chat-messages');
-            const query = input.value.trim();
-
-            if (!query) return;
-
-            const userMsg = document.createElement('div');
-            userMsg.className = 'flex gap-3 justify-end';
-            userMsg.innerHTML = `
-                <div class="bg-blue-600 text-white p-3.5 rounded-2xl rounded-tr-none max-w-[80%]">
-                    ${escapeHtml(query)}
-                </div>
-            `;
-            messagesContainer.appendChild(userMsg);
-            input.value = '';
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-
-            setTimeout(() => {
-                const aiMsg = document.createElement('div');
-                aiMsg.className = 'flex gap-3';
-                aiMsg.innerHTML = `
-                    <div class="w-8 h-8 rounded-full bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400 text-xs shrink-0">
-                        <i class="fa-solid fa-robot"></i>
-                    </div>
-                    <div class="bg-slate-800/80 border border-slate-700/50 p-3.5 rounded-2xl rounded-tl-none max-w-[80%] text-slate-200">
-                        ${getAiResponse(query)}
-                    </div>
-                `;
-                messagesContainer.appendChild(aiMsg);
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
-            }, 600);
-        }
-
-        function getAiResponse(text) {
-            const q = text.toLowerCase();
-            if (q.includes('halo') || q.includes('hai')) {
-                return 'Halo! Ada yang bisa saya bantu terkait pembuatan website atau informasi proyek?';
-            } else if (q.includes('harga') || q.includes('jasa') || q.includes('biaya')) {
-                return 'Untuk informasi harga dan paket pembuatan website, kamu bisa langsung membuka layanan RZR Web atau hubungi via WhatsApp +62 895-4010-61300.';
-            } else if (q.includes('proyek') || q.includes('portfolio') || q.includes('aplikasi')) {
-                return 'Mochamad Rizky Ramadhan telah mengembangkan berbagai proyek seperti AbsensiBos, TabunganKu, RZR Photobox, dan game interaktif.';
-            } else {
-                return 'Terima kasih atas pertanyaannya! Kamu juga bisa menghubungi Mochamad Rizky Ramadhan secara langsung melalui WhatsApp untuk respon lebih cepat.';
-            }
-        }
-
-        function escapeHtml(text) {
-            return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-        }
-
-        window.addEventListener('click', (e) => {
-            const modal = document.getElementById('login-modal');
-            if (e.target === modal) {
-                closeLoginModal();
-            }
-        });
     </script>
 </body>
 </html>
