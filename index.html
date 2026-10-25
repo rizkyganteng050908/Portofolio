@@ -115,13 +115,14 @@
         <div class="max-w-6xl mx-auto space-y-12">
             <div class="text-center space-y-4">
                 <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">Proyek Pilihan</h2>
-                <p class="text-slate-400 max-w-xl mx-auto">Sistem web dan solusi digital yang dikembangkan untuk berbagai kebutuhan operasional, produktivitas, hiburan, dan interaksi pengguna.</p>
+                <p class="text-slate-400 max-w-xl mx-auto">Sistem web dan solusi digital yang dikembangkan untuk berbagai kebutuhan operasional, sekolah, produktivitas, dan hiburan.</p>
                 
                 <!-- Category Filter Buttons -->
                 <div class="flex flex-wrap justify-center gap-2 pt-4">
                     <button onclick="filterProjects('all', this)" class="filter-btn active px-4 py-1.5 rounded-full text-xs font-semibold bg-blue-600 text-white transition">Semua</button>
                     <button onclick="filterProjects('system', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Sistem Web</button>
-                    <button onclick="filterProjects('finance', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Keuangan</button>
+                    <button onclick="filterProjects('school', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Sekolah & Edukasi</button>
+                    <button onclick="filterProjects('finance', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Keuangan & Kasir</button>
                     <button onclick="filterProjects('services', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Layanan Jasa</button>
                     <button onclick="filterProjects('tools', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Tools & Media</button>
                     <button onclick="filterProjects('game', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Game & Fun</button>
@@ -130,15 +131,16 @@
 
             <!-- Project Cards Grid -->
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Project 1 -->
-                <div class="project-card system group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-blue-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-blue-500/5">
+                
+                <!-- Project: AbsensiBos -->
+                <div class="project-card system school group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-blue-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-blue-500/5">
                     <div class="space-y-4">
                         <div class="w-12 h-12 bg-blue-500/10 text-blue-400 rounded-xl flex items-center justify-center text-xl font-bold border border-blue-500/20">
                             <i class="fa-solid fa-user-check"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">AbsensiBos — Sistem Absensi Digital</h3>
+                        <h3 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">AbsensiBos — Presensi Digital</h3>
                         <p class="text-sm text-slate-400 leading-relaxed">
-                            Aplikasi pencatatan presensi berbasis web secara real-time. Memudahkan pemantauan riwayat kehadiran, rekapitulasi data otomatis, dan manajemen pengguna yang terstruktur.
+                            Aplikasi pencatatan presensi berbasis web secara real-time. Memudahkan pemantauan riwayat kehadiran dan rekapitulasi data otomatis.
                         </p>
                         <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-blue-300">
                             <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">JavaScript</span>
@@ -147,8 +149,289 @@
                         </div>
                     </div>
                     <div class="pt-6 border-t border-slate-800/80 mt-6">
-                        <a href="https://absensi.rzr.my.id/" target="_blank" class="inline-flex items-center gap-2 text-sm text-blue-400 hover:text-blue-300 font-semibold group-hover:translate-x-1 transition-all">
+                        <a href="https://absensi.rzr.my.id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-blue-400 hover:text-blue-300 font-semibold group-hover:translate-x-1 transition-all">
                             Buka Aplikasi <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project: Absensi Guru -->
+                <div class="project-card system school group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-indigo-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-indigo-500/5">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 bg-indigo-500/10 text-indigo-400 rounded-xl flex items-center justify-center text-xl font-bold border border-indigo-500/20">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-indigo-400 transition-colors">Website Absensi Guru</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Sistem pengelolaan presensi khusus tenaga pengajar dan staf guru sekolah dengan perekaman data kehadiran yang rapi dan terstruktur.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-indigo-300">
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Absensi Guru</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Sekolah</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Web App</span>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800/80 mt-6">
+                        <a href="https://website-absensi-guru.rzr.my.id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-indigo-400 hover:text-indigo-300 font-semibold group-hover:translate-x-1 transition-all">
+                            Buka Sistem Guru <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project: Absensi Online Siswa -->
+                <div class="project-card system school group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-sky-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-sky-500/5">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 bg-sky-500/10 text-sky-400 rounded-xl flex items-center justify-center text-xl font-bold border border-sky-500/20">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-sky-400 transition-colors">Absensi Online Siswa</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Portal absensi harian online untuk siswa sekolah. Memfasilitasi konfirmasi kehadiran secara fleksibel dan akurat.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-sky-300">
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Absensi Siswa</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Real-time</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Tailwind</span>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800/80 mt-6">
+                        <a href="https://absensi-online-siswa.rzr.my.id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-sky-400 hover:text-sky-300 font-semibold group-hover:translate-x-1 transition-all">
+                            Buka Absensi Siswa <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project: Sistem BK -->
+                <div class="project-card system school group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-teal-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-teal-500/5">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 bg-teal-500/10 text-teal-400 rounded-xl flex items-center justify-center text-xl font-bold border border-teal-500/20">
+                            <i class="fa-solid fa-clipboard-user"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-teal-400 transition-colors">Sistem Informasi BK</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Aplikasi Manajemen Bimbingan Konseling (BK) untuk mencatat poin pelanggaran, konseling siswa, dan rekapitulasi perkembangan perilaku murid.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-teal-300">
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Konseling</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Sistem BK</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Web App</span>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800/80 mt-6">
+                        <a href="https://sistem-bk.rzr.my.id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-teal-400 hover:text-teal-300 font-semibold group-hover:translate-x-1 transition-all">
+                            Buka Sistem BK <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project: Website Perpustakaan -->
+                <div class="project-card system school group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-amber-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-amber-500/5">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-xl font-bold border border-amber-500/20">
+                            <i class="fa-solid fa-book"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">Website Perpustakaan</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Sistem Informasi Perpustakaan Digital untuk pencarian katalog buku, manajemen peminjaman, serta pengembalian koleksi literatur.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-amber-300">
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Perpustakaan</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Katalog Buku</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Database</span>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800/80 mt-6">
+                        <a href="https://website-perpustakaan.rzr.my.id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-amber-400 hover:text-amber-300 font-semibold group-hover:translate-x-1 transition-all">
+                            Buka Perpustakaan <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project: Exam Browser -->
+                <div class="project-card school system group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-red-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-red-500/5">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 bg-red-500/10 text-red-400 rounded-xl flex items-center justify-center text-xl font-bold border border-red-500/20">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-red-400 transition-colors">Exambrowser Web</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Platform ujian online berbasis web yang aman untuk mencegah kecurangan saat pengerjaan evaluasi dan tes siswa.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-red-300">
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Exambrowser</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Ujian Online</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Security</span>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800/80 mt-6">
+                        <a href="https://exambrowser.rzr.my.id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-red-400 hover:text-red-300 font-semibold group-hover:translate-x-1 transition-all">
+                            Buka Exambrowser <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project: Pengingat PR -->
+                <div class="project-card school tools group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-yellow-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-yellow-500/5">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 bg-yellow-500/10 text-yellow-400 rounded-xl flex items-center justify-center text-xl font-bold border border-yellow-500/20">
+                            <i class="fa-solid fa-bell"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-yellow-400 transition-colors">Website Pengingat PR</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Aplikasi pengingat tugas sekolah dan Pekerjaan Rumah (PR) interaktif untuk manajemen waktu belajar siswa yang disiplin.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-yellow-300">
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Task Tracker</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Pengingat PR</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Web App</span>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800/80 mt-6">
+                        <a href="https://website-pengingat-pr.rzr.my.id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-yellow-400 hover:text-yellow-300 font-semibold group-hover:translate-x-1 transition-all">
+                            Buka Pengingat PR <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project: Simulasi TKA IT -->
+                <div class="project-card school tools group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-cyan-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-cyan-500/5">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 bg-cyan-500/10 text-cyan-400 rounded-xl flex items-center justify-center text-xl font-bold border border-cyan-500/20">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">Simulasi TKA IT</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Platform simulasi Tes Kemampuan Akademik (TKA) bidang Teknologi Informasi untuk latihan soal dan pemetaan kompetensi pengembang.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-cyan-300">
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Simulasi TKA</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">IT Exam</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Interactive</span>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800/80 mt-6">
+                        <a href="https://website-simulasi-tka-it.rzr.my.id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-cyan-400 hover:text-cyan-300 font-semibold group-hover:translate-x-1 transition-all">
+                            Mulai Simulasi <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project: Kasir Kantin Sekolah -->
+                <div class="project-card finance school group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-emerald-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-emerald-500/5">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 bg-emerald-500/10 text-emerald-400 rounded-xl flex items-center justify-center text-xl font-bold border border-emerald-500/20">
+                            <i class="fa-solid fa-cash-register"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">Kasir Kantin Sekolah</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Sistem kasir Point of Sale (POS) digital untuk transaksi penjualan kantin sekolah yang cepat, praktis, dan akurat.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-emerald-300">
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">POS Kantin</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Kasir Digital</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Transaksi</span>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800/80 mt-6">
+                        <div class="flex flex-col gap-2">
+                            <a href="https://kasir-kantin.rzr.my.id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-emerald-400 hover:text-emerald-300 font-semibold transition-all">
+                                Kasir Kantin (V1) <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </a>
+                            <a href="https://website-kasir-kantin.rzr.my.id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-emerald-400 hover:text-emerald-300 font-semibold transition-all">
+                                Website Kasir Kantin (V2) <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project: TabunganKu -->
+                <div class="project-card finance group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-emerald-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-emerald-500/5">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 bg-emerald-500/10 text-emerald-400 rounded-xl flex items-center justify-center text-xl font-bold border border-emerald-500/20">
+                            <i class="fa-solid fa-wallet"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">TabunganKu — Manajemen Tabungan</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Platform pencatatan keuangan mandiri dan pelacakan target tabungan. Dilengkapi visualisasi grafik pemasukan/pengeluaran untuk membantu efisiensi finansial.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-emerald-300">
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Web App</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Database</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Chart UI</span>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800/80 mt-6">
+                        <a href="https://tabungan.rzr.my.id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-emerald-400 hover:text-emerald-300 font-semibold group-hover:translate-x-1 transition-all">
+                            Buka Aplikasi <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project: Kalkulator Digital -->
+                <div class="project-card tools finance group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-purple-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-purple-500/5">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 bg-purple-500/10 text-purple-400 rounded-xl flex items-center justify-center text-xl font-bold border border-purple-500/20">
+                            <i class="fa-solid fa-calculator"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-purple-400 transition-colors">Kalkulator Digital Web</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Alat hitung digital modern berbasis web untuk perhitungan matematis praktis dengan antarmuka yang clean dan mudah digunakan.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-purple-300">
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Kalkulator</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">JavaScript</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Web Utility</span>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800/80 mt-6">
+                        <a href="https://kalkulator-digital.rzr.my.id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-purple-400 hover:text-purple-300 font-semibold group-hover:translate-x-1 transition-all">
+                            Buka Kalkulator <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project: Movio Streaming -->
+                <div class="project-card tools group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-pink-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-pink-500/5">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 bg-pink-500/10 text-pink-400 rounded-xl flex items-center justify-center text-xl font-bold border border-pink-500/20">
+                            <i class="fa-solid fa-film"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-pink-400 transition-colors">Movio — Streaming Movie Hub</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Platform eksplorasi dan katalog film interaktif dengan tampilan modern untuk mencari judul film populer dan informasi sinema terkini.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-pink-300">
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Movio</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Movie API</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Streaming UI</span>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800/80 mt-6">
+                        <a href="https://movio.rzr.my.id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-pink-400 hover:text-pink-300 font-semibold group-hover:translate-x-1 transition-all">
+                            Jelajahi Movio <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project: Sonjaya PLN Portfolio -->
+                <div class="project-card services group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-yellow-400/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-yellow-400/5">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 bg-yellow-400/10 text-yellow-400 rounded-xl flex items-center justify-center text-xl font-bold border border-yellow-400/20">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-yellow-400 transition-colors">Sonjaya — Portofolio Spesialis PLN</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Website portofolio profesional buatan kustom untuk Muhammad Sonjaya, spesialis teknis sistem kelistrikan & energi PLN di Cirebon.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-yellow-300">
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Custom Web</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Client Portfolio</span>
+                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">PLN Expert</span>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-slate-800/80 mt-6">
+                        <a href="https://sonjaya.rzr.my.id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-yellow-400 hover:text-yellow-300 font-semibold group-hover:translate-x-1 transition-all">
+                            Lihat Portofolio Sonjaya <i class="fa-solid fa-arrow-right text-xs"></i>
                         </a>
                     </div>
                 </div>
@@ -199,15 +482,15 @@
                     </div>
                 </div>
 
-                <!-- Project 2 (Web RPL) -->
-                <div class="project-card system group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-indigo-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-indigo-500/5">
+                <!-- Project: Web RPL -->
+                <div class="project-card system school group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-indigo-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-indigo-500/5">
                     <div class="space-y-4">
                         <div class="w-12 h-12 bg-indigo-500/10 text-indigo-400 rounded-xl flex items-center justify-center text-xl font-bold border border-indigo-500/20">
                             <i class="fa-solid fa-code"></i>
                         </div>
                         <h3 class="text-xl font-bold text-white group-hover:text-indigo-400 transition-colors">RPL Class — Portal Kelas</h3>
                         <p class="text-sm text-slate-400 leading-relaxed">
-                            Platform web khusus Rekayasa Perangkat Lunak (RPL) untuk pengelolaan materi, informasi akademik, serta portal pembelajaran terintegrasi.
+                            Platform web khusus Rekayasa Perangkat Lunak (RPL) untuk pengelolaan materi dan informasi akademik.
                         </p>
                         <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-indigo-300">
                             <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Portal RPL</span>
@@ -216,36 +499,13 @@
                         </div>
                     </div>
                     <div class="pt-6 border-t border-slate-800/80 mt-6">
-                        <a href="https://web-rpl.rzr.my.id/" target="_blank" class="inline-flex items-center gap-2 text-sm text-indigo-400 hover:text-indigo-300 font-semibold group-hover:translate-x-1 transition-all">
+                        <a href="https://web-rpl.rzr.my.id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-indigo-400 hover:text-indigo-300 font-semibold group-hover:translate-x-1 transition-all">
                             Buka Portal RPL <i class="fa-solid fa-arrow-right text-xs"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- Project 3 -->
-                <div class="project-card finance group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-emerald-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-emerald-500/5">
-                    <div class="space-y-4">
-                        <div class="w-12 h-12 bg-emerald-500/10 text-emerald-400 rounded-xl flex items-center justify-center text-xl font-bold border border-emerald-500/20">
-                            <i class="fa-solid fa-wallet"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">TabunganKu — Manajemen Tabungan</h3>
-                        <p class="text-sm text-slate-400 leading-relaxed">
-                            Platform pencatatan keuangan mandiri dan pelacakan target tabungan. Dilengkapi visualisasi grafik pemasukan/pengeluaran untuk membantu efisiensi finansial.
-                        </p>
-                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-emerald-300">
-                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Web App</span>
-                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Database</span>
-                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Chart UI</span>
-                        </div>
-                    </div>
-                    <div class="pt-6 border-t border-slate-800/80 mt-6">
-                        <a href="https://tabungan.rzr.my.id/" target="_blank" class="inline-flex items-center gap-2 text-sm text-emerald-400 hover:text-emerald-300 font-semibold group-hover:translate-x-1 transition-all">
-                            Buka Aplikasi <i class="fa-solid fa-arrow-right text-xs"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project 4 -->
+                <!-- Project: RZR Web Jasa -->
                 <div class="project-card services group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-purple-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-purple-500/5">
                     <div class="space-y-4">
                         <div class="w-12 h-12 bg-purple-500/10 text-purple-400 rounded-xl flex items-center justify-center text-xl font-bold border border-purple-500/20">
@@ -253,7 +513,7 @@
                         </div>
                         <h3 class="text-xl font-bold text-white group-hover:text-purple-400 transition-colors">RZR Web — Jasa Pembuatan Website</h3>
                         <p class="text-sm text-slate-400 leading-relaxed">
-                            Platform layanan pembuatan website kustom untuk UMKM, landing page pemasaran, hingga portofolio dengan performa cepat dan integrasi SEO.
+                            Platform layanan pembuatan website kustom untuk UMKM, landing page pemasaran, hingga portofolio dengan performa cepat.
                         </p>
                         <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-purple-300">
                             <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Landing Page</span>
@@ -273,7 +533,7 @@
                     </div>
                 </div>
 
-                <!-- Project 5 (Web Tools) -->
+                <!-- Project: RZR Tools -->
                 <div class="project-card tools group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-amber-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-amber-500/5">
                     <div class="space-y-4">
                         <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-xl font-bold border border-amber-500/20">
@@ -281,7 +541,7 @@
                         </div>
                         <h3 class="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">RZR Tools — Developer Tools</h3>
                         <p class="text-sm text-slate-400 leading-relaxed">
-                            Kumpulan utilitas web serbaguna untuk membantu produktivitas harian, pengolahan data praktis, serta alat bantu teknis pengembang.
+                            Kumpulan utilitas web serbaguna untuk membantu produktivitas harian dan pengolahan data praktis.
                         </p>
                         <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-amber-300">
                             <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Utilities</span>
@@ -290,36 +550,13 @@
                         </div>
                     </div>
                     <div class="pt-6 border-t border-slate-800/80 mt-6">
-                        <a href="https://tools.rzr.my.id/" target="_blank" class="inline-flex items-center gap-2 text-sm text-amber-400 hover:text-amber-300 font-semibold group-hover:translate-x-1 transition-all">
+                        <a href="https://tools.rzr.my.id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-amber-400 hover:text-amber-300 font-semibold group-hover:translate-x-1 transition-all">
                             Buka Tools <i class="fa-solid fa-arrow-right text-xs"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- Project 6 (Tool Boost Pro) -->
-                <div class="project-card tools group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-violet-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-violet-500/5">
-                    <div class="space-y-4">
-                        <div class="w-12 h-12 bg-violet-500/10 text-violet-400 rounded-xl flex items-center justify-center text-xl font-bold border border-violet-500/20">
-                            <i class="fa-solid fa-rocket"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-white group-hover:text-violet-400 transition-colors">Tool Boost Pro</h3>
-                        <p class="text-sm text-slate-400 leading-relaxed">
-                            Platform web alat bantu canggih yang dirancang untuk mengoptimalkan performa, alur kerja digital, dan efisiensi produktivitas secara praktis.
-                        </p>
-                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-violet-300">
-                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Productivity</span>
-                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Netlify</span>
-                            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Web Tools</span>
-                        </div>
-                    </div>
-                    <div class="pt-6 border-t border-slate-800/80 mt-6">
-                        <a href="https://toolboostpro.netlify.app/" target="_blank" class="inline-flex items-center gap-2 text-sm text-violet-400 hover:text-violet-300 font-semibold group-hover:translate-x-1 transition-all">
-                            Buka Tool Boost Pro <i class="fa-solid fa-arrow-right text-xs"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project 7 (Photobox) -->
+                <!-- Project: Photobox -->
                 <div class="project-card tools group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-pink-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-pink-500/5">
                     <div class="space-y-4">
                         <div class="w-12 h-12 bg-pink-500/10 text-pink-400 rounded-xl flex items-center justify-center text-xl font-bold border border-pink-500/20">
@@ -327,7 +564,7 @@
                         </div>
                         <h3 class="text-xl font-bold text-white group-hover:text-pink-400 transition-colors">RZR Photobox — Virtual Photobox</h3>
                         <p class="text-sm text-slate-400 leading-relaxed">
-                            Aplikasi photobox berbasis web interaktif. Memungkinkan pengguna mengambil foto strip, menerapkan bingkai custom, dan mengunduh hasilnya secara langsung.
+                            Aplikasi photobox berbasis web interaktif. Mengambil foto strip, menerapkan bingkai custom, dan mengunduh hasilnya.
                         </p>
                         <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-pink-300">
                             <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Webcam API</span>
@@ -336,13 +573,13 @@
                         </div>
                     </div>
                     <div class="pt-6 border-t border-slate-800/80 mt-6">
-                        <a href="https://photobox.rzr.my.id/" target="_blank" class="inline-flex items-center gap-2 text-sm text-pink-400 hover:text-pink-300 font-semibold group-hover:translate-x-1 transition-all">
+                        <a href="https://photobox.rzr.my.id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-pink-400 hover:text-pink-300 font-semibold group-hover:translate-x-1 transition-all">
                             Coba Photobox <i class="fa-solid fa-arrow-right text-xs"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- Project 8 (Tebak Kata) -->
+                <!-- Project: Tebak Kata -->
                 <div class="project-card game group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-cyan-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-cyan-500/5">
                     <div class="space-y-4">
                         <div class="w-12 h-12 bg-cyan-500/10 text-cyan-400 rounded-xl flex items-center justify-center text-xl font-bold border border-cyan-500/20">
@@ -350,7 +587,7 @@
                         </div>
                         <h3 class="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">Tebak Kata — Game Edukasi</h3>
                         <p class="text-sm text-slate-400 leading-relaxed">
-                            Permainan asah otak interaktif berbasis web untuk menebak susunan kata. Dilengkapi sistem skor, petunjuk (hint), dan antarmuka pengguna yang responsif.
+                            Permainan asah otak interaktif berbasis web untuk menebak susunan kata. Dilengkapi sistem skor dan petunjuk.
                         </p>
                         <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-cyan-300">
                             <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Interactive Game</span>
@@ -359,13 +596,13 @@
                         </div>
                     </div>
                     <div class="pt-6 border-t border-slate-800/80 mt-6">
-                        <a href="https://tebak-kata.rzr.my.id/" target="_blank" class="inline-flex items-center gap-2 text-sm text-cyan-400 hover:text-cyan-300 font-semibold group-hover:translate-x-1 transition-all">
+                        <a href="https://tebak-kata.rzr.my.id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-cyan-400 hover:text-cyan-300 font-semibold group-hover:translate-x-1 transition-all">
                             Mainkan Game <i class="fa-solid fa-arrow-right text-xs"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- Project 9 (Game Memory) -->
+                <!-- Project: Memory Card -->
                 <div class="project-card game group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-indigo-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-indigo-500/5">
                     <div class="space-y-4">
                         <div class="w-12 h-12 bg-indigo-500/10 text-indigo-400 rounded-xl flex items-center justify-center text-xl font-bold border border-indigo-500/20">
@@ -373,7 +610,7 @@
                         </div>
                         <h3 class="text-xl font-bold text-white group-hover:text-indigo-400 transition-colors">Memory Card — Game Asah Otak</h3>
                         <p class="text-sm text-slate-400 leading-relaxed">
-                            Permainan mencocokkan kartu memori interaktif berbasis web. Dirancang untuk melatih daya ingat dengan sistem pencatat langkah (moves), penghitung waktu, dan UI yang bersih.
+                            Permainan mencocokkan kartu memori interaktif berbasis web dengan timer dan sistem hitung langkah.
                         </p>
                         <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-indigo-300">
                             <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Memory Game</span>
@@ -382,7 +619,7 @@
                         </div>
                     </div>
                     <div class="pt-6 border-t border-slate-800/80 mt-6">
-                        <a href="https://game-memory.rzr.my.id/" target="_blank" class="inline-flex items-center gap-2 text-sm text-indigo-400 hover:text-indigo-300 font-semibold group-hover:translate-x-1 transition-all">
+                        <a href="https://game-memory.rzr.my.id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-indigo-400 hover:text-indigo-300 font-semibold group-hover:translate-x-1 transition-all">
                             Mainkan Gratis <i class="fa-solid fa-arrow-right text-xs"></i>
                         </a>
                     </div>
