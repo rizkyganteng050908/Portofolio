@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mochamad Rizky Ramadhan - Web Developer Portfolio</title>
+    <title>Mochamad Rizky Ramadhan - Web Developer Portfolio Profesional</title>
     
     <!-- FAVICON PNG -->
     <link rel="icon" type="image/png" sizes="192x192" href="Orang Misterius.png">
@@ -19,7 +19,6 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
-            // Inisialisasi EmailJS (Ganti 'YOUR_PUBLIC_KEY' dengan Public Key EmailJS kamu nanti)
             emailjs.init({
                 publicKey: "YOUR_PUBLIC_KEY",
             });
@@ -83,7 +82,7 @@
         </div>
     </div>
 
-    <!-- ================= HALAMAN UTAMA PORTOFOLIO (Disembunyikan sebelum login) ================= -->
+    <!-- ================= HALAMAN UTAMA PORTOFOLIO ================= -->
     <div id="portfolio-content" class="hidden">
         <!-- Header / Navbar -->
         <header class="fixed top-0 w-full bg-slate-950/80 backdrop-blur-md z-40 border-b border-slate-800/80">
@@ -730,7 +729,7 @@
                                     </div>
                                     <div>
                                         <p class="text-xs text-slate-400">Email</p>
-                                        <p class="font-medium text-white">rizkyganteng050908@gmail.com</p>
+                                        <p class="font-medium text-white">rizkyganteng050981@gmail.com</p>
                                     </div>
                                 </div>
                                 <div class="flex items-center gap-4">
@@ -795,7 +794,7 @@
 
     <!-- JavaScript Interaktif Login & EmailJS -->
     <script>
-        // Cek apakah pengunjung sudah pernah login sebelumnya di perangkat ini
+        // Cek apakah pengunjung sudah pernah login sebelumnya
         window.addEventListener('DOMContentLoaded', () => {
             const savedName = localStorage.getItem('rzr_visitor_name');
             if (savedName) {
@@ -818,21 +817,19 @@
             // Simpan nama pengunjung ke localStorage
             localStorage.setItem('rzr_visitor_name', visitorName);
 
-            // Kirim data nama pengunjung secara otomatis ke email rizkyganteng050908@gmail.com via EmailJS
+            // Kirim data nama pengunjung secara otomatis ke email rizkyganteng050981@gmail.com via EmailJS
             const templateParams = {
                 visitor_name: visitorName,
-                to_email: 'rizkyganteng050908@gmail.com',
+                to_email: 'rizkyganteng050981@gmail.com',
                 login_time: new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' })
             };
 
-            // PERHATIAN: Ganti 'YOUR_SERVICE_ID' dan 'YOUR_TEMPLATE_ID' dengan akun EmailJS gratis kamu
             emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
                 .then(function(response) {
                     console.log('Email Berhasil Dikirim!', response.status, response.text);
                     proceedToPortfolio(visitorName);
                 }, function(error) {
                     console.log('Gagal Kirim Email (Pastikan ID EmailJS diisi):', error);
-                    // Tetap izinkan masuk meskipun EmailJS belum dikonfigurasi kodenya
                     proceedToPortfolio(visitorName);
                 });
         }
