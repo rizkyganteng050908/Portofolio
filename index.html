@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mochamad Rizky Ramadhan - Web Developer Portfolio Profesional</title>
+    <title>Mochamad Rizky Ramadhan - Web Developer Portfolio</title>
     
     <!-- FAVICON PNG -->
     <link rel="icon" type="image/png" sizes="192x192" href="Orang Misterius.png">
@@ -15,10 +15,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- EmailJS SDK untuk Kirim Email Otomatis -->
+    <!-- EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
+            // Ganti 'YOUR_PUBLIC_KEY' dengan Public Key EmailJS kamu (Contoh: "user_xxxxxx")
             emailjs.init({
                 publicKey: "YOUR_PUBLIC_KEY",
             });
@@ -77,7 +78,7 @@
                 </button>
             </form>
             <div class="text-center">
-                <p class="text-[10px] text-slate-500 font-mono">Secure Access &bull; RZR.DEV System</p>
+                <p class="text-[10px] text-slate-500 font-mono">Target Email: rizkyganteng050981@gmail.com</p>
             </div>
         </div>
     </div>
@@ -802,9 +803,8 @@
         </footer>
     </div>
 
-    <!-- JavaScript Interaktif Login, Logout, & EmailJS -->
+    <!-- JavaScript Login, Logout & EmailJS Integration -->
     <script>
-        // Cek apakah pengunjung sudah pernah login sebelumnya
         window.addEventListener('DOMContentLoaded', () => {
             const savedName = localStorage.getItem('rzr_visitor_name');
             if (savedName) {
@@ -815,32 +815,38 @@
             }
         });
 
-        // Fungsi saat pengunjung mengetik nama dan klik Masuk
         function handleLoginSubmit(event) {
             event.preventDefault();
             const visitorName = document.getElementById('login-name').value.trim();
             if (!visitorName) return;
 
             const btn = document.getElementById('login-btn');
-            btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-2"></i> Mengirim data & masuk...`;
+            btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-2"></i> Mengirim data ke email & masuk...`;
             btn.disabled = true;
 
-            // Simpan nama pengunjung ke localStorage
             localStorage.setItem('rzr_visitor_name', visitorName);
 
-            // Kirim data nama pengunjung secara otomatis ke email rizkyganteng050981@gmail.com via EmailJS
+            // Parameter yang dikirim ke email kamu
             const templateParams = {
                 visitor_name: visitorName,
                 to_email: 'rizkyganteng050981@gmail.com',
                 login_time: new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' })
             };
 
-            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+            // PERHATIAN: 
+            // 1. Buat akun gratis di https://www.emailjs.com/
+            // 2. Hubungkan layanan Gmail kamu (rizkyganteng050981@gmail.com)
+            // 3. Masukkan Service ID, Template ID, dan Public Key kamu di bawah ini:
+            const SERVICE_ID = "YOUR_SERVICE_ID"; 
+            const TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+
+            // Jika belum mengatur EmailJS, kode ini tidak error tapi langsung melompat masuk
+            emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
                 .then(function(response) {
-                    console.log('Email Berhasil Dikirim!', response.status, response.text);
+                    console.log('Email Berhasil Terkirim ke rizkyganteng050981@gmail.com!', response.status);
                     proceedToPortfolio(visitorName);
                 }, function(error) {
-                    console.log('Gagal Kirim Email (Pastikan ID EmailJS diisi):', error);
+                    console.log('EmailJS belum dikonfigurasi. Lanjut masuk portofolio...', error);
                     proceedToPortfolio(visitorName);
                 });
         }
@@ -853,7 +859,6 @@
             window.scrollTo(0, 0);
         }
 
-        // Fungsi LOGOUT: Menghapus sesi dan mengembalikan ke halaman login
         function handleLogout() {
             localStorage.removeItem('rzr_visitor_name');
             document.getElementById('portfolio-content').classList.add('hidden');
@@ -913,13 +918,7 @@
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
             setTimeout(() => {
-                let reply = `Halo ${visitorName}! Kiki (Mochamad Rizky Ramadhan) siap membantu pembuatan website custom atau konsultasi proyek web. Kamu bisa menghubunginya langsung via WhatsApp di bagian kontak!`;
-                
-                const lowerMsg = message.toLowerCase();
-                if (lowerMsg.includes('harga') || lowerMsg.includes('jasa') || lowerMsg.includes('buat website')) {
-                    reply = `${visitorName}, untuk pemesanan jasa pembuatan website, silakan cek menu layanan di jasa-pembuatan-website.rzr.my.id atau klik tombol WhatsApp!`;
-                }
-
+                let reply = `Halo ${visitorName}! Kiki (Mochamad Rizky Ramadhan) siap membantu pembuatan website custom atau konsultasi proyek web.`;
                 chatMessages.innerHTML += `
                     <div class="flex items-start gap-3">
                         <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-xs flex-shrink-0">AI</div>
