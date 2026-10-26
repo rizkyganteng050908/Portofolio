@@ -828,7 +828,7 @@
             // Parameter yang dikirim ke email kamu
             const templateParams = {
                 visitor_name: visitorName,
-                to_email: 'rizkyganteng050981@gmail.com',
+                to_name: 'Mochamad Rizky Ramadhan',
                 login_time: new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' })
             };
 
@@ -838,11 +838,10 @@
             // Kirim email otomatis via EmailJS
             emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
                 .then(function(response) {
-                    console.log('Email Berhasil Terkirim ke rizkyganteng050981@gmail.com!', response.status);
+                    console.log('Email Berhasil Terkirim!', response.status);
                     proceedToPortfolio(visitorName);
                 }, function(error) {
                     console.log('Gagal Kirim Email:', error);
-                    // Tetap masuk meskipun ada kendala jaringan
                     proceedToPortfolio(visitorName);
                 });
         }
