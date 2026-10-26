@@ -15,6 +15,16 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // Inisialisasi EmailJS (Ganti dengan Public Key kamu nanti jika ingin pakai EmailJS)
+            emailjs.init({
+                publicKey: "YOUR_PUBLIC_KEY",
+            });
+        })();
+    </script>
     <script>
         tailwind.config = {
             theme: {
@@ -34,6 +44,29 @@
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-blue-500 selection:text-white">
 
+    <!-- MODAL WAJIB ISI NAMA (VISITOR CAPTURE) -->
+    <div id="visitor-modal" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md flex items-center justify-center px-4">
+        <div class="bg-slate-900 border border-slate-800 p-8 rounded-2xl max-w-md w-full space-y-6 shadow-2xl relative">
+            <div class="text-center space-y-2">
+                <div class="w-16 h-16 bg-blue-500/10 text-blue-400 rounded-2xl mx-auto flex items-center justify-center text-2xl border border-blue-500/20 mb-4">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-white">Selamat Datang di RZR.DEV</h2>
+                <p class="text-sm text-slate-400">Silakan masukkan nama Anda terlebih dahulu untuk mengakses portofolio Mochamad Rizky Ramadhan.</p>
+            </div>
+
+            <form onsubmit="handleVisitorSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 mb-1">Nama Lengkap Anda</label>
+                    <input type="text" id="visitor-name-input" required placeholder="Contoh: Budi Santoso" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-blue-500 transition">
+                </div>
+                <button type="submit" class="w-full py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl shadow-lg shadow-blue-600/25 transition">
+                    Masuk ke Portofolio <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
     <!-- Header / Navbar -->
     <header class="fixed top-0 w-full bg-slate-950/80 backdrop-blur-md z-40 border-b border-slate-800/80">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
@@ -49,9 +82,14 @@
                 <a href="#skills" class="hover:text-blue-400 transition-colors">Keahlian</a>
                 <a href="#contact" class="hover:text-blue-400 transition-colors">Kontak</a>
             </nav>
-            <a href="#contact" class="hidden md:inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-medium text-sm rounded-lg transition-all shadow-lg shadow-blue-600/20">
-                <i class="fa-regular fa-paper-plane"></i> Kontak Saya
-            </a>
+            <div class="hidden md:flex items-center gap-3">
+                <span id="visitor-badge" class="text-xs font-medium text-blue-400 bg-blue-500/10 px-3 py-1.5 rounded-lg border border-blue-500/20 hidden">
+                    Halo, <span id="display-visitor-name" class="font-bold"></span>!
+                </span>
+                <a href="#contact" class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-medium text-sm rounded-lg transition-all shadow-lg shadow-blue-600/20">
+                    <i class="fa-regular fa-paper-plane"></i> Kontak Saya
+                </a>
+            </div>
             <!-- Mobile Menu Button -->
             <button id="menu-btn" onclick="toggleMobileMenu()" class="md:hidden text-slate-300 hover:text-white focus:outline-none">
                 <i class="fa-solid fa-bars text-2xl"></i>
@@ -674,7 +712,7 @@
                                 </div>
                                 <div>
                                     <p class="text-xs text-slate-400">Email</p>
-                                    <p class="font-medium text-white">mrizkyrn@gmail.com</p>
+                                    <p class="font-medium text-white">rizkyganteng050908@gmail.com</p>
                                 </div>
                             </div>
                             <div class="flex items-center gap-4">
@@ -736,8 +774,53 @@
         <p>&copy; 2026 Mochamad Rizky Ramadhan (RZR.DEV). All rights reserved.</p>
     </footer>
 
-    <!-- JavaScript Interaktif -->
+    <!-- JavaScript Interaktif & Visitor Capture -->
     <script>
+        // Fungsi saat pengunjung mengisi nama di awal
+        function handleVisitorSubmit(event) {
+            event.preventDefault();
+            const visitorName = document.getElementById('visitor-name-input').value.trim();
+            if (!visitorName) return;
+
+            // Simpan ke localStorage supaya tidak muncul terus jika refresh di tab yang sama
+            localStorage.setItem('rzr_visitor_name', visitorName);
+
+            // Tampilkan nama di navbar
+            document.getElementById('display-visitor-name').innerText = visitorName;
+            document.getElementById('visitor-badge').classList.remove('hidden');
+
+            // Tutup Modal
+            document.getElementById('visitor-modal').classList.add('hidden');
+
+            // KIRIM OTOMATIS KE EMAIL KAMU (rizkyganteng050908@gmail.com) via EmailJS
+            // Pastikan kamu mendaftar gratis di emailjs.com dan mengisi Service ID & Template ID
+            const templateParams = {
+                visitor_name: visitorName,
+                to_email: 'rizkyganteng050908@gmail.com',
+                visit_time: new Date().toLocaleString('id-ID')
+            };
+
+            // Contoh pemanggilan EmailJS (aktifkan setelah setup akun EmailJS kamu)
+            /*
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                }, function(error) {
+                    console.log('FAILED...', error);
+                });
+            */
+        }
+
+        // Cek jika pengunjung sudah pernah mengisi nama sebelumnya
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedName = localStorage.getItem('rzr_visitor_name');
+            if (savedName) {
+                document.getElementById('visitor-modal').classList.add('hidden');
+                document.getElementById('display-visitor-name').innerText = savedName;
+                document.getElementById('visitor-badge').classList.remove('hidden');
+            }
+        });
+
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
@@ -772,6 +855,7 @@
             if (!message) return;
 
             const chatMessages = document.getElementById('chat-messages');
+            const visitorName = localStorage.getItem('rzr_visitor_name') || 'Tamu';
 
             // User Bubble
             chatMessages.innerHTML += `
@@ -779,7 +863,7 @@
                     <div class="bg-blue-600 text-white px-4 py-3 rounded-2xl max-w-[80%] leading-relaxed">
                         ${escapeHtml(message)}
                     </div>
-                    <div class="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-white font-bold text-xs flex-shrink-0">You</div>
+                    <div class="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-white font-bold text-xs flex-shrink-0">${visitorName.charAt(0).toUpperCase()}</div>
                 </div>
             `;
             input.value = '';
@@ -787,13 +871,13 @@
 
             // AI Simulated Reply
             setTimeout(() => {
-                let reply = "Terima kasih atas pertanyaannya! Kiki (Mochamad Rizky Ramadhan) siap membantu pembuatan website custom atau konsultasi proyek web. Kamu bisa menghubunginya langsung via WhatsApp di bagian kontak!";
+                let reply = `Halo ${visitorName}! Kiki (Mochamad Rizky Ramadhan) siap membantu pembuatan website custom atau konsultasi proyek web. Kamu bisa menghubunginya langsung via WhatsApp di bagian kontak!`;
                 
                 const lowerMsg = message.toLowerCase();
                 if (lowerMsg.includes('harga') || lowerMsg.includes('jasa') || lowerMsg.includes('buat website')) {
-                    reply = "Untuk pemesanan jasa pembuatan website, kamu bisa langsung mengecek menu layanan di jasa-pembuatan-website.rzr.my.id atau langsung klik tombol WhatsApp di bawah!";
+                    reply = `${visitorName}, untuk pemesanan jasa pembuatan website, kamu bisa langsung mengecek menu layanan di jasa-pembuatan-website.rzr.my.id atau langsung klik tombol WhatsApp di bawah!`;
                 } else if (lowerMsg.includes('absensi') || lowerMsg.includes('proyek')) {
-                    reply = "Kiki telah membangun banyak sistem web mulai dari AbsensiBos, sistem sekolah, perpustakaan, hingga aplikasi kasir kantin. Silakan cek bagian Proyek untuk mencobanya!";
+                    reply = `${visitorName}, Kiki telah membangun banyak sistem web mulai dari AbsensiBos, sistem sekolah, perpustakaan, hingga aplikasi kasir kantin. Silakan cek bagian Proyek untuk mencobanya!`;
                 }
 
                 chatMessages.innerHTML += `
