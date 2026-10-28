@@ -19,9 +19,9 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
-            if (window.emailjs) {
-                emailjs.init({ publicKey: "DeJsJa87SCRhQ2oCe" });
-            }
+            emailjs.init({
+                publicKey: "DeJsJa87SCRhQ2oCe",
+            });
         })();
     </script>
     <script>
@@ -804,11 +804,18 @@
 
     <!-- JavaScript Login, Logout & EmailJS Integration -->
     <script>
+        // Cek sesi saat halaman dimuat (agar tidak perlu login ulang jika sudah pernah login)
         window.addEventListener('DOMContentLoaded', () => {
-            // Tampilkan halaman login setiap kali halaman dibuka agar setiap kunjungan
-            // yang mengisi nama dapat mengirim notifikasi email.
-            document.getElementById('login-page').classList.remove('hidden');
-            document.getElementById('portfolio-content').classList.add('hidden');
+            const savedName = localStorage.getItem('rzr_visitor_name');
+            if (savedName && savedName.trim() !== "") {
+                document.getElementById('login-page').classList.add('hidden');
+                document.getElementById('portfolio-content').classList.remove('hidden');
+                document.getElementById('nav-visitor-name').innerText = savedName;
+                document.getElementById('mobile-visitor-name').innerText = savedName;
+            } else {
+                document.getElementById('login-page').classList.remove('hidden');
+                document.getElementById('portfolio-content').classList.add('hidden');
+            }
         });
 
         function handleLoginSubmit(event) {
@@ -820,43 +827,28 @@
             btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-2"></i> Mengirim data ke email & masuk...`;
             btn.disabled = true;
 
+            // Simpan permanen ke localStorage browser
             localStorage.setItem('rzr_visitor_name', visitorName);
 
             // Parameter yang dikirim ke email kamu
             const templateParams = {
                 visitor_name: visitorName,
                 to_name: 'Mochamad Rizky Ramadhan',
-                to_email: 'rizkyganteng050981@gmail.com',
-                recipient_email: 'rizkyganteng050981@gmail.com',
-                login_time: new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' }),
-                message: `Pengunjung bernama ${visitorName} baru saja masuk ke portofolio RZR.DEV.`
+                login_time: new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' })
             };
 
             const SERVICE_ID = "service_vc5gb3w"; 
             const TEMPLATE_ID = "template_cl3ycsx";
 
             // Kirim email otomatis via EmailJS
-            if (window.emailjs && typeof emailjs.send === 'function') {
-                emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
-                    .then(function(response) {
-                        console.log('Email berhasil terkirim:', response.status);
-                        proceedToPortfolio(visitorName);
-                    })
-                    .catch(function(error) {
-                        console.error('Email gagal dikirim:', error);
-                        alert('Nama berhasil dicatat di perangkat ini, tetapi email gagal dikirim. Periksa konfigurasi EmailJS (Service ID, Template ID, dan alamat penerima) lalu coba lagi.');
-                        btn.innerHTML = `<span>Masuk ke Portofolio</span> <i class="fa-solid fa-arrow-right text-xs"></i>`;
-                        btn.disabled = false;
-                        // Tetap izinkan pengunjung masuk setelah kegagalan email.
-                        proceedToPortfolio(visitorName);
-                    });
-            } else {
-                console.error('EmailJS tidak tersedia.');
-                alert('Layanan email belum siap. Periksa koneksi internet dan konfigurasi EmailJS.');
-                btn.innerHTML = `<span>Masuk ke Portofolio</span> <i class="fa-solid fa-arrow-right text-xs"></i>`;
-                btn.disabled = false;
-                proceedToPortfolio(visitorName);
-            }
+            emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
+                .then(function(response) {
+                    console.log('Email Berhasil Terkirim!', response.status);
+                    proceedToPortfolio(visitorName);
+                }, function(error) {
+                    console.log('Gagal Kirim Email:', error);
+                    proceedToPortfolio(visitorName);
+                });
         }
 
         function proceedToPortfolio(name) {
@@ -914,94 +906,29 @@
             const chatMessages = document.getElementById('chat-messages');
             const visitorName = localStorage.getItem('rzr_visitor_name') || 'Tamu';
 
-            // Tambahkan pesan pengunjung dengan textContent agar input aman.
-            const userRow = document.createElement('div');
-            userRow.className = 'flex items-start justify-end gap-3';
-            const userBubble = document.createElement('div');
-            userBubble.className = 'bg-blue-600 text-white px-4 py-3 rounded-2xl max-w-[80%] leading-relaxed break-words';
-            userBubble.textContent = message;
-            const userAvatar = document.createElement('div');
-            userAvatar.className = 'w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-white font-bold text-xs flex-shrink-0';
-            userAvatar.textContent = visitorName.charAt(0).toUpperCase();
-            userRow.append(userBubble, userAvatar);
-            chatMessages.appendChild(userRow);
-
+            chatMessages.innerHTML += `
+                <div class="flex items-start justify-end gap-3">
+                    <div class="bg-blue-600 text-white px-4 py-3 rounded-2xl max-w-[80%] leading-relaxed">
+                        ${escapeHtml(message)}
+                    </div>
+                    <div class="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-white font-bold text-xs flex-shrink-0">${visitorName.charAt(0).toUpperCase()}</div>
+                </div>
+            `;
             input.value = '';
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
-            // Cari proyek berdasarkan nama kartu, deskripsi, teks tautan, dan alamat situs.
-            const normalize = (value) => (value || '')
-                .toLocaleLowerCase('id-ID')
-                .normalize('NFD')
-                .replace(/[\u0300-\u036f]/g, '')
-                .replace(/[^a-z0-9]+/g, ' ')
-                .trim();
-
-            const normalizedMessage = normalize(message);
-            const cards = Array.from(document.querySelectorAll('.project-card'));
-            let matchedProject = null;
-            let bestScore = 0;
-
-            for (const card of cards) {
-                const title = card.querySelector('h3')?.textContent || '';
-                const description = card.querySelector('p')?.textContent || '';
-                const link = card.querySelector('a[href^="http"]');
-                if (!link) continue;
-
-                const linkText = link.textContent || '';
-                let hostname = '';
-                try { hostname = new URL(link.href).hostname.replace(/^www\./, '').split('.')[0]; } catch (_) {}
-
-                const fullName = normalize(title);
-                const projectWords = normalize(`${title} ${linkText} ${hostname}`).split(' ').filter(Boolean);
-                let score = 0;
-
-                if (fullName && normalizedMessage.includes(fullName)) score = 100;
-                else if (fullName && fullName.includes(normalizedMessage) && normalizedMessage.length >= 3) score = 80;
-                else {
-                    const nameWords = normalize(title).split(' ').filter(word => word.length >= 3);
-                    score = nameWords.reduce((sum, word) => sum + (normalizedMessage.includes(word) ? 10 : 0), 0);
-                    if (hostname && normalizedMessage.includes(normalize(hostname))) score += 30;
-                    if (projectWords.some(word => word.length >= 4 && normalizedMessage === word)) score += 15;
-                }
-
-                // Hindari membuka proyek hanya karena pesan umum seperti "website".
-                if (normalizedMessage.length < 3 || /^(halo|hai|hello|assalamualaikum|terima kasih|makasih|info|bantuan)$/.test(normalizedMessage)) score = 0;
-                if (score > bestScore) {
-                    bestScore = score;
-                    matchedProject = { title, description, url: link.href };
-                }
-            }
-
-            window.setTimeout(() => {
-                const botRow = document.createElement('div');
-                botRow.className = 'flex items-start gap-3';
-                const botAvatar = document.createElement('div');
-                botAvatar.className = 'w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-xs flex-shrink-0';
-                botAvatar.textContent = 'AI';
-                const botBubble = document.createElement('div');
-                botBubble.className = 'bg-slate-800 text-slate-200 px-4 py-3 rounded-2xl max-w-[85%] leading-relaxed border border-slate-700/50 break-words';
-
-                if (matchedProject && bestScore >= 10) {
-                    const intro = document.createElement('p');
-                    intro.textContent = `Saya menemukan proyek ${matchedProject.title}. Klik tombol di bawah untuk membukanya.`;
-                    const projectLink = document.createElement('a');
-                    projectLink.href = matchedProject.url;
-                    projectLink.target = '_blank';
-                    projectLink.rel = 'noopener noreferrer';
-                    projectLink.className = 'inline-flex items-center gap-2 mt-3 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg transition';
-                    projectLink.innerHTML = 'Buka Proyek <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>';
-                    botBubble.append(intro, projectLink);
-                } else {
-                    const reply = document.createElement('p');
-                    reply.textContent = `Halo ${visitorName}! Saya bisa membantu menemukan proyek di portofolio RZR.DEV. Coba ketik nama proyek, misalnya “Movio”, “AbsensiBos”, “Photobox”, “Tebak Kata”, “TabunganKu”, “Simulasi TKA IT”, atau “Jasa Pembuatan Website”.`;
-                    botBubble.appendChild(reply);
-                }
-
-                botRow.append(botAvatar, botBubble);
-                chatMessages.appendChild(botRow);
+            setTimeout(() => {
+                let reply = `Halo ${visitorName}! Kiki (Mochamad Rizky Ramadhan) siap membantu pembuatan website custom atau konsultasi proyek web.`;
+                chatMessages.innerHTML += `
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-xs flex-shrink-0">AI</div>
+                        <div class="bg-slate-800 text-slate-200 px-4 py-3 rounded-2xl max-w-[80%] leading-relaxed border border-slate-700/50">
+                            ${reply}
+                        </div>
+                    </div>
+                `;
                 chatMessages.scrollTop = chatMessages.scrollHeight;
-            }, 350);
+            }, 600);
         }
 
         function handleContactSubmit(event) {
