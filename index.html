@@ -159,6 +159,39 @@
             </div>
         </header>
 
+        <!-- ================= PANEL AKTIVITAS LOGIN ADMIN ================= -->
+        <section id="admin-activity-panel" class="hidden pt-28 pb-12 px-6 min-h-screen bg-slate-950">
+            <div class="max-w-6xl mx-auto space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div>
+                        <p class="text-xs uppercase tracking-[0.2em] text-purple-400 font-bold">Admin Dashboard</p>
+                        <h1 class="text-3xl font-black text-white mt-2">Aktivitas Login Pengunjung</h1>
+                        <p class="text-sm text-slate-400 mt-2">Daftar nama pengunjung beserta tanggal dan waktu saat mereka login.</p>
+                    </div>
+                    <div class="flex gap-2 flex-wrap">
+                        <button onclick="exportLoginActivity()" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-sm font-semibold"><i class="fa-solid fa-download mr-2"></i>Ekspor CSV</button>
+                        <button onclick="clearLoginActivity()" class="px-4 py-2 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 hover:bg-red-500/20 text-sm font-semibold">Hapus Riwayat</button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="p-5 rounded-2xl border border-slate-800 bg-slate-900"><p class="text-xs text-slate-400">Total aktivitas tersimpan</p><p id="activity-total" class="text-3xl font-black mt-2">0</p></div>
+                    <div class="p-5 rounded-2xl border border-slate-800 bg-slate-900"><p class="text-xs text-slate-400">Login hari ini</p><p id="activity-today" class="text-3xl font-black mt-2">0</p></div>
+                    <div class="p-5 rounded-2xl border border-slate-800 bg-slate-900"><p class="text-xs text-slate-400">Penyimpanan</p><p class="text-sm font-bold text-amber-300 mt-3">Browser/perangkat ini</p></div>
+                </div>
+                <div class="rounded-2xl border border-slate-800 bg-slate-900 overflow-hidden">
+                    <div class="p-4 border-b border-slate-800 flex items-center justify-between gap-3"><h2 class="font-bold">Riwayat Login</h2><button onclick="renderLoginActivity()" class="text-xs text-blue-400 hover:text-blue-300"><i class="fa-solid fa-rotate mr-1"></i>Segarkan</button></div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left">
+                            <thead class="bg-slate-950 text-slate-400 text-xs uppercase"><tr><th class="px-4 py-3">No.</th><th class="px-4 py-3">Nama Pengunjung</th><th class="px-4 py-3">Tanggal</th><th class="px-4 py-3">Jam (WIB)</th></tr></thead>
+                            <tbody id="login-activity-rows"><tr><td colspan="4" class="px-4 py-8 text-center text-slate-500">Belum ada aktivitas login tersimpan.</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-500">Catatan: karena website ini masih HTML tanpa database, riwayat hanya tersimpan di browser/perangkat yang digunakan. Agar admin bisa melihat login dari semua pengunjung dan perangkat, perlu database/backend seperti Firebase atau Supabase.</p>
+                <button onclick="showPortfolioAsAdmin()" class="px-4 py-2 rounded-xl border border-slate-700 hover:bg-slate-800 text-sm"><i class="fa-solid fa-arrow-left mr-2"></i>Kembali ke Portofolio</button>
+            </div>
+        </section>
+
         <!-- Hero Section / About -->
         <section id="about" class="relative min-h-screen flex items-center justify-center pt-24 pb-12 px-6 overflow-hidden">
             <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
@@ -869,9 +902,12 @@
                 localStorage.setItem('rzr_admin_session', 'true');
                 document.getElementById('login-page').classList.add('hidden');
                 document.getElementById('portfolio-content').classList.remove('hidden');
+                document.getElementById('admin-activity-panel').classList.remove('hidden');
                 document.getElementById('nav-visitor-name').innerText = 'Admin';
                 const mobileName = document.getElementById('mobile-visitor-name');
                 if (mobileName) mobileName.innerText = 'Admin';
+                document.querySelectorAll('#portfolio-content > section:not(#admin-activity-panel)').forEach(section => section.classList.add('hidden'));
+                renderLoginActivity();
                 window.scrollTo(0, 0);
             } else {
                 document.getElementById('admin-login-error').classList.remove('hidden');
@@ -888,6 +924,7 @@
             btn.disabled = true;
 
             localStorage.setItem('rzr_visitor_name', visitorName);
+            recordLoginActivity(visitorName);
 
             // Parameter yang dikirim ke email kamu
             const templateParams = {
@@ -929,9 +966,76 @@
         function proceedToPortfolio(name) {
             document.getElementById('login-page').classList.add('hidden');
             document.getElementById('portfolio-content').classList.remove('hidden');
+            document.getElementById('admin-activity-panel').classList.add('hidden');
+            document.querySelectorAll('#portfolio-content > section:not(#admin-activity-panel)').forEach(section => section.classList.remove('hidden'));
             document.getElementById('nav-visitor-name').innerText = name;
             const mobileName = document.getElementById('mobile-visitor-name');
             if (mobileName) mobileName.innerText = name;
+            window.scrollTo(0, 0);
+        }
+
+        // Catat aktivitas login pengunjung di browser/perangkat ini.
+        function recordLoginActivity(name) {
+            const now = new Date();
+            const activity = {
+                name: name,
+                timestamp: now.toISOString(),
+                date: now.toLocaleDateString('id-ID', { timeZone: 'Asia/Jakarta', day: '2-digit', month: '2-digit', year: 'numeric' }),
+                time: now.toLocaleTimeString('id-ID', { timeZone: 'Asia/Jakarta', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false })
+            };
+            let activities = [];
+            try { activities = JSON.parse(localStorage.getItem('rzr_login_activity') || '[]'); } catch (e) { activities = []; }
+            activities.unshift(activity);
+            localStorage.setItem('rzr_login_activity', JSON.stringify(activities.slice(0, 500)));
+        }
+
+        function renderLoginActivity() {
+            let activities = [];
+            try { activities = JSON.parse(localStorage.getItem('rzr_login_activity') || '[]'); } catch (e) { activities = []; }
+            const rows = document.getElementById('login-activity-rows');
+            if (!rows) return;
+            const today = new Date().toLocaleDateString('id-ID', { timeZone: 'Asia/Jakarta', day: '2-digit', month: '2-digit', year: 'numeric' });
+            document.getElementById('activity-total').textContent = activities.length;
+            document.getElementById('activity-today').textContent = activities.filter(item => item.date === today).length;
+            if (!activities.length) {
+                rows.innerHTML = '<tr><td colspan="4" class="px-4 py-8 text-center text-slate-500">Belum ada aktivitas login tersimpan di browser ini.</td></tr>';
+                return;
+            }
+            rows.replaceChildren();
+            activities.forEach((item, index) => {
+                const tr = document.createElement('tr');
+                tr.className = 'border-t border-slate-800 hover:bg-slate-800/50';
+                [String(index + 1), item.name || 'Tanpa nama', item.date || '-', (item.time || '-') + ' WIB'].forEach(value => {
+                    const td = document.createElement('td');
+                    td.className = 'px-4 py-3';
+                    td.textContent = value;
+                    tr.appendChild(td);
+                });
+                rows.appendChild(tr);
+            });
+        }
+
+        function clearLoginActivity() {
+            if (!confirm('Yakin ingin menghapus seluruh riwayat login yang tersimpan di browser ini?')) return;
+            localStorage.removeItem('rzr_login_activity');
+            renderLoginActivity();
+        }
+
+        function exportLoginActivity() {
+            let activities = [];
+            try { activities = JSON.parse(localStorage.getItem('rzr_login_activity') || '[]'); } catch (e) { activities = []; }
+            const escapeCsv = value => '"' + String(value ?? '').replace(/"/g, '""') + '"';
+            const csv = [['No', 'Nama Pengunjung', 'Tanggal', 'Jam WIB'], ...activities.map((item, index) => [index + 1, item.name, item.date, item.time])].map(row => row.map(escapeCsv).join(',')).join('\r\n');
+            const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url; link.download = 'riwayat-login-rzr.csv'; link.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function showPortfolioAsAdmin() {
+            document.getElementById('admin-activity-panel').classList.add('hidden');
+            document.querySelectorAll('#portfolio-content > section:not(#admin-activity-panel)').forEach(section => section.classList.remove('hidden'));
             window.scrollTo(0, 0);
         }
 
