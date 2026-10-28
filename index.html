@@ -806,10 +806,15 @@
     <!-- JavaScript Login, Logout & EmailJS Integration -->
     <script>
         window.addEventListener('DOMContentLoaded', () => {
-            // Tampilkan halaman login setiap kali halaman dibuka agar setiap kunjungan
-            // yang mengisi nama dapat mengirim notifikasi email.
-            document.getElementById('login-page').classList.remove('hidden');
-            document.getElementById('portfolio-content').classList.add('hidden');
+            // Jika pengunjung sudah pernah login di browser ini, langsung buka portofolio.
+            // Nama disimpan di localStorage sehingga tetap ada setelah halaman dimuat ulang.
+            const savedName = localStorage.getItem('rzr_visitor_name');
+            if (savedName && savedName.trim()) {
+                proceedToPortfolio(savedName.trim());
+            } else {
+                document.getElementById('login-page').classList.remove('hidden');
+                document.getElementById('portfolio-content').classList.add('hidden');
+            }
         });
 
         function handleLoginSubmit(event) {
