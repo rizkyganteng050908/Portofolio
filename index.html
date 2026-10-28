@@ -1,498 +1,1590 @@
+
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth dark">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mochamad Rizky Ramadhan - Web Developer Portfolio</title>
-    
-    <!-- FAVICON PNG -->
-    <link rel="icon" type="image/png" sizes="192x192" href="Orang Misterius.png">
-    <link rel="shortcut icon" type="image/png" href="Orang Misterius.png">
-    <link rel="apple-touch-icon" href="Orang Misterius.png">
-    <meta name="google-site-verification" content="Sh2njlrFvj3e6tG1Jjo3tlO9cOv5TUlcwpwBrlynrv0" />
-    
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            50: '#eff6ff',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            900: '#1e3a8a',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- EmailJS SDK -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function() {
-            emailjs.init({
-                publicKey: "DeJsJa87SCRhQ2oCe",
-            });
-        })();
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080d1a">
+  <meta name="description" content="Portofolio Mochamad Rizky Ramadhan — Web Developer dan Digital Solutions Specialist.">
+  <title>Mochamad Rizky Ramadhan | RZR.DEV</title>
+
+  <link rel="icon" type="image/png" href="Orang Misterius.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    :root {
+      --bg: #080d1a;
+      --panel: #10182a;
+      --panel2: #131e33;
+      --text: #f1f5f9;
+      --muted: #9caec7;
+      --blue: #60a5fa;
+      --cyan: #22d3ee;
+      --border: rgba(148,163,184,.17);
+      --radius: 18px;
+      --width: 1160px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      background:
+        radial-gradient(ellipse at 10% 0%, rgba(37,99,235,.13), transparent 35%),
+        radial-gradient(ellipse at 95% 25%, rgba(6,182,212,.08), transparent 28%),
+        var(--bg);
+      color: var(--text);
+      font-family: "Inter", Arial, sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    body.no-scroll { overflow: hidden; }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+    button { cursor: pointer; }
+    section { scroll-margin-top: 90px; }
+
+    .container {
+      width: min(var(--width), calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+    .section { padding: 76px 0; }
+
+    .section-heading {
+      margin-bottom: 28px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--cyan);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(1.7rem, 4vw, 2.5rem);
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    .gradient-text {
+      background: linear-gradient(100deg, #60a5fa, #22d3ee);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* NAVIGASI */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8,13,26,.88);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -.7px;
+      white-space: nowrap;
+    }
+
+    .brand span { color: var(--cyan); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 23px;
+    }
+
+    .nav-links a {
+      color: #cbd5e1;
+      font-size: .9rem;
+      transition: color .2s;
+    }
+
+    .nav-links a:hover { color: var(--cyan); }
+
+    .menu-toggle {
+      display: none;
+      background: var(--panel);
+      color: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      width: 43px;
+      height: 43px;
+      font-size: 1.15rem;
+    }
+
+    /* TOMBOL */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 12px 18px;
+      border-radius: 11px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      font-size: .92rem;
+      transition: transform .2s, background .2s;
+      text-align: center;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      color: #06111f;
+      background: linear-gradient(100deg, #60a5fa, #22d3ee);
+    }
+
+    .btn-secondary {
+      color: var(--text);
+      border-color: var(--border);
+      background: rgba(255,255,255,.035);
+    }
+
+    /* HERO */
+    .hero { padding: 76px 0 58px; }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.35fr .65fr;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(34,197,94,.28);
+      color: #86efac;
+      background: rgba(34,197,94,.07);
+      font-size: .8rem;
+      margin-bottom: 20px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #4ade80;
+      border-radius: 50%;
+      box-shadow: 0 0 12px rgba(74,222,128,.7);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5.4vw, 4.4rem);
+      letter-spacing: -2px;
+      line-height: 1.12;
+      margin-bottom: 18px;
+      overflow-wrap: anywhere;
+    }
+
+    .hero-description {
+      max-width: 650px;
+      color: var(--muted);
+      font-size: 1.04rem;
+      margin-bottom: 25px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-socials {
+      display: flex;
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    .hero-socials a {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: #dbeafe;
+      transition: .2s;
+    }
+
+    .hero-socials a:hover {
+      color: var(--cyan);
+      border-color: var(--cyan);
+    }
+
+    .profile-wrap {
+      width: min(100%, 310px);
+      margin-inline: auto;
+      padding: 10px;
+      border: 1px solid rgba(96,165,250,.35);
+      border-radius: 30px;
+      background: linear-gradient(145deg, rgba(96,165,250,.15), rgba(34,211,238,.03));
+      box-shadow: 0 25px 80px rgba(0,0,0,.25);
+    }
+
+    .profile-image {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 22px;
+      background: var(--panel2);
+    }
+
+    .profile-caption {
+      text-align: center;
+      padding: 15px 8px 8px;
+    }
+
+    .profile-caption strong { display: block; }
+    .profile-caption span { color: var(--muted); font-size: .85rem; }
+
+    /* KARTU UMUM */
+    .panel {
+      background: linear-gradient(145deg, rgba(19,30,51,.95), rgba(13,21,37,.95));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .panel h3 {
+      font-size: 1.15rem;
+      margin-bottom: 12px;
+    }
+
+    .panel p { color: var(--muted); }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .stat {
+      padding: 16px 10px;
+      text-align: center;
+      border-radius: 14px;
+      background: rgba(255,255,255,.035);
+      border: 1px solid var(--border);
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--cyan);
+      font-size: 1.45rem;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: .76rem;
+    }
+
+    /* FILTER PROYEK */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 9px;
+      margin-bottom: 26px;
+    }
+
+    .filter-btn {
+      color: #cbd5e1;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 9px 14px;
+      border-radius: 999px;
+      font-size: .84rem;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: rgba(34,211,238,.12);
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 18px;
+    }
+
+    .project-card {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      transition: transform .2s, border-color .2s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(34,211,238,.5);
+    }
+
+    .project-icon {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      margin-bottom: 16px;
+      border-radius: 14px;
+      background: rgba(96,165,250,.12);
+      color: var(--cyan);
+      font-size: 1.3rem;
+    }
+
+    .project-card h3 {
+      font-size: 1.08rem;
+      line-height: 1.4;
+      margin-bottom: 7px;
+      overflow-wrap: anywhere;
+    }
+
+    .project-card p {
+      color: var(--muted);
+      font-size: .88rem;
+      flex: 1;
+      margin-bottom: 16px;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 17px;
+    }
+
+    .tag {
+      color: #bfdbfe;
+      background: rgba(96,165,250,.1);
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: .72rem;
+    }
+
+    .project-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--cyan);
+      font-size: .88rem;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    /* KEAHLIAN */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 15px;
+    }
+
+    .skill {
+      padding: 20px 12px;
+      text-align: center;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: 15px;
+    }
+
+    .skill i {
+      color: var(--cyan);
+      font-size: 1.7rem;
+      margin-bottom: 10px;
+    }
+
+    .skill strong {
+      display: block;
+      font-size: .92rem;
+    }
+
+    .skill span {
+      display: block;
+      color: var(--muted);
+      font-size: .77rem;
+      margin-top: 4px;
+    }
+
+    /* KONTAK */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 20px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 13px;
+      margin-top: 20px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      min-width: 0;
+    }
+
+    .contact-item i {
+      flex: 0 0 42px;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: rgba(96,165,250,.12);
+      color: var(--cyan);
+    }
+
+    .contact-item div { min-width: 0; }
+    .contact-item small { display: block; color: var(--muted); }
+    .contact-item a { overflow-wrap: anywhere; }
+
+    .contact-form {
+      display: grid;
+      gap: 13px;
+    }
+
+    .field label {
+      display: block;
+      font-size: .85rem;
+      margin-bottom: 6px;
+    }
+
+    .field input, .field textarea {
+      display: block;
+      width: 100%;
+      color: white;
+      background: #0a1222;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 13px;
+      outline: none;
+    }
+
+    .field input:focus, .field textarea:focus {
+      border-color: var(--cyan);
+    }
+
+    .field textarea {
+      min-height: 125px;
+      resize: vertical;
+    }
+
+    /* CHATBOT */
+    .chat-launcher {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 150;
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      color: #06111f;
+      background: linear-gradient(135deg, #60a5fa, #22d3ee);
+      border: 0;
+      border-radius: 50%;
+      box-shadow: 0 8px 28px rgba(34,211,238,.23);
+      font-size: 1.4rem;
+    }
+
+    .chat-window {
+      position: fixed;
+      right: 22px;
+      bottom: 92px;
+      z-index: 150;
+      width: min(370px, calc(100vw - 28px));
+      height: min(500px, calc(100dvh - 125px));
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      background: #0c1424;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 20px 70px rgba(0,0,0,.5);
+    }
+
+    .chat-window.open { display: flex; }
+
+    .chat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 15px;
+      background: #14213a;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .chat-header small {
+      display: block;
+      color: var(--muted);
+      font-size: .76rem;
+    }
+
+    .chat-close {
+      width: 35px;
+      height: 35px;
+      color: white;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+    }
+
+    .chat-messages {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      gap: 12px;
+      overflow-y: auto;
+      padding: 15px;
+    }
+
+    .chat-message {
+      max-width: 90%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-size: .86rem;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+    }
+
+    .chat-message.bot {
+      align-self: flex-start;
+      background: #18253b;
+      color: #e2e8f0;
+    }
+
+    .chat-message.user {
+      align-self: flex-end;
+      background: #075985;
+      color: white;
+    }
+
+    .chat-message a {
+      color: #67e8f9;
+      text-decoration: underline;
+    }
+
+    .chat-form {
+      display: flex;
+      gap: 8px;
+      padding: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .chat-form input {
+      min-width: 0;
+      flex: 1;
+      padding: 11px;
+      color: white;
+      background: #111c30;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      outline: none;
+    }
+
+    .chat-form button {
+      flex: 0 0 43px;
+      color: #06111f;
+      background: var(--cyan);
+      border: 0;
+      border-radius: 10px;
+    }
+
+    /* LOGIN PENGUNJUNG */
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      overflow-y: auto;
+      background: rgba(0,0,0,.78);
+      backdrop-filter: blur(7px);
+    }
+
+    .modal.open { display: flex; }
+
+    .modal-card {
+      width: min(420px, 100%);
+      max-height: calc(100dvh - 36px);
+      overflow-y: auto;
+      padding: 27px;
+      background: #101a2d;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      text-align: center;
+    }
+
+    .modal-icon {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 16px;
+      display: grid;
+      place-items: center;
+      border-radius: 17px;
+      color: var(--cyan);
+      background: rgba(34,211,238,.12);
+      font-size: 1.5rem;
+    }
+
+    .modal-card h2 { margin-bottom: 8px; }
+    .modal-card p { color: var(--muted); font-size: .9rem; margin-bottom: 20px; }
+    .modal-card .field { text-align: left; margin-bottom: 14px; }
+    .modal-card .btn { width: 100%; }
+    .modal-note { display: block; margin-top: 13px; color: var(--muted); font-size: .75rem; }
+
+    /* FOOTER */
+    footer {
+      padding: 25px 0;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: .84rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .footer-links { display: flex; flex-wrap: wrap; gap: 15px; }
+
+    /* TABLET */
+    @media (max-width: 950px) {
+      .hero-grid { grid-template-columns: 1.1fr .9fr; gap: 28px; }
+      .project-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .skills-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+      .nav-links { gap: 14px; }
+      .nav-links a { font-size: .84rem; }
+    }
+
+    /* HP */
+    @media (max-width: 700px) {
+      html { scroll-padding-top: 76px; }
+      section { scroll-margin-top: 76px; }
+      .container { width: calc(100% - 30px); }
+      .section { padding: 54px 0; }
+      .nav-inner { min-height: 64px; }
+      .brand { font-size: 1.2rem; }
+      .menu-toggle { display: grid; place-items: center; }
+
+      .nav-links {
+        position: absolute;
+        top: calc(100% + 1px);
+        left: 0;
+        right: 0;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 8px 15px 15px;
+        background: #0b1221;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-links.open { display: flex; }
+
+      .nav-links a {
+        padding: 12px 8px;
+        border-bottom: 1px solid rgba(148,163,184,.1);
+        font-size: .95rem;
+      }
+
+      .hero { padding: 48px 0 35px; }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .hero-copy { order: 1; }
+      .profile-wrap { order: 0; width: min(225px, 72%); }
+      .profile-image { aspect-ratio: 1 / 1.12; }
+      .hero h1 { font-size: clamp(2.05rem, 9vw, 3.2rem); letter-spacing: -1.2px; }
+      .hero-description { font-size: .95rem; }
+      .hero-actions .btn { flex: 1 1 145px; }
+      .section-heading { margin-bottom: 23px; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .project-grid { grid-template-columns: 1fr; gap: 13px; }
+      .project-card { padding: 19px; }
+      .skills-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .stats { gap: 8px; }
+      .stat { padding: 12px 5px; }
+      .stat strong { font-size: 1.2rem; }
+      .stat span { font-size: .68rem; }
+      .panel { padding: 19px; }
+      .chat-launcher { right: 15px; bottom: 15px; width: 53px; height: 53px; }
+      .chat-window { right: 14px; bottom: 78px; width: calc(100vw - 28px); height: min(490px, calc(100dvh - 100px)); }
+      .modal-card { padding: 22px 18px; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .footer-links { justify-content: center; }
+    }
+
+    @media (max-width: 360px) {
+      .container { width: calc(100% - 24px); }
+      .hero h1 { font-size: 2rem; }
+      .hero-actions { flex-direction: column; }
+      .hero-actions .btn { width: 100%; }
+      .skills-grid { gap: 9px; }
+      .skill { padding: 15px 8px; }
+      .filters { gap: 6px; }
+      .filter-btn { padding: 7px 10px; font-size: .76rem; }
+      .chat-window { right: 10px; width: calc(100vw - 20px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+      }
+    }
+  </style>
 </head>
-<body class="bg-slate-950 text-slate-100 dark:bg-slate-950 dark:text-slate-100 font-sans antialiased selection:bg-blue-500 selection:text-white transition-colors duration-300" id="body-theme">
 
-    <!-- ================= TOMBOL PINTASAN ADMIN DI LUAR (Pojok Kanan Atas) ================= -->
-    <div class="fixed top-4 right-4 z-50">
-        <button onclick="openAdminLoginModal()" class="px-3.5 py-2 bg-indigo-600/20 hover:bg-indigo-600/40 text-indigo-400 border border-indigo-500/30 rounded-xl text-xs font-semibold backdrop-blur-md transition flex items-center gap-1.5 shadow-lg">
-            <i class="fa-solid fa-shield-halved"></i> Login Admin
-        </button>
+<body>
+  <!-- NAVIGASI -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#home" class="brand">RZR<span>.DEV</span></a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Buka menu" aria-expanded="false">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#home">Beranda</a>
+        <a href="#about">Tentang</a>
+        <a href="#projects">Proyek</a>
+        <a href="#skills">Keahlian</a>
+        <a href="#contact">Kontak</a>
+      </nav>
     </div>
+  </header>
 
-    <!-- ================= HALAMAN LOGIN / FORM MASUK PENGUNJUNG (RESPONSIF HP & LAPTOP) ================= -->
-    <div id="login-page" class="fixed inset-0 z-40 bg-slate-950 flex items-center justify-center p-4">
-        <!-- Efek Cahaya Latar Belakang -->
-        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 md:w-96 md:h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none"></div>
-        
-        <!-- Kotak Kartu Login Pengunjung -->
-        <div class="bg-slate-900 border border-slate-800 p-6 md:p-8 rounded-3xl max-w-md w-full space-y-6 shadow-2xl relative z-10 mx-auto">
-            <div class="text-center space-y-3">
-                <div class="w-16 h-16 bg-blue-500/10 text-blue-400 rounded-2xl mx-auto flex items-center justify-center text-2xl border border-blue-500/20 shadow-inner">
-                    <i class="fa-solid fa-lock-open"></i>
-                </div>
-                <h1 class="text-xl md:text-2xl font-bold text-white tracking-tight">Akses Portofolio RZR</h1>
-                <p class="text-xs md:text-sm text-slate-400 leading-relaxed">Masukkan nama lengkap Anda untuk melanjutkan ke halaman portofolio resmi Mochamad Rizky Ramadhan.</p>
-            </div>
+  <main>
+    <!-- BERANDA -->
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="status">
+            <span class="status-dot"></span>
+            Available for Freelance &amp; Projects
+          </div>
 
-            <form id="login-form" onsubmit="handleLoginSubmit(event)" class="space-y-4">
+          <h1>Halo, saya <span class="gradient-text">Mochamad Rizky Ramadhan</span></h1>
+
+          <p class="hero-description">
+            Web Developer &amp; Digital Solutions Specialist.
+            Saya membuat website, aplikasi web, tools digital, dan berbagai
+            proyek kreatif yang mudah digunakan.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">
+              <i class="fa-solid fa-code"></i> Lihat Proyek
+            </a>
+            <a class="btn btn-secondary" href="#contact">
+              <i class="fa-regular fa-paper-plane"></i> Hubungi Saya
+            </a>
+          </div>
+
+          <div class="hero-socials">
+            <a href="https://github.com/rizkyganteng050908" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <i class="fa-brands fa-github"></i>
+            </a>
+            <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+            <a href="#contact" aria-label="Email">
+              <i class="fa-regular fa-envelope"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="profile-wrap">
+          <img class="profile-image" src="Orang Misterius.png" alt="Foto profil RZR.DEV"
+               onerror="this.style.display='none';this.parentElement.style.minHeight='220px';">
+          <div class="profile-caption">
+            <strong>Mochamad Rizky Ramadhan</strong>
+            <span>Web Developer · RZR.DEV</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TENTANG -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Tentang Saya</span>
+          <h2>Membangun <span class="gradient-text">Solusi Digital</span></h2>
+          <p>Mengenal saya dan hal-hal yang saya kerjakan di dunia pengembangan web.</p>
+        </div>
+
+        <div class="about-grid">
+          <article class="panel">
+            <h3><i class="fa-regular fa-user gradient-text"></i> Siapa Saya?</h3>
+            <p>
+              Saya adalah pengembang web yang tertarik membuat website yang
+              responsif, menarik, dan bermanfaat. Saya terus belajar dan
+              mengembangkan proyek baru untuk meningkatkan kemampuan.
+            </p>
+          </article>
+
+          <article class="panel">
+            <h3><i class="fa-solid fa-laptop-code gradient-text"></i> Fokus Saya</h3>
+            <p>
+              Pengembangan website, aplikasi berbasis web, antarmuka pengguna,
+              tools digital, serta sistem sederhana yang membantu aktivitas
+              sehari-hari.
+            </p>
+          </article>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <strong id="projectCount">0</strong>
+            <span>Proyek Terdaftar</span>
+          </div>
+          <div class="stat">
+            <strong>Web</strong>
+            <span>Fokus Pengembangan</span>
+          </div>
+          <div class="stat">
+            <strong>100%</strong>
+            <span>Semangat Belajar</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROYEK -->
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Portofolio</span>
+          <h2>Proyek <span class="gradient-text">Saya</span></h2>
+          <p>Pilih kategori untuk menemukan proyek yang ingin kamu kunjungi.</p>
+        </div>
+
+        <div class="filters" id="projectFilters">
+          <button class="filter-btn active" data-filter="all">Semua</button>
+          <button class="filter-btn" data-filter="system">Sistem Web</button>
+          <button class="filter-btn" data-filter="finance">Keuangan</button>
+          <button class="filter-btn" data-filter="services">Layanan Jasa</button>
+          <button class="filter-btn" data-filter="tools">Tools &amp; Media</button>
+          <button class="filter-btn" data-filter="game">Game &amp; Fun</button>
+          <button class="filter-btn" data-filter="education">Pendidikan</button>
+        </div>
+
+        <div class="project-grid" id="projectGrid">
+          <!-- Kartu proyek dibuat otomatis melalui JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- KEAHLIAN -->
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Kemampuan</span>
+          <h2>Teknologi &amp; <span class="gradient-text">Keahlian</span></h2>
+          <p>Teknologi yang digunakan dalam proses belajar dan pengembangan proyek.</p>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill">
+            <i class="fa-brands fa-html5"></i>
+            <strong>HTML5</strong>
+            <span>Struktur Website</span>
+          </div>
+          <div class="skill">
+            <i class="fa-brands fa-css3-alt"></i>
+            <strong>CSS3</strong>
+            <span>Desain Responsif</span>
+          </div>
+          <div class="skill">
+            <i class="fa-brands fa-js"></i>
+            <strong>JavaScript</strong>
+            <span>Interaktivitas</span>
+          </div>
+          <div class="skill">
+            <i class="fa-solid fa-wind"></i>
+            <strong>Tailwind CSS</strong>
+            <span>UI Styling</span>
+          </div>
+          <div class="skill">
+            <i class="fa-brands fa-github"></i>
+            <strong>GitHub</strong>
+            <span>Repositori Kode</span>
+          </div>
+          <div class="skill">
+            <i class="fa-solid fa-database"></i>
+            <strong>Supabase</strong>
+            <span>Backend &amp; Data</span>
+          </div>
+          <div class="skill">
+            <i class="fa-solid fa-mobile-screen"></i>
+            <strong>Responsive UI</strong>
+            <span>Mobile &amp; Desktop</span>
+          </div>
+          <div class="skill">
+            <i class="fa-solid fa-puzzle-piece"></i>
+            <strong>Problem Solving</strong>
+            <span>Pengembangan Fitur</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KONTAK -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Kontak</span>
+          <h2>Mari <span class="gradient-text">Terhubung</span></h2>
+          <p>Punya ide proyek atau ingin membuat website? Silakan kirim pesan.</p>
+        </div>
+
+        <div class="contact-grid">
+          <article class="panel">
+            <h3>Informasi Kontak</h3>
+            <p>Hubungi saya untuk berdiskusi tentang website atau proyek digital.</p>
+
+            <div class="contact-list">
+              <div class="contact-item">
+                <i class="fa-brands fa-github"></i>
                 <div>
-                    <label class="block text-xs font-semibold text-slate-400 mb-1.5">Nama Lengkap Anda</label>
-                    <input 
-                        type="text" 
-                        id="login-name" 
-                        required 
-                        placeholder="Contoh: Andi Pratama" 
-                        class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-blue-500 transition shadow-inner"
-                    >
+                  <small>GitHub</small>
+                  <a href="https://github.com/rizkyganteng050908" target="_blank" rel="noopener noreferrer">
+                    rizkyganteng050908
+                  </a>
                 </div>
-                <button 
-                    type="submit" 
-                    id="login-btn"
-                    class="w-full py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl shadow-lg shadow-blue-600/25 transition flex items-center justify-center gap-2 text-sm"
-                >
-                    <span>Masuk ke Portofolio</span>
-                    <i class="fa-solid fa-arrow-right text-xs"></i>
-                </button>
-            </form>
-            <div class="text-center pt-2">
-                <p class="text-[10px] text-slate-500 font-mono">Target Email: rizkyganteng050981@gmail.com</p>
+              </div>
+
+              <div class="contact-item">
+                <i class="fa-regular fa-envelope"></i>
+                <div>
+                  <small>Email</small>
+                  <a href="mailto:rizkyganteng050981@gmail.com">rizkyganteng050981@gmail.com</a>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <i class="fa-solid fa-globe"></i>
+                <div>
+                  <small>Website</small>
+                  <a href="https://rzr.my.id" target="_blank" rel="noopener noreferrer">rzr.my.id</a>
+                </div>
+              </div>
             </div>
+          </article>
+
+          <form class="panel contact-form" id="contactForm">
+            <h3>Kirim Pesan via WhatsApp</h3>
+
+            <div class="field">
+              <label for="contactName">Nama</label>
+              <input id="contactName" type="text" placeholder="Masukkan nama kamu" required maxlength="80">
+            </div>
+
+            <div class="field">
+              <label for="contactEmail">Email (opsional)</label>
+              <input id="contactEmail" type="email" placeholder="nama@email.com" maxlength="120">
+            </div>
+
+            <div class="field">
+              <label for="contactMessage">Pesan</label>
+              <textarea id="contactMessage" placeholder="Tuliskan kebutuhan website kamu..." required maxlength="2000"></textarea>
+            </div>
+
+            <button class="btn btn-primary" type="submit">
+              <i class="fa-brands fa-whatsapp"></i> Buat Pesan WhatsApp
+            </button>
+            <small style="color:var(--muted)">Atur nomor WhatsApp tujuan pada variabel WHATSAPP_NUMBER di JavaScript.</small>
+          </form>
         </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> <strong>RZR.DEV</strong>. Dibuat dengan semangat belajar.</div>
+      <div class="footer-links">
+        <a href="#home">Beranda</a>
+        <a href="#projects">Proyek</a>
+        <a href="#contact">Kontak</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CHATBOT -->
+  <button class="chat-launcher" id="chatLauncher" aria-label="Buka Chatbot AI RZR" title="Chatbot AI RZR">
+    <i class="fa-solid fa-comments"></i>
+  </button>
+
+  <aside class="chat-window" id="chatWindow" aria-label="Chatbot AI RZR">
+    <div class="chat-header">
+      <div>
+        <strong><i class="fa-solid fa-robot"></i> Chatbot AI RZR</strong>
+        <small>Asisten pencarian proyek</small>
+      </div>
+      <button class="chat-close" id="chatClose" aria-label="Tutup chatbot">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
     </div>
 
-    <!-- ================= MODAL LOGIN ADMIN ================= -->
-    <div id="admin-login-modal" class="hidden fixed inset-0 z-60 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl max-w-sm w-full space-y-4 shadow-2xl relative">
-            <div class="flex justify-between items-center">
-                <h3 class="text-lg font-bold text-white">Login Panel Admin</h3>
-                <button onclick="closeAdminLoginModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
-            </div>
-            <p class="text-xs text-slate-400">Masukkan PIN Admin khusus untuk melihat riwayat pengunjung.</p>
-            <form onsubmit="handleAdminAuth(event)" class="space-y-3">
-                <input type="password" id="admin-pin" required placeholder="Masukkan PIN Admin" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500">
-                <button type="submit" class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl text-sm transition">Buka Dashboard Admin</button>
-            </form>
+    <div class="chat-messages" id="chatMessages" aria-live="polite">
+      <div class="chat-message bot">
+        Halo! Saya Chatbot AI RZR. Ketik nama proyek yang ingin kamu buka, misalnya Movio, AbsensiBos, Photobox, atau TabunganKu.
+      </div>
+    </div>
+
+    <form class="chat-form" id="chatForm">
+      <input id="chatInput" type="text" placeholder="Cari nama proyek..." autocomplete="off" maxlength="200" required>
+      <button type="submit" aria-label="Kirim pesan"><i class="fa-solid fa-paper-plane"></i></button>
+    </form>
+  </aside>
+
+  <!-- LOGIN PENGUNJUNG -->
+  <div class="modal" id="visitorModal" role="dialog" aria-modal="true" aria-labelledby="visitorTitle">
+    <div class="modal-card">
+      <div class="modal-icon"><i class="fa-solid fa-user-astronaut"></i></div>
+      <h2 id="visitorTitle">Selamat Datang!</h2>
+      <p>Kenalan dulu, yuk. Masukkan nama kamu sebelum menjelajahi portofolio RZR.DEV.</p>
+
+      <form id="visitorForm">
+        <div class="field">
+          <label for="visitorName">Nama kamu</label>
+          <input id="visitorName" type="text" placeholder="Masukkan nama" maxlength="80" required autocomplete="name">
         </div>
+        <button class="btn btn-primary" type="submit">
+          <i class="fa-solid fa-arrow-right"></i> Masuk Portofolio
+        </button>
+      </form>
+      <small class="modal-note">Nama disimpan di browser ini agar tidak perlu dimasukkan lagi saat berkunjung kembali.</small>
     </div>
+  </div>
 
-    <!-- ================= HALAMAN UTAMA PORTOFOLIO ================= -->
-    <div id="portfolio-content" class="hidden">
-        <!-- Header / Navbar -->
-        <header class="fixed top-0 w-full bg-slate-950/80 backdrop-blur-md z-40 border-b border-slate-800/80">
-            <div class="max-w-6xl mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
-                <a href="#" class="text-xl font-black tracking-wider text-white">
-                    RZR<span class="text-blue-500">.DEV</span>
-                </a>
-                
-                <!-- Desktop Navigation -->
-                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
-                    <a href="#about" class="hover:text-blue-400 transition-colors">Tentang</a>
-                    <a href="#projects" class="hover:text-blue-400 transition-colors">Proyek</a>
-                    <a href="#admin-panel-section" id="nav-admin-link" class="hidden hover:text-indigo-400 font-semibold text-indigo-400 transition-colors"><i class="fa-solid fa-shield-halved mr-1"></i> Admin Panel</a>
-                    <a href="#chatbot" class="hover:text-blue-400 transition-colors">Chatbot AI</a>
-                    <a href="#skills" class="hover:text-blue-400 transition-colors">Keahlian</a>
-                    <a href="#contact" class="hover:text-blue-400 transition-colors">Kontak</a>
-                </nav>
-                <div class="hidden md:flex items-center gap-3">
-                    <button onclick="toggleTheme()" class="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-yellow-400 hover:bg-slate-800 transition" title="Ganti Tema">
-                        <i id="theme-icon" class="fa-solid fa-moon text-sm"></i>
-                    </button>
-                    <span class="text-xs font-medium text-blue-400 bg-blue-500/10 px-3 py-1.5 rounded-lg border border-blue-500/20">
-                        Visitor: <span id="nav-visitor-name" class="font-bold">Admin</span>
-                    </span>
-                    <button 
-                        onclick="handleLogout()" 
-                        title="Keluar / Logout"
-                        class="px-3 py-1.5 bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 text-xs font-semibold rounded-lg transition-all flex items-center gap-1.5"
-                    >
-                        <i class="fa-solid fa-right-from-bracket"></i> Logout
-                    </button>
-                </div>
-                <!-- Mobile Menu Button -->
-                <button id="menu-btn" onclick="toggleMobileMenu()" class="md:hidden text-slate-300 hover:text-white focus:outline-none">
-                    <i class="fa-solid fa-bars text-2xl"></i>
-                </button>
-            </div>
-            <!-- Mobile Navigation Menu -->
-            <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-b border-slate-800 px-6 py-4 space-y-3">
-                <a href="#about" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-blue-400 font-medium">Tentang</a>
-                <a href="#projects" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-blue-400 font-medium">Proyek</a>
-                <a href="#admin-panel-section" id="mobile-admin-link" onclick="toggleMobileMenu()" class="hidden block text-indigo-400 font-semibold"><i class="fa-solid fa-shield-halved mr-1"></i> Admin Panel</a>
-                <a href="#chatbot" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-blue-400 font-medium">Chatbot AI</a>
-                <a href="#skills" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-blue-400 font-medium">Keahlian</a>
-                <a href="#contact" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-blue-400 font-medium">Kontak</a>
-                <div class="pt-2 border-t border-slate-800 flex items-center justify-between">
-                    <span class="text-xs text-blue-400">Visitor: <strong id="mobile-visitor-name">Admin</strong></span>
-                    <button onclick="handleLogout()" class="px-3 py-1.5 bg-red-500/10 text-red-400 text-xs font-semibold rounded-lg border border-red-500/20">
-                        <i class="fa-solid fa-right-from-bracket"></i> Logout
-                    </button>
-                </div>
-            </div>
-        </header>
+  <script>
+    // =========================================================
+    // PENGATURAN
+    // Ganti nomor berikut dengan nomor WhatsApp tujuan.
+    // Gunakan kode negara tanpa tanda +, spasi, atau strip.
+    // Contoh Indonesia: 6281234567890
+    // =========================================================
+    const WHATSAPP_NUMBER = "6281234567890";
 
-        <!-- Hero Section / About -->
-        <section id="about" class="relative min-h-screen flex items-center justify-center pt-24 pb-12 px-4 md:px-6 overflow-hidden">
-            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
-            <div class="max-w-4xl text-center space-y-6 relative z-10 flex flex-col items-center">
-                
-                <!-- Foto Profil -->
-                <div class="relative group mb-2">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
-                    <img 
-                        src="Orang Misterius.png" 
-                        alt="Foto Profil Mochamad Rizky Ramadhan" 
-                        class="relative w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-slate-800 shadow-2xl"
-                    >
-                </div>
+    // DAFTAR PROYEK
+    // Ubah nama, deskripsi, kategori, ikon, atau tautan sesuai kebutuhan.
+    const projects = [
+      {
+        name: "AbsensiBos",
+        description: "Sistem absensi digital untuk mencatat kehadiran dan memantau riwayat absensi.",
+        url: "https://absensi.rzr.my.id/",
+        category: "system",
+        icon: "fa-calendar-check",
+        tags: ["Sistem Web", "Absensi"]
+      },
+      {
+        name: "Absensi Guru",
+        description: "Website pendukung pencatatan kehadiran guru.",
+        url: "https://absensi-guru.rzr.my.id/",
+        category: "system",
+        icon: "fa-chalkboard-user",
+        tags: ["Sistem Web", "Sekolah"]
+      },
+      {
+        name: "Absensi Online Siswa",
+        description: "Sistem untuk membantu pencatatan absensi siswa secara online.",
+        url: "https://absensi-online-siswa.rzr.my.id/",
+        category: "system",
+        icon: "fa-user-check",
+        tags: ["Sistem Web", "Siswa"]
+      },
+      {
+        name: "Sistem BK",
+        description: "Proyek sistem informasi untuk mendukung kegiatan bimbingan konseling.",
+        url: "https://sistem-bk.rzr.my.id/",
+        category: "system",
+        icon: "fa-people-group",
+        tags: ["Sistem Web", "Sekolah"]
+      },
+      {
+        name: "Perpustakaan",
+        description: "Proyek website untuk pengelolaan informasi perpustakaan.",
+        url: "https://perpustakaan.rzr.my.id/",
+        category: "education",
+        icon: "fa-book-open",
+        tags: ["Pendidikan", "Buku"]
+      },
+      {
+        name: "Exambrowser",
+        description: "Proyek website pendukung kegiatan ujian berbasis web.",
+        url: "https://exambrowser.rzr.my.id/",
+        category: "education",
+        icon: "fa-file-circle-check",
+        tags: ["Pendidikan", "Ujian"]
+      },
+      {
+        name: "Pengingat PR",
+        description: "Website untuk membantu mengingat tugas dan pekerjaan rumah.",
+        url: "https://pr-master.rzr.my.id/",
+        category: "education",
+        icon: "fa-bell",
+        tags: ["Pendidikan", "Produktivitas"]
+      },
+      {
+        name: "Simulasi TKA IT",
+        description: "Website simulasi latihan soal untuk persiapan tes.",
+        url: "https://website-simulasi-tka-it.rzr.my.id/",
+        category: "education",
+        icon: "fa-graduation-cap",
+        tags: ["Pendidikan", "Simulasi"]
+      },
+      {
+        name: "RPL Class",
+        description: "Portal kelas untuk mengumpulkan kenangan dan informasi kelas RPL 3.",
+        url: "https://web-rpl.rzr.my.id/",
+        category: "education",
+        icon: "fa-school",
+        tags: ["Pendidikan", "Kelas"]
+      },
+      {
+        name: "Kasir Kantin V1",
+        description: "Proyek aplikasi kasir untuk membantu transaksi kantin.",
+        url: "https://kasir-kantin.rzr.my.id/",
+        category: "finance",
+        icon: "fa-cash-register",
+        tags: ["Kasir", "Transaksi"]
+      },
+      {
+        name: "Kasir Kantin V2",
+        description: "Versi lanjutan proyek aplikasi kasir kantin.",
+        url: "https://kasir-kantin-v2.rzr.my.id/",
+        category: "finance",
+        icon: "fa-receipt",
+        tags: ["Kasir", "Versi 2"]
+      },
+      {
+        name: "TabunganKu",
+        description: "Website pencatatan dan pemantauan tabungan.",
+        url: "https://tabungan.rzr.my.id/",
+        category: "finance",
+        icon: "fa-piggy-bank",
+        tags: ["Keuangan", "Tabungan"]
+      },
+      {
+        name: "Kalkulator Digital",
+        description: "Kalkulator praktis untuk membantu perhitungan sehari-hari.",
+        url: "https://kalkulator-digital.rzr.my.id/",
+        category: "tools",
+        icon: "fa-calculator",
+        tags: ["Tools", "Kalkulator"]
+      },
+      {
+        name: "Toolza",
+        description: "Kumpulan tools digital untuk membantu berbagai kebutuhan di web.",
+        url: "https://tools.rzr.my.id/",
+        category: "tools",
+        icon: "fa-screwdriver-wrench",
+        tags: ["Tools", "Produktivitas"]
+      },
+      {
+        name: "Movio",
+        description: "Website video dengan fitur penjelajahan video dan tampilan modern.",
+        url: "https://movio.rzr.my.id/",
+        category: "tools",
+        icon: "fa-circle-play",
+        tags: ["Video", "Media"]
+      },
+      {
+        name: "Website Video Link",
+        description: "Website untuk menampilkan atau mengelola tautan video.",
+        url: "https://website-video-link-ku.rzr.my.id/",
+        category: "tools",
+        icon: "fa-link",
+        tags: ["Video", "Tautan"]
+      },
+      {
+        name: "Photobox",
+        description: "Website photobooth dengan fitur kamera dan efek foto.",
+        url: "https://photobox.rzr.my.id/",
+        category: "tools",
+        icon: "fa-camera",
+        tags: ["Foto", "Kamera"]
+      },
+      {
+        name: "Jasa Pembuatan Website",
+        description: "Halaman layanan untuk pengunjung yang ingin memesan website.",
+        url: "https://jasa-pembuatan-website.rzr.my.id/",
+        category: "services",
+        icon: "fa-laptop-code",
+        tags: ["Jasa", "Website"]
+      },
+      {
+        name: "RZR Web",
+        description: "Portofolio layanan dan solusi digital RZR.",
+        url: "https://rzr.my.id/",
+        category: "services",
+        icon: "fa-globe",
+        tags: ["Portofolio", "Layanan"]
+      },
+      {
+        name: "Tebak Kata",
+        description: "Game tebak kata yang bisa dimainkan untuk hiburan.",
+        url: "https://tebak-kata.rzr.my.id/",
+        category: "game",
+        icon: "fa-puzzle-piece",
+        tags: ["Game", "Tebak Kata"]
+      },
+      {
+        name: "Memory Card",
+        description: "Game mencocokkan kartu untuk menguji ingatan.",
+        url: "https://game-memory.rzr.my.id/",
+        category: "game",
+        icon: "fa-brain",
+        tags: ["Game", "Memori"]
+      },
+      {
+        name: "Website Video Simulasi",
+        description: "Proyek simulasi website berbasis video.",
+        url: "https://website-video-link-ku.rzr.my.id/",
+        category: "tools",
+        icon: "fa-film",
+        tags: ["Video", "Simulasi"]
+      }
+    ];
 
-                <!-- Status Real-time -->
-                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
-                    <span class="relative flex h-2.5 w-2.5">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-                    </span>
-                    Available for Freelance & Projects
-                </div>
+    // NAVIGASI MOBILE
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
 
-                <h1 class="text-3xl sm:text-4xl md:text-7xl font-extrabold text-white tracking-tight leading-tight">
-                    Mochamad Rizky Ramadhan
-                </h1>
-                
-                <p class="text-base sm:text-lg md:text-2xl text-slate-400 font-light max-w-2xl mx-auto leading-relaxed">
-                    Web Developer & Digital Solutions Specialist yang fokus membangun aplikasi web fungsional, responsif, dan terintegrasi basis data modern.
-                </p>
-                
-                <div class="flex flex-col sm:flex-row justify-center gap-4 pt-4 w-full sm:w-auto">
-                    <a href="#projects" class="px-8 py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl shadow-lg shadow-blue-600/25 transition-all text-center">
-                        Lihat Portofolio <i class="fa-solid fa-arrow-down ml-2 text-sm"></i>
-                    </a>
-                    <a href="https://github.com/rizkyganteng050908" target="_blank" class="px-8 py-3.5 bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 font-semibold rounded-xl transition-all text-center">
-                        <i class="fa-brands fa-github mr-2"></i> GitHub Profile
-                    </a>
-                </div>
-            </div>
-        </section>
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.innerHTML = isOpen
+        ? '<i class="fa-solid fa-xmark"></i>'
+        : '<i class="fa-solid fa-bars"></i>';
+    });
 
-        <!-- Projects Section -->
-        <section id="projects" class="py-24 px-4 md:px-6 bg-slate-900/40 border-y border-slate-800/50">
-            <div class="max-w-6xl mx-auto space-y-12">
-                <div class="text-center space-y-4">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">Proyek Pilihan</h2>
-                    <p class="text-slate-400 max-w-xl mx-auto text-sm md:text-base">Sistem web dan solusi digital yang dikembangkan untuk berbagai kebutuhan operasional, sekolah, produktivitas, dan hiburan.</p>
-                    
-                    <!-- Category Filter Buttons -->
-                    <div class="flex flex-wrap justify-center gap-2 pt-4">
-                        <button onclick="filterProjects('all', this)" class="filter-btn active px-4 py-1.5 rounded-full text-xs font-semibold bg-blue-600 text-white transition">Semua</button>
-                        <button onclick="filterProjects('system', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Sistem Web</button>
-                        <button onclick="filterProjects('school', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Sekolah & Edukasi</button>
-                        <button onclick="filterProjects('finance', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Keuangan & Kasir</button>
-                        <button onclick="filterProjects('services', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Layanan Jasa</button>
-                        <button onclick="filterProjects('tools', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Tools & Media</button>
-                        <button onclick="filterProjects('game', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Game & Fun</button>
-                    </div>
-                </div>
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+      });
+    });
 
-                <!-- Project Cards Grid -->
-                <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
-                    <!-- Project Cards disederhanakan struktur gridnya agar aman di HP & Laptop -->
-                    <!-- Project: Website Virus -->
-                    <div class="project-card tools group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-red-500/50 transition-all duration-300 flex flex-col justify-between">
-                        <div class="space-y-4">
-                            <div class="w-12 h-12 bg-red-500/10 text-red-400 rounded-xl flex items-center justify-center text-xl font-bold border border-red-500/20">
-                                <i class="fa-solid fa-triangle-exclamation"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-white group-hover:text-red-400 transition-colors">Website Virus Simulator</h3>
-                            <p class="text-sm text-slate-400 leading-relaxed">Eksperimen web interaktif dan simulasi hiburan bertema sistem keamanan dengan antarmuka yang unik.</p>
-                        </div>
-                        <div class="pt-6 border-t border-slate-800/80 mt-6">
-                            <a href="https://website-virus.rzr.my.id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-red-400 font-semibold">
-                                Buka Website <i class="fa-solid fa-arrow-right text-xs"></i>
-                            </a>
-                        </div>
-                    </div>
+    // RENDER PROYEK
+    const projectGrid = document.getElementById("projectGrid");
+    const projectFilters = document.getElementById("projectFilters");
 
-                    <!-- Project: AbsensiBos -->
-                    <div class="project-card system school group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-blue-500/50 transition-all duration-300 flex flex-col justify-between">
-                        <div class="space-y-4">
-                            <div class="w-12 h-12 bg-blue-500/10 text-blue-400 rounded-xl flex items-center justify-center text-xl font-bold border border-blue-500/20">
-                                <i class="fa-solid fa-user-check"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">AbsensiBos — Presensi Digital</h3>
-                            <p class="text-sm text-slate-400 leading-relaxed">Aplikasi pencatatan presensi berbasis web secara real-time dengan Supabase.</p>
-                        </div>
-                        <div class="pt-6 border-t border-slate-800/80 mt-6">
-                            <a href="https://absensi.rzr.my.id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-blue-400 font-semibold">
-                                Buka Aplikasi <i class="fa-solid fa-arrow-right text-xs"></i>
-                            </a>
-                        </div>
-                    </div>
+    function renderProjects(filter = "all") {
+      const filtered = filter === "all"
+        ? projects
+        : projects.filter(project => project.category === filter);
 
-                    <!-- Project: TabunganKu -->
-                    <div class="project-card finance group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-emerald-500/50 transition-all duration-300 flex flex-col justify-between">
-                        <div class="space-y-4">
-                            <div class="w-12 h-12 bg-emerald-500/10 text-emerald-400 rounded-xl flex items-center justify-center text-xl font-bold border border-emerald-500/20">
-                                <i class="fa-solid fa-wallet"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">TabunganKu — Manajemen Tabungan</h3>
-                            <p class="text-sm text-slate-400 leading-relaxed">Platform pencatatan keuangan mandiri dan pelacakan target tabungan dengan visual grafik.</p>
-                        </div>
-                        <div class="pt-6 border-t border-slate-800/80 mt-6">
-                            <a href="https://tabungan.rzr.my.id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-emerald-400 font-semibold">
-                                Buka Aplikasi <i class="fa-solid fa-arrow-right text-xs"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+      projectGrid.replaceChildren();
 
-        <!-- ================= PANEL ADMIN ================= -->
-        <section id="admin-panel-section" class="hidden py-24 px-4 md:px-6 bg-slate-950 border-b border-indigo-500/30">
-            <div class="max-w-4xl mx-auto space-y-8">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-800 pb-4 gap-4">
-                    <div>
-                        <h2 class="text-xl md:text-2xl font-bold text-indigo-400 flex items-center gap-2"><i class="fa-solid fa-shield-halved"></i> Panel Admin — Riwayat Pengunjung</h2>
-                        <p class="text-xs text-slate-400 mt-1">Daftar lengkap orang yang telah mengakses portofolio Anda.</p>
-                    </div>
-                    <button onclick="lockAdminPanel()" class="px-3 py-1.5 bg-red-500/10 hover:bg-red-500/20 text-red-400 text-xs font-semibold rounded-lg border border-red-500/20 transition">Kunci Kembali 🔒</button>
-                </div>
+      if (filtered.length === 0) {
+        projectGrid.textContent = "Belum ada proyek pada kategori ini.";
+        return;
+      }
 
-                <div class="grid sm:grid-cols-2 gap-6">
-                    <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex items-center gap-4">
-                        <div class="w-12 h-12 bg-indigo-500/10 text-indigo-400 rounded-xl flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-users"></i></div>
-                        <div>
-                            <p class="text-xs text-slate-400">Total Tamu Masuk</p>
-                            <h3 id="admin-total-visitors" class="text-2xl font-bold text-white">0</h3>
-                        </div>
-                    </div>
-                    <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex items-center gap-4">
-                        <div class="w-12 h-12 bg-emerald-500/10 text-emerald-400 rounded-xl flex items-center justify-center text-xl font-bold"><i class="fa-solid fa-clock"></i></div>
-                        <div>
-                            <p class="text-xs text-slate-400">Status Database</p>
-                            <h3 class="text-sm font-bold text-emerald-400 mt-1">Lokal Tersinkronisasi</h3>
-                        </div>
-                    </div>
-                </div>
+      filtered.forEach(project => {
+        const card = document.createElement("article");
+        card.className = "project-card";
 
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
-                    <div class="px-6 py-4 bg-slate-800/50 border-b border-slate-800 flex justify-between items-center">
-                        <span class="text-sm font-semibold text-white">Log Tamu Masuk Terakhir</span>
-                        <button onclick="clearVisitorLogs()" class="text-xs text-red-400 hover:underline">Hapus Semua Log</button>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left text-sm text-slate-300">
-                            <thead class="bg-slate-950 text-xs uppercase text-slate-400 border-b border-slate-800">
-                                <tr>
-                                    <th class="px-6 py-3">No</th>
-                                    <th class="px-6 py-3">Nama Pengunjung</th>
-                                    <th class="px-6 py-3">Waktu Masuk</th>
-                                </tr>
-                            </thead>
-                            <tbody id="visitor-log-table-body" class="divide-y divide-slate-800"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </section>
+        const icon = document.createElement("div");
+        icon.className = "project-icon";
+        const iconElement = document.createElement("i");
+        iconElement.className = "fa-solid " + project.icon;
+        icon.appendChild(iconElement);
 
-        <!-- Footer -->
-        <footer class="py-8 text-center text-xs text-slate-500 border-t border-slate-900 bg-slate-950">
-            <p>&copy; 2026 Mochamad Rizky Ramadhan (RZR.DEV). All rights reserved.</p>
-        </footer>
-    </div>
+        const title = document.createElement("h3");
+        title.textContent = project.name;
 
-    <!-- JavaScript -->
-    <script>
-        const ADMIN_PIN_SECRET = "050908";
+        const description = document.createElement("p");
+        description.textContent = project.description;
 
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedName = localStorage.getItem('rzr_visitor_name');
-            const isAdminLoggedIn = localStorage.getItem('rzr_admin_logged') === 'true';
-
-            if (isAdminLoggedIn) {
-                showAdminPanelElements();
-            } else if (savedName && savedName.trim() !== "") {
-                document.getElementById('login-page').classList.add('hidden');
-                document.getElementById('portfolio-content').classList.remove('hidden');
-                document.getElementById('nav-visitor-name').innerText = savedName;
-                document.getElementById('mobile-visitor-name').innerText = savedName;
-            } else {
-                document.getElementById('login-page').classList.remove('hidden');
-                document.getElementById('portfolio-content').classList.add('hidden');
-            }
+        const tags = document.createElement("div");
+        tags.className = "project-tags";
+        project.tags.forEach(tagText => {
+          const tag = document.createElement("span");
+          tag.className = "tag";
+          tag.textContent = tagText;
+          tags.appendChild(tag);
         });
 
-        function handleLoginSubmit(event) {
-            event.preventDefault();
-            const visitorName = document.getElementById('login-name').value.trim();
-            if (!visitorName) return;
+        const link = document.createElement("a");
+        link.className = "project-link";
+        link.href = project.url;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.innerHTML = '<span>Buka Proyek</span><i class="fa-solid fa-arrow-up-right-from-square"></i>';
 
-            const btn = document.getElementById('login-btn');
-            btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-2"></i> Mengirim data...`;
-            btn.disabled = true;
+        card.append(icon, title, description, tags, link);
+        projectGrid.appendChild(card);
+      });
+    }
 
-            localStorage.setItem('rzr_visitor_name', visitorName);
+    projectFilters.addEventListener("click", event => {
+      const button = event.target.closest("[data-filter]");
+      if (!button) return;
 
-            let logs = JSON.parse(localStorage.getItem('rzr_visitor_logs') || '[]');
-            logs.unshift({
-                name: visitorName,
-                time: new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' })
-            });
-            localStorage.setItem('rzr_visitor_logs', JSON.stringify(logs));
+      projectFilters.querySelectorAll(".filter-btn").forEach(item => {
+        item.classList.toggle("active", item === button);
+      });
 
-            const templateParams = {
-                visitor_name: visitorName,
-                to_name: 'Mochamad Rizky Ramadhan',
-                login_time: new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' })
-            };
+      renderProjects(button.dataset.filter);
+    });
 
-            emailjs.send("service_vc5gb3w", "template_cl3ycsx", templateParams)
-                .then(function() { proceedToPortfolio(visitorName); }, function() { proceedToPortfolio(visitorName); });
+    renderProjects();
+    document.getElementById("projectCount").textContent = projects.length;
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // FORM KONTAK KE WHATSAPP
+    document.getElementById("contactForm").addEventListener("submit", event => {
+      event.preventDefault();
+
+      if (WHATSAPP_NUMBER === "6281234567890") {
+        alert("Silakan ganti WHATSAPP_NUMBER di JavaScript dengan nomor WhatsApp tujuan kamu terlebih dahulu.");
+        return;
+      }
+
+      const name = document.getElementById("contactName").value.trim();
+      const email = document.getElementById("contactEmail").value.trim();
+      const message = document.getElementById("contactMessage").value.trim();
+
+      const text = [
+        "Halo, saya ingin bertanya tentang jasa pembuatan website.",
+        "",
+        "Nama: " + name,
+        email ? "Email: " + email : "",
+        "Pesan: " + message
+      ].filter(Boolean).join("\n");
+
+      const url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text);
+      window.open(url, "_blank", "noopener,noreferrer");
+    });
+
+    // CHATBOT PROYEK
+    const chatLauncher = document.getElementById("chatLauncher");
+    const chatWindow = document.getElementById("chatWindow");
+    const chatClose = document.getElementById("chatClose");
+    const chatMessages = document.getElementById("chatMessages");
+    const chatForm = document.getElementById("chatForm");
+    const chatInput = document.getElementById("chatInput");
+
+    function toggleChat(force) {
+      const open = typeof force === "boolean"
+        ? force
+        : !chatWindow.classList.contains("open");
+
+      chatWindow.classList.toggle("open", open);
+      chatLauncher.setAttribute("aria-expanded", String(open));
+
+      if (open) chatInput.focus();
+    }
+
+    chatLauncher.addEventListener("click", () => toggleChat());
+    chatClose.addEventListener("click", () => toggleChat(false));
+
+    function addChatMessage(text, sender, projectUrl = null) {
+      const message = document.createElement("div");
+      message.className = "chat-message " + sender;
+
+      if (projectUrl) {
+        const paragraph = document.createElement("div");
+        paragraph.textContent = text + " ";
+        const link = document.createElement("a");
+        link.href = projectUrl;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = "Buka proyek";
+        paragraph.appendChild(link);
+        message.appendChild(paragraph);
+      } else {
+        message.textContent = text;
+      }
+
+      chatMessages.appendChild(message);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function findProject(query) {
+      const normalized = query.toLowerCase().trim();
+
+      // Cocokkan nama proyek terlebih dahulu.
+      let result = projects.find(project =>
+        project.name.toLowerCase() === normalized
+      );
+
+      // Jika tidak cocok persis, cari nama yang mengandung kata yang diketik.
+      if (!result) {
+        result = projects.find(project =>
+          project.name.toLowerCase().includes(normalized)
+        );
+      }
+
+      // Cari berdasarkan sebagian URL juga.
+      if (!result) {
+        result = projects.find(project =>
+          project.url.toLowerCase().includes(normalized)
+        );
+      }
+
+      return result;
+    }
+
+    chatForm.addEventListener("submit", event => {
+      event.preventDefault();
+      const query = chatInput.value.trim();
+      if (!query) return;
+
+      addChatMessage(query, "user");
+      chatInput.value = "";
+
+      const project = findProject(query);
+
+      if (project) {
+        addChatMessage(
+          "Saya menemukan proyek " + project.name + ". Kamu bisa membukanya melalui tautan berikut.",
+          "bot",
+          project.url
+        );
+
+        // Buka otomatis hanya jika nama proyek cocok persis.
+        const exactMatch = project.name.toLowerCase() === query.toLowerCase();
+        if (exactMatch) {
+          const confirmation = document.createElement("div");
+          confirmation.className = "chat-message bot";
+          confirmation.textContent = "Proyek ditemukan. Membuka " + project.name + " di tab baru.";
+          chatMessages.appendChild(confirmation);
+
+          // Pengunjung masih dapat membuka tautan manual jika browser memblokir tab baru.
+          window.open(project.url, "_blank", "noopener,noreferrer");
         }
+      } else {
+        addChatMessage(
+          "Saya belum menemukan proyek dengan nama itu. Coba ketik Movio, AbsensiBos, Photobox, TabunganKu, Toolza, atau Tebak Kata.",
+          "bot"
+        );
+      }
 
-        function proceedToPortfolio(name) {
-            document.getElementById('login-page').classList.add('hidden');
-            document.getElementById('portfolio-content').classList.remove('hidden');
-            document.getElementById('nav-visitor-name').innerText = name;
-            document.getElementById('mobile-visitor-name').innerText = name;
-            window.scrollTo(0, 0);
-        }
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    });
 
-        function handleLogout() {
-            localStorage.removeItem('rzr_visitor_name');
-            localStorage.removeItem('rzr_admin_logged');
-            location.reload();
-        }
+    // LOGIN PENGUNJUNG SEDERHANA
+    // Nama disimpan hanya pada browser/perangkat ini melalui localStorage.
+    const visitorModal = document.getElementById("visitorModal");
+    const visitorForm = document.getElementById("visitorForm");
+    const visitorName = document.getElementById("visitorName");
 
-        function openAdminLoginModal() {
-            document.getElementById('admin-login-modal').classList.remove('hidden');
-        }
-        function closeAdminLoginModal() {
-            document.getElementById('admin-login-modal').classList.add('hidden');
-        }
+    try {
+      const savedVisitor = localStorage.getItem("rzr_visitor_name");
 
-        function handleAdminAuth(event) {
-            event.preventDefault();
-            const pin = document.getElementById('admin-pin').value;
-            if (pin === ADMIN_PIN_SECRET) {
-                localStorage.setItem('rzr_admin_logged', 'true');
-                closeAdminLoginModal();
-                showAdminPanelElements();
-                alert('Berhasil Login sebagai Admin!');
-                window.location.hash = '#admin-panel-section';
-            } else {
-                alert('PIN Admin Salah!');
-            }
-            document.getElementById('admin-pin').value = '';
-        }
+      if (!savedVisitor) {
+        visitorModal.classList.add("open");
+        document.body.classList.add("no-scroll");
+      } else {
+        document.getElementById("visitorTitle").textContent =
+          "Selamat datang kembali, " + savedVisitor + "!";
+      }
+    } catch (error) {
+      // Jika penyimpanan browser tidak tersedia, halaman tetap bisa digunakan.
+      visitorModal.classList.add("open");
+      document.body.classList.add("no-scroll");
+    }
 
-        function showAdminPanelElements() {
-            document.getElementById('login-page').classList.add('hidden');
-            document.getElementById('portfolio-content').classList.remove('hidden');
-            document.getElementById('nav-admin-link').classList.remove('hidden');
-            document.getElementById('mobile-admin-link').classList.remove('hidden');
-            document.getElementById('admin-panel-section').classList.remove('hidden');
-            loadVisitorLogsToTable();
-        }
+    visitorForm.addEventListener("submit", event => {
+      event.preventDefault();
+      const name = visitorName.value.trim();
 
-        function lockAdminPanel() {
-            localStorage.removeItem('rzr_admin_logged');
-            location.reload();
-        }
+      if (!name) return;
 
-        function loadVisitorLogsToTable() {
-            const logs = JSON.parse(localStorage.getItem('rzr_visitor_logs') || '[]');
-            const tbody = document.getElementById('visitor-log-table-body');
-            document.getElementById('admin-total-visitors').innerText = logs.length;
+      try {
+        localStorage.setItem("rzr_visitor_name", name);
+      } catch (error) {
+        // Login tetap dilanjutkan walaupun penyimpanan lokal tidak tersedia.
+      }
 
-            tbody.innerHTML = '';
-            if (logs.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="3" class="px-6 py-4 text-center text-slate-500">Belum ada pengunjung tercatat.</td></tr>`;
-                return;
-            }
+      document.getElementById("visitorTitle").textContent = "Selamat datang, " + name + "!";
+      visitorModal.classList.remove("open");
+      document.body.classList.remove("no-scroll");
+    });
 
-            logs.forEach((log, index) => {
-                tbody.innerHTML += `
-                    <tr class="hover:bg-slate-800/50 transition">
-                        <td class="px-6 py-3 font-mono text-xs">${index + 1}</td>
-                        <td class="px-6 py-3 font-medium text-white">${escapeHtml(log.name)}</td>
-                        <td class="px-6 py-3 text-xs text-slate-400 font-mono">${log.time}</td>
-                    </tr>
-                `;
-            });
-        }
-
-        function clearVisitorLogs() {
-            if (confirm('Yakin ingin menghapus seluruh riwayat log pengunjung?')) {
-                localStorage.removeItem('rzr_visitor_logs');
-                loadVisitorLogsToTable();
-            }
-        }
-
-        function toggleTheme() {
-            const body = document.getElementById('body-theme');
-            const icon = document.getElementById('theme-icon');
-            body.classList.toggle('dark');
-            icon.className = body.classList.contains('dark') ? "fa-solid fa-moon text-sm" : "fa-solid fa-sun text-sm";
-        }
-
-        function toggleMobileMenu() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        }
-
-        function filterProjects(category, btn) {
-            document.querySelectorAll('.filter-btn').forEach(b => {
-                b.classList.0 && b.classList.remove('bg-blue-600', 'text-white');
-                b.classList.add('bg-slate-800', 'text-slate-400');
-            });
-            btn.classList.remove('bg-slate-800', 'text-slate-400');
-            btn.classList.add('bg-blue-600', 'text-white');
-
-            document.querySelectorAll('.project-card').forEach(card => {
-                if (category === 'all' || card.classList.contains(category)) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        function escapeHtml(text) {
-            const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
-            return text.replace(/[&<>"']/g, function(m) { return map[m]; });
-        }
-    </script>
+    // Tekan Escape untuk menutup chatbot atau modal.
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
+        toggleChat(false);
+      }
+    });
+  </script>
 </body>
 </html>
