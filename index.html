@@ -99,7 +99,7 @@
             </div>
             <p class="text-xs text-slate-400">Masukkan PIN Admin khusus untuk melihat riwayat pengunjung.</p>
             <form onsubmit="handleAdminAuth(event)" class="space-y-3">
-                <input type="password" id="admin-pin" required placeholder="PIN Admin (Contoh: 050908)" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500">
+                <input type="password" id="admin-pin" required placeholder="Masukkan PIN Admin" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500">
                 <button type="submit" class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl text-sm transition">Buka Dashboard Admin</button>
             </form>
         </div>
@@ -884,14 +884,13 @@
 
     <!-- JavaScript Terupdate -->
     <script>
-        const ADMIN_PIN_SECRET = "050908"; // PIN Admin kamu
+        const ADMIN_PIN_SECRET = "050908"; // PIN Admin rahasia aman di dalam script
 
         window.addEventListener('DOMContentLoaded', () => {
             const savedName = localStorage.getItem('rzr_visitor_name');
             const isAdminLoggedIn = localStorage.getItem('rzr_admin_logged') === 'true';
 
             if (isAdminLoggedIn) {
-                // Jika sudah login admin, langsung buka portofolio & panel admin tanpa form nama
                 showAdminPanelElements();
             } else if (savedName && savedName.trim() !== "") {
                 document.getElementById('login-page').classList.add('hidden');
@@ -943,10 +942,9 @@
         function handleLogout() {
             localStorage.removeItem('rzr_visitor_name');
             localStorage.removeItem('rzr_admin_logged');
-            location.reload(); // Muat ulang halaman agar bersih kembali ke awal
+            location.reload();
         }
 
-        // Fungsi Modal Admin
         function openAdminLoginModal() {
             document.getElementById('admin-login-modal').classList.remove('hidden');
         }
@@ -960,8 +958,6 @@
             if (pin === ADMIN_PIN_SECRET) {
                 localStorage.setItem('rzr_admin_logged', 'true');
                 closeAdminLoginModal();
-                
-                // Langsung buka halaman utama dan panel admin tanpa perlu isi nama tamu
                 showAdminPanelElements();
                 alert('Berhasil Login sebagai Admin!');
                 window.location.hash = '#admin-panel-section';
@@ -1052,7 +1048,7 @@
             if (!message) return;
 
             const chatMessages = document.getElementById('chat-messages');
-            const visitorName = localStorage.getItem('rzr_visitor_name') || 'Admin / Tamu';
+            const visitorName = localStorage.getItem('rzr_visitor_name') || 'Admin';
 
             chatMessages.innerHTML += `
                 <div class="flex items-start justify-end gap-3">
