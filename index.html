@@ -44,8 +44,15 @@
 </head>
 <body class="bg-slate-950 text-slate-100 dark:bg-slate-950 dark:text-slate-100 font-sans antialiased selection:bg-blue-500 selection:text-white transition-colors duration-300" id="body-theme">
 
+    <!-- ================= TOMBOL PINTASAN ADMIN DI LUAR (Pojok Kanan Atas) ================= -->
+    <div class="fixed top-4 right-4 z-50">
+        <button onclick="openAdminLoginModal()" class="px-3.5 py-2 bg-indigo-600/20 hover:bg-indigo-600/40 text-indigo-400 border border-indigo-500/30 rounded-xl text-xs font-semibold backdrop-blur-md transition flex items-center gap-1.5 shadow-lg">
+            <i class="fa-solid fa-shield-halved"></i> Login Admin
+        </button>
+    </div>
+
     <!-- ================= HALAMAN LOGIN / FORM MASUK PENGUNJUNG ================= -->
-    <div id="login-page" class="fixed inset-0 z-50 bg-slate-950 flex items-center justify-center px-4">
+    <div id="login-page" class="fixed inset-0 z-40 bg-slate-950 flex items-center justify-center px-4">
         <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
         
         <div class="bg-slate-900 border border-slate-800 p-8 rounded-3xl max-w-md w-full space-y-6 shadow-2xl relative z-10">
@@ -77,9 +84,8 @@
                     <i class="fa-solid fa-arrow-right text-xs"></i>
                 </button>
             </form>
-            <div class="flex items-center justify-between pt-2">
+            <div class="text-center pt-2">
                 <p class="text-[10px] text-slate-500 font-mono">Target Email: rizkyganteng050981@gmail.com</p>
-                <button onclick="openAdminLoginModal()" class="text-xs text-blue-400 hover:underline font-medium">Login Admin ⚙️</button>
             </div>
         </div>
     </div>
@@ -93,7 +99,7 @@
             </div>
             <p class="text-xs text-slate-400">Masukkan PIN Admin khusus untuk melihat riwayat pengunjung.</p>
             <form onsubmit="handleAdminAuth(event)" class="space-y-3">
-                <input type="password" id="admin-pin" required placeholder="PIN Admin (Contoh: 0509)" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500">
+                <input type="password" id="admin-pin" required placeholder="PIN Admin (Contoh: 050908)" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500">
                 <button type="submit" class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl text-sm transition">Buka Dashboard Admin</button>
             </form>
         </div>
@@ -876,9 +882,9 @@
         </footer>
     </div>
 
-    <!-- JavaScript Lengkap dengan Sistem Admin & Visitor Logs -->
+    <!-- JavaScript Terbaru -->
     <script>
-        const ADMIN_PIN_SECRET = "050908"; // PIN rahasia kamu (bisa diubah sesuai keinginan)
+        const ADMIN_PIN_SECRET = "050908"; // PIN Admin kamu
 
         window.addEventListener('DOMContentLoaded', () => {
             const savedName = localStorage.getItem('rzr_visitor_name');
@@ -908,10 +914,8 @@
             btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-2"></i> Mengirim data ke email & masuk...`;
             btn.disabled = true;
 
-            // Simpan nama pengunjung
             localStorage.setItem('rzr_visitor_name', visitorName);
 
-            // Simpan ke riwayat log pengunjung (Array di LocalStorage)
             let logs = JSON.parse(localStorage.getItem('rzr_visitor_logs') || '[]');
             logs.unshift({
                 name: visitorName,
@@ -919,7 +923,6 @@
             });
             localStorage.setItem('rzr_visitor_logs', JSON.stringify(logs));
 
-            // Kirim email via EmailJS
             const templateParams = {
                 visitor_name: visitorName,
                 to_name: 'Mochamad Rizky Ramadhan',
@@ -963,6 +966,11 @@
             if (pin === ADMIN_PIN_SECRET) {
                 localStorage.setItem('rzr_admin_logged', 'true');
                 closeAdminLoginModal();
+                
+                // Jika halaman utama masih tertutup form login, buka otomatis agar admin bisa melihat dashboard
+                document.getElementById('login-page').classList.add('hidden');
+                document.getElementById('portfolio-content').classList.remove('hidden');
+                
                 showAdminPanelElements();
                 alert('Berhasil Login sebagai Admin!');
                 window.location.hash = '#admin-panel-section';
@@ -1082,7 +1090,7 @@
             event.preventDefault();
             const name = document.getElementById('contact-name').value;
             const sender = document.getElementById('contact-sender').value;
-            const message = document.getElementById('contact-message').value;
+            const message = document.getElementById('contact-message-input')?.value || document.getElementById('contact-message').value;
 
             const waUrl = `https://wa.me/62895401061300?text=Halo%20RZR,%20saya%20${encodeURIComponent(name)}%20(${encodeURIComponent(sender)}).%20Pesan:%20${encodeURIComponent(message)}`;
             window.open(waUrl, '_blank');
