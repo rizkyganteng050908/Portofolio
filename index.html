@@ -103,6 +103,8 @@
                 <div class="hidden md:flex items-center gap-3">
                     <!-- Jam digital WIB -->
                     <span class="text-xs font-mono text-cyan-300 bg-cyan-500/10 px-3 py-1.5 rounded-lg border border-cyan-500/20 whitespace-nowrap">
+                        <i class="fa-regular fa-calendar-days mr-1"></i><span id="portfolio-date">Kamis, 29 Oktober</span>
+                        <span class="text-slate-400 mx-1">|</span>
                         <i class="fa-regular fa-clock mr-1"></i><span id="portfolio-clock">00:00:00</span>
                         <span class="text-slate-400 ml-1">WIB</span>
                     </span>
@@ -129,9 +131,10 @@
                 <a href="#chatbot" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-blue-400 font-medium">Chatbot AI</a>
                 <a href="#skills" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-blue-400 font-medium">Keahlian</a>
                 <a href="#contact" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-blue-400 font-medium">Kontak</a>
-                <div class="pb-3 text-xs font-mono text-cyan-300">
-                    <i class="fa-regular fa-clock mr-1"></i><span id="portfolio-clock-mobile">00:00:00</span>
-                    <span class="text-slate-400 ml-1">WIB · Waktu Indonesia Barat</span>
+                <div class="pb-3 text-xs font-mono text-cyan-300 space-y-1">
+                    <div><i class="fa-regular fa-calendar-days mr-1"></i><span id="portfolio-date-mobile">Kamis, 29 Oktober 2026</span></div>
+                    <div><i class="fa-regular fa-clock mr-1"></i><span id="portfolio-clock-mobile">00:00:00</span>
+                    <span class="text-slate-400 ml-1">WIB · Waktu Indonesia Barat</span></div>
                 </div>
                 <div class="pt-2 border-t border-slate-800 flex items-center justify-between">
                     <span class="text-xs text-blue-400">Visitor: <strong id="mobile-visitor-name"></strong></span>
@@ -864,10 +867,22 @@
                 hour12: false
             }).format(now);
 
+            const date = new Intl.DateTimeFormat('id-ID', {
+                timeZone: 'Asia/Jakarta',
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            }).format(now);
+
             const desktopClock = document.getElementById('portfolio-clock');
             const mobileClock = document.getElementById('portfolio-clock-mobile');
+            const desktopDate = document.getElementById('portfolio-date');
+            const mobileDate = document.getElementById('portfolio-date-mobile');
             if (desktopClock) desktopClock.textContent = time;
             if (mobileClock) mobileClock.textContent = time;
+            if (desktopDate) desktopDate.textContent = date;
+            if (mobileDate) mobileDate.textContent = date;
         }
 
         window.addEventListener('DOMContentLoaded', () => {
