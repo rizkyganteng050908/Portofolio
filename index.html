@@ -63,7 +63,7 @@
                         type="text" 
                         id="login-name" 
                         required 
-                        placeholder="Harus Nama Lengkap" 
+                        placeholder="Contoh: Andi Pratama" 
                         class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-blue-500 transition shadow-inner"
                     >
                 </div>
@@ -101,13 +101,6 @@
                     <a href="#contact" class="hover:text-blue-400 transition-colors">Kontak</a>
                 </nav>
                 <div class="hidden md:flex items-center gap-3">
-                    <!-- Jam digital WIB -->
-                    <span class="text-xs font-mono text-cyan-300 bg-cyan-500/10 px-3 py-1.5 rounded-lg border border-cyan-500/20 whitespace-nowrap">
-                        <i class="fa-regular fa-calendar-days mr-1"></i><span id="portfolio-date">Kamis, 29 Oktober</span>
-                        <span class="text-slate-400 mx-1">|</span>
-                        <i class="fa-regular fa-clock mr-1"></i><span id="portfolio-clock">00:00:00</span>
-                        <span class="text-slate-400 ml-1">WIB</span>
-                    </span>
                     <span class="text-xs font-medium text-blue-400 bg-blue-500/10 px-3 py-1.5 rounded-lg border border-blue-500/20">
                         Visitor: <span id="nav-visitor-name" class="font-bold"></span>
                     </span>
@@ -131,11 +124,6 @@
                 <a href="#chatbot" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-blue-400 font-medium">Chatbot AI</a>
                 <a href="#skills" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-blue-400 font-medium">Keahlian</a>
                 <a href="#contact" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-blue-400 font-medium">Kontak</a>
-                <div class="pb-3 text-xs font-mono text-cyan-300 space-y-1">
-                    <div><i class="fa-regular fa-calendar-days mr-1"></i><span id="portfolio-date-mobile">Kamis, 29 Oktober 2026</span></div>
-                    <div><i class="fa-regular fa-clock mr-1"></i><span id="portfolio-clock-mobile">00:00:00</span>
-                    <span class="text-slate-400 ml-1">WIB · Waktu Indonesia Barat</span></div>
-                </div>
                 <div class="pt-2 border-t border-slate-800 flex items-center justify-between">
                     <span class="text-xs text-blue-400">Visitor: <strong id="mobile-visitor-name"></strong></span>
                     <button onclick="handleLogout()" class="px-3 py-1.5 bg-red-500/10 text-red-400 text-xs font-semibold rounded-lg border border-red-500/20">
@@ -174,7 +162,7 @@
                 </h1>
                 
                 <p class="text-lg md:text-2xl text-slate-400 font-light max-w-2xl mx-auto leading-relaxed">
-                    Web Developer & Digital Solutions Specialist yang fokus membangun aplikasi web fungsional, responsif, dan terintegrasi basis data modern Dan Profesional di Berbagai Bidang.
+                    Web Developer & Digital Solutions Specialist yang fokus membangun aplikasi web fungsional, responsif, dan terintegrasi basis data modern.
                 </p>
                 
                 <div class="flex flex-col sm:flex-row justify-center gap-4 pt-4">
@@ -216,12 +204,12 @@
                             <div class="w-12 h-12 bg-red-500/10 text-red-400 rounded-xl flex items-center justify-center text-xl font-bold border border-red-500/20">
                                 <i class="fa-solid fa-triangle-exclamation"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-white group-hover:text-red-400 transition-colors">Website Virus</h3>
+                            <h3 class="text-xl font-bold text-white group-hover:text-red-400 transition-colors">Website Virus Simulator</h3>
                             <p class="text-sm text-slate-400 leading-relaxed">
-                                Dilarang Membuka ini ⚠️ ⚠️
+                                Eksperimen web interaktif dan simulasi hiburan bertema sistem keamanan dengan antarmuka yang unik.
                             </p>
                             <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-red-300">
-                                <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Berbahaya</span>
+                                <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Simulation</span>
                                 <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Interactive</span>
                                 <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Web App</span>
                             </div>
@@ -233,75 +221,7 @@
                         </div>
                     </div>
 
-                    <!-- Project: Anubis Clone -->
-                    <div class="project-card system group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-violet-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-violet-500/5">
-                        <div class="space-y-4">
-                            <div class="w-12 h-12 bg-violet-500/10 text-violet-400 rounded-xl flex items-center justify-center text-xl font-bold border border-violet-500/20">
-                                <i class="fa-solid fa-layer-group"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-white group-hover:text-violet-400 transition-colors">Anubis Clone — Web App</h3>
-                            <p class="text-sm text-slate-400 leading-relaxed">
-                                Aplikasi web Anubis Clone dengan antarmuka digital interaktif. Kunjungi situs untuk melihat fitur dan tampilan proyek.
-                            </p>
-                            <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-violet-300">
-                                <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Anubis Clone</span>
-                                <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Web App</span>
-                                <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Lovable</span>
-                            </div>
-                        </div>
-                        <div class="pt-6 border-t border-slate-800/80 mt-6">
-                            <a href="https://anubisclone.lovable.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-violet-400 hover:text-violet-300 font-semibold group-hover:translate-x-1 transition-all">
-                                Buka Anubis Clone <i class="fa-solid fa-arrow-right text-xs"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    
-                <!-- Project: Anubiss -->
-<div class="project-card system group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-violet-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-violet-500/10">
-
-    <div class="space-y-4">
-
-        <div class="w-12 h-12 bg-violet-500/10 text-violet-400 rounded-xl flex items-center justify-center text-xl font-bold border border-violet-500/20 group-hover:bg-violet-500/20 group-hover:scale-105 transition-all">
-            <i class="fa-solid fa-cubes-stacked"></i>
-        </div>
-
-        <div>
-            <div class="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-wider font-bold text-violet-300 bg-violet-500/10 border border-violet-500/20 rounded-full px-2.5 py-1 mb-3">
-                <span class="w-1.5 h-1.5 rounded-full bg-violet-400"></span>
-                Web Project
-            </div>
-
-            <h3 class="text-xl font-bold text-white group-hover:text-violet-400 transition-colors">
-                Anubiss — Web App
-            </h3>
-
-            <p class="text-sm text-slate-400 leading-relaxed mt-2">
-                Jelajahi Anubiss, proyek aplikasi berbasis web dengan tampilan digital modern. Kunjungi situsnya untuk melihat langsung pengalaman dan fitur yang tersedia.
-            </p>
-        </div>
-
-        <div class="flex flex-wrap gap-2 pt-1 text-xs font-mono text-violet-300">
-            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Anubiss</span>
-            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Lovable</span>
-            <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Web App</span>
-        </div>
-
-    </div>
-
-    <div class="pt-6 border-t border-slate-800/80 mt-6">
-        <a href="https://anubiss.lovable.app/"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="inline-flex items-center gap-2 text-sm text-violet-400 hover:text-violet-300 font-semibold group-hover:translate-x-1 transition-all">
-            Buka Anubiss
-            <i class="fa-solid fa-arrow-right text-xs"></i>
-        </a>
-    </div>
-
-</div>
-
-<!-- Project: AbsensiBos -->
+                    <!-- Project: AbsensiBos -->
                     <div class="project-card system school group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-blue-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-blue-500/5">
                         <div class="space-y-4">
                             <div class="w-12 h-12 bg-blue-500/10 text-blue-400 rounded-xl flex items-center justify-center text-xl font-bold border border-blue-500/20">
@@ -485,49 +405,31 @@
                         </div>
                     </div>
 
-                    <!-- Project: Kasir Kantin  -->
+                    <!-- Project: Kasir Kantin Sekolah -->
                     <div class="project-card finance school group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-emerald-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-emerald-500/5">
                         <div class="space-y-4">
                             <div class="w-12 h-12 bg-emerald-500/10 text-emerald-400 rounded-xl flex items-center justify-center text-xl font-bold border border-emerald-500/20">
                                 <i class="fa-solid fa-cash-register"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">Kasir Kantin Sekolah.</h3>
+                            <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">Kasir Kantin Sekolah</h3>
                             <p class="text-sm text-slate-400 leading-relaxed">
-                                Sistem kasir digital untuk membantu pencatatan transaksi penjualan kantin sekolah secara praktis.
+                                Sistem kasir Point of Sale (POS) digital untuk transaksi penjualan kantin sekolah yang cepat, praktis, dan akurat.
                             </p>
                             <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-emerald-300">
                                 <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">POS Kantin</span>
                                 <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Kasir Digital</span>
-                                <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">V1</span>
+                                <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Transaksi</span>
                             </div>
                         </div>
                         <div class="pt-6 border-t border-slate-800/80 mt-6">
-                            <a href="https://kasir-kantin.rzr.my.id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-emerald-400 hover:text-emerald-300 font-semibold group-hover:translate-x-1 transition-all">
-                                Buka Kasir Kantin.<i class="fa-solid fa-arrow-right text-xs"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Project: Website Kasir Kantin -->
-                    <div class="project-card finance school group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-teal-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-teal-500/5">
-                        <div class="space-y-4">
-                            <div class="w-12 h-12 bg-teal-500/10 text-teal-400 rounded-xl flex items-center justify-center text-xl font-bold border border-teal-500/20">
-                                <i class="fa-solid fa-store"></i>
+                            <div class="flex flex-col gap-2">
+                                <a href="https://kasir-kantin.rzr.my.id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-emerald-400 hover:text-emerald-300 font-semibold transition-all">
+                                    Kasir Kantin (V1) <i class="fa-solid fa-arrow-right text-xs"></i>
+                                </a>
+                                <a href="https://website-kasir-kantin.rzr.my.id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-emerald-400 hover:text-emerald-300 font-semibold transition-all">
+                                    Website Kasir Kantin (V2) <i class="fa-solid fa-arrow-right text-xs"></i>
+                                </a>
                             </div>
-                            <h3 class="text-xl font-bold text-white group-hover:text-teal-400 transition-colors">Website Kasir Kantin.</h3>
-                            <p class="text-sm text-slate-400 leading-relaxed">
-                                Versi kedua website kasir kantin sekolah. Buka situs untuk melihat antarmuka dan fitur yang tersedia.
-                            </p>
-                            <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-teal-300">
-                                <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Website Kasir</span>
-                                <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Kantin Sekolah</span>
-                                <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">V2</span>
-                            </div>
-                        </div>
-                        <div class="pt-6 border-t border-slate-800/80 mt-6">
-                            <a href="https://website-kasir-kantin.rzr.my.id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-teal-400 hover:text-teal-300 font-semibold group-hover:translate-x-1 transition-all">
-                                Buka Website Kasir V2 <i class="fa-solid fa-arrow-right text-xs"></i>
-                            </a>
                         </div>
                     </div>
 
@@ -600,29 +502,6 @@
                         </div>
                     </div>
 
-                    <!-- Project: Movio Tube -->
-                    <div class="project-card tools group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-rose-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-rose-500/5">
-                        <div class="space-y-4">
-                            <div class="w-12 h-12 bg-rose-500/10 text-rose-400 rounded-xl flex items-center justify-center text-xl font-bold border border-rose-500/20">
-                                <i class="fa-solid fa-circle-play"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-white group-hover:text-rose-400 transition-colors">Movio Tube — Video Streaming</h3>
-                            <p class="text-sm text-slate-400 leading-relaxed">
-                                Platform video interaktif dengan tampilan modern untuk menjelajahi dan menonton konten secara praktis dan responsif.
-                            </p>
-                            <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-rose-300">
-                                <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Movio Tube</span>
-                                <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Video UI</span>
-                                <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Web App</span>
-                            </div>
-                        </div>
-                        <div class="pt-6 border-t border-slate-800/80 mt-6">
-                            <a href="https://website-movio-tube.rzr.my.id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-rose-400 hover:text-rose-300 font-semibold group-hover:translate-x-1 transition-all">
-                                Buka Movio Tube <i class="fa-solid fa-arrow-right text-xs"></i>
-                            </a>
-                        </div>
-                    </div>
-
                     <!-- Project: Sonjaya PLN Portfolio -->
                     <div class="project-card services group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-yellow-400/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-yellow-400/5">
                         <div class="space-y-4">
@@ -669,6 +548,34 @@
                                 </a>
                                 <a href="https://wa.me/62895401061300?text=Halo%20RZR%2C%20saya%20ingin%20memesan%20jasa%20pembuatan%20website." target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm rounded-xl transition-all">
                                     <i class="fa-brands fa-whatsapp text-lg"></i> Pesan via WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project: Jasa Pembuatan Laporan PKL -->
+                    <div class="project-card services group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-cyan-400/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-cyan-400/5">
+                        <div class="space-y-4">
+                            <div class="w-12 h-12 bg-cyan-500/10 text-cyan-400 rounded-xl flex items-center justify-center text-xl font-bold border border-cyan-500/20">
+                                <i class="fa-solid fa-file-lines"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">Jasa Pembuatan Laporan PKL</h3>
+                            <p class="text-sm text-slate-400 leading-relaxed">
+                                Layanan bantuan penyusunan dan penataan laporan PKL dengan format yang rapi dan harga terjangkau. Hubungi kami untuk konsultasi dan informasi layanan.
+                            </p>
+                            <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-cyan-300">
+                                <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Laporan PKL</span>
+                                <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Dokumen</span>
+                                <span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">Jasa</span>
+                            </div>
+                        </div>
+                        <div class="pt-6 border-t border-slate-800/80 mt-6">
+                            <div class="flex flex-col gap-2">
+                                <a href="https://website.jasa.pembuatan.laporan.pkl.rzr.my.id/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-cyan-400 hover:text-cyan-300 font-semibold transition-all">
+                                    Lihat Layanan <i class="fa-solid fa-arrow-right text-xs"></i>
+                                </a>
+                                <a href="https://wa.me/62895401061300?text=Halo%20RZR%2C%20saya%20ingin%20bertanya%20tentang%20jasa%20pembuatan%20laporan%20PKL." target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm rounded-xl transition-all">
+                                    <i class="fa-brands fa-whatsapp text-lg"></i> Konsultasi via WhatsApp
                                 </a>
                             </div>
                         </div>
@@ -883,27 +790,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="pt-2 space-y-3">
-                                <p class="text-xs text-slate-400">Peta GPS berdasarkan koordinat yang diberikan</p>
-                                <div class="overflow-hidden rounded-xl border border-slate-700">
-                                    <iframe
-                                        title="Peta GPS lokasi Perumahan Bumi Cirebon Adipura Indah 8, Blok AB40"
-                                        src="https://www.google.com/maps?q=-6.7606389%2C108.5657778&z=19&output=embed"
-                                        width="100%"
-                                        height="260"
-                                        style="border:0; display:block;"
-                                        loading="lazy"
-                                        referrerpolicy="no-referrer-when-downgrade"
-                                        allowfullscreen>
-                                    </iframe>
-                                </div>
-                                <a href="https://www.google.com/maps/dir/?api=1&destination=-6.7606389%2C108.5657778"
-                                   target="_blank" rel="noopener noreferrer"
-                                   class="inline-flex items-center gap-2 text-sm font-semibold text-blue-400 hover:text-blue-300 transition">
-                                    <i class="fa-solid fa-map-location-dot"></i> Buka titik GPS di Google Maps
-                                </a>
-                                <p class="text-xs text-slate-500">Koordinat GPS: 6°45'38.3&quot;S, 108°33'56.8&quot;E (−6.7606389, 108.5657778).</p>
-                            </div>
                         </div>
                         
                         <div class="pt-6 border-t border-slate-800 flex gap-4">
@@ -947,39 +833,7 @@
 
     <!-- JavaScript Login, Logout & EmailJS Integration -->
     <script>
-        // Jam digital real-time berdasarkan zona waktu Indonesia Barat (WIB).
-        function updatePortfolioClock() {
-            const now = new Date();
-            const time = new Intl.DateTimeFormat('id-ID', {
-                timeZone: 'Asia/Jakarta',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: false
-            }).format(now);
-
-            const date = new Intl.DateTimeFormat('id-ID', {
-                timeZone: 'Asia/Jakarta',
-                weekday: 'long',
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric'
-            }).format(now);
-
-            const desktopClock = document.getElementById('portfolio-clock');
-            const mobileClock = document.getElementById('portfolio-clock-mobile');
-            const desktopDate = document.getElementById('portfolio-date');
-            const mobileDate = document.getElementById('portfolio-date-mobile');
-            if (desktopClock) desktopClock.textContent = time;
-            if (mobileClock) mobileClock.textContent = time;
-            if (desktopDate) desktopDate.textContent = date;
-            if (mobileDate) mobileDate.textContent = date;
-        }
-
         window.addEventListener('DOMContentLoaded', () => {
-            updatePortfolioClock();
-            window.setInterval(updatePortfolioClock, 1000);
-
             // Jika pengunjung sudah pernah login di browser ini, langsung buka portofolio.
             // Nama disimpan di localStorage sehingga tetap ada setelah halaman dimuat ulang.
             const savedName = localStorage.getItem('rzr_visitor_name');
@@ -1176,7 +1030,7 @@
                     botBubble.append(intro, projectLink);
                 } else {
                     const reply = document.createElement('p');
-                    reply.textContent = `Halo ${visitorName}! Saya bisa membantu menemukan proyek di portofolio RZR.DEV. Coba ketik nama proyek, misalnya “Movio”, “Movio Tube”, “AbsensiBos”, “Photobox”, “Tebak Kata”, “TabunganKu”, “Simulasi TKA IT”, atau “Jasa Pembuatan Website”.`;
+                    reply.textContent = `Halo ${visitorName}! Saya bisa membantu menemukan proyek di portofolio RZR.DEV. Coba ketik nama proyek, misalnya “Movio”, “AbsensiBos”, “Photobox”, “Tebak Kata”, “TabunganKu”, “Simulasi TKA IT”, atau “Jasa Pembuatan Website”, atau “Jasa Pembuatan Laporan PKL”.`;
                     botBubble.appendChild(reply);
                 }
 
