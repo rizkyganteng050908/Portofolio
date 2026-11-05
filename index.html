@@ -22,34 +22,17 @@
     </script>
 
     <style>
-        /* ===== MARQUEE KARTU PROYEK ===== */
-        .marquee {
-            overflow: hidden;
-            -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
-                    mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+        /* ===== GRID KARTU PROYEK (STATIS, TIDAK BERGERAK) ===== */
+        #project-grid {
+            display: grid;
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+            gap: 1.5rem;
         }
-        .marquee-track {
-            display: flex;
-            width: max-content;
-            animation: marquee var(--dur, 60s) linear infinite;
+        @media (min-width: 640px) {
+            #project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
-        .marquee-track .project-card {
-            width: 320px;
-            flex-shrink: 0;
-            margin-right: 2rem;
-        }
-        @keyframes marquee {
-            from { transform: translateX(0); }
-            to   { transform: translateX(-50%); }
-        }
-
-        /* OPSIONAL: berhenti saat kursor di atas kartu (memudahkan klik tombol).
-           Hapus blok ini kalau mau benar-benar tidak pernah berhenti. */
-        .marquee:hover .marquee-track { animation-play-state: paused; }
-
-        @media (prefers-reduced-motion: reduce) {
-            .marquee-track { animation: none; }
-            .marquee { overflow-x: auto; }
+        @media (min-width: 1024px) {
+            #project-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
         }
 
         /* ===== NOTIFIKASI BERHASIL MASUK ===== */
@@ -86,13 +69,6 @@
         html { scroll-padding-top: 5rem; }          /* judul section tidak tertutup header saat klik menu */
         body { overflow-x: hidden; }                /* cegah geser samping di HP */
         header { padding-top: env(safe-area-inset-top, 0px); }  /* aman untuk HP berponi/notch */
-
-        /* Lebar kartu menyesuaikan layar: ~80% layar di HP, maksimal 340px di laptop */
-        .marquee-track .project-card { width: clamp(260px, 80vw, 340px); }
-        .marquee-track .project-card { margin-right: clamp(1rem, 3vw, 2rem); }
-
-        /* Di layar sentuh tidak ada hover, jadi berhenti saat disentuh/ditahan */
-        .marquee:active .marquee-track { animation-play-state: paused; }
 
         /* Notifikasi turun sedikit di HP berponi */
         #welcome-toast { top: calc(5rem + env(safe-area-inset-top, 0px)); }
@@ -282,10 +258,8 @@
                     </div>
                 </div>
 
-                <!-- Kartu dibuat otomatis dari array "projects" di bagian script, bergerak terus (marquee) -->
-                <div class="marquee">
-                    <div id="project-grid" class="marquee-track"></div>
-                </div>
+                <!-- Kartu proyek statis (grid responsif, tidak bergerak) -->
+                <div id="project-grid"></div>
             </div>
         </section>
 
@@ -439,7 +413,7 @@
             ['Memory Card — Game Asah Otak', 'Permainan mencocokkan kartu memori interaktif berbasis web dengan timer dan sistem hitung langkah.', 'fa-solid fa-brain', 'indigo', 'game', ['Memory Game','Gratis / Free','JavaScript'], 'https://game-memory.rzr.my.id/', 'Mainkan Gratis']
         ];
 
-        // ===== RENDER KARTU (MARQUEE) =====
+        // ===== RENDER KARTU (GRID STATIS) =====
         function cardHTML([title, desc, icon, c, cats, tags, url, cta, wa]) {
             return `
             <div class="project-card ${cats} group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-${c}-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-${c}-500/5">
@@ -467,14 +441,8 @@
         function renderProjects(category = 'all') {
             const grid = document.getElementById('project-grid');
             const list = projects.filter(p => category === 'all' || p[4].split(' ').includes(category));
-
-            // pastikan satu set cukup lebar supaya tidak ada celah kosong
-            let half = list.slice();
-            while (half.length < 6) half = half.concat(list);
-
-            const html = half.map(cardHTML).join('');
-            grid.innerHTML = html + html;                              // digandakan agar loop mulus
-            grid.style.setProperty('--dur', (half.length * 7) + 's');  // makin banyak kartu, durasi makin panjang
+            // Tampilkan setiap kartu satu kali saja dalam grid statis (tidak bergerak)
+            grid.innerHTML = list.map(cardHTML).join('');
         }
 
         // ===== LOGIN / LOGOUT =====
