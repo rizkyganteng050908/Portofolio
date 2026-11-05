@@ -148,6 +148,7 @@
 
                 <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
                     <a href="#about" class="hover:text-blue-400 transition-colors">Tentang</a>
+                    <a href="#cv" class="hover:text-blue-400 transition-colors">CV / Resume</a>
                     <a href="#projects" class="hover:text-blue-400 transition-colors">Proyek</a>
                     <a href="#skills" class="hover:text-blue-400 transition-colors">Keahlian</a>
                     <a href="#contact" class="hover:text-blue-400 transition-colors">Kontak</a>
@@ -167,6 +168,7 @@
             </div>
             <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-b border-slate-800 px-6 py-4 space-y-3">
                 <a href="#about" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-blue-400 font-medium">Tentang</a>
+                <a href="#cv" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-blue-400 font-medium">CV / Resume</a>
                 <a href="#projects" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-blue-400 font-medium">Proyek</a>
                 <a href="#skills" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-blue-400 font-medium">Keahlian</a>
                 <a href="#contact" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-blue-400 font-medium">Kontak</a>
@@ -250,6 +252,118 @@
                 </div>
             </div>
         </section>
+
+        <!-- ================= SECTION CURRICULUM VITAE (CV) ================= -->
+        <section id="cv" class="py-24 px-6 bg-slate-950 border-t border-slate-800/80">
+            <div class="max-w-6xl mx-auto space-y-12">
+                <div class="text-center space-y-4">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold">
+                        <i class="fa-solid fa-file-invoice"></i> Dokumentasi Resmi
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">Curriculum Vitae (CV)</h2>
+                    <p class="text-slate-400 max-w-xl mx-auto">Ringkasan profil profesional, riwayat pendidikan, keahlian teknis, dan data pribadi Mochamad Rizky Ramadhan.</p>
+                </div>
+
+                <div class="grid lg:grid-cols-12 gap-8 items-start">
+                    <!-- Tampilan Gambar CV -->
+                    <div class="lg:col-span-6 bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-4 shadow-xl">
+                        <div class="relative group overflow-hidden rounded-xl bg-slate-950 border border-slate-800 flex justify-center items-center">
+                            <img src="CV Mochamad Rizky Ramadhan.jpeg" alt="Foto CV Mochamad Rizky Ramadhan" class="w-full h-auto object-cover max-h-[600px] transition duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+                                <button onclick="openCvModal()" class="px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-semibold text-xs transition flex items-center gap-2 shadow-lg">
+                                    <i class="fa-solid fa-magnifying-glass-plus"></i> Perbesar Foto CV
+                                </button>
+                                <a href="CV Mochamad Rizky Ramadhan.jpeg" download="CV_Mochamad_Rizky_Ramadhan.jpeg" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-white rounded-xl font-semibold text-xs transition flex items-center gap-2 border border-slate-700 shadow-lg">
+                                    <i class="fa-solid fa-download"></i> Unduh CV
+                                </a>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between px-2 text-xs text-slate-400">
+                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-image text-blue-400"></i> Format: JPG/JPEG Image</span>
+                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-emerald-400"></i> Terverifikasi</span>
+                        </div>
+                    </div>
+
+                    <!-- Informasi Rinci CV -->
+                    <div class="lg:col-span-6 space-y-6">
+                        <!-- Personal Details -->
+                        <div class="bg-slate-900/80 border border-slate-800 p-6 rounded-2xl space-y-4">
+                            <h3 class="text-lg font-bold text-white flex items-center gap-2.5 border-b border-slate-800 pb-3">
+                                <i class="fa-solid fa-id-card text-blue-400"></i> Data Pribadi (Personal Details)
+                            </h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs md:text-sm">
+                                <div><p class="text-slate-500">Nama Lengkap</p><p class="font-semibold text-white">Mochamad Rizky Ramadhan</p></div>
+                                <div><p class="text-slate-500">Jenis Kelamin</p><p class="font-semibold text-white">Laki-Laki (Male)</p></div>
+                                <div><p class="text-slate-500">Tempat, Tanggal Lahir</p><p class="font-semibold text-white">Cirebon, 05 September 2008</p></div>
+                                <div><p class="text-slate-500">Kewarganegaraan</p><p class="font-semibold text-white">Indonesia</p></div>
+                                <div class="sm:col-span-2"><p class="text-slate-500">Alamat</p><p class="font-semibold text-white">Jln. Pamujudan III No. 26 RT 02 RW 02, Kota Cirebon</p></div>
+                            </div>
+                        </div>
+
+                        <!-- Educational Background -->
+                        <div class="bg-slate-900/80 border border-slate-800 p-6 rounded-2xl space-y-4">
+                            <h3 class="text-lg font-bold text-white flex items-center gap-2.5 border-b border-slate-800 pb-3">
+                                <i class="fa-solid fa-graduation-cap text-cyan-400"></i> Riwayat Pendidikan
+                            </h3>
+                            <ul class="space-y-3 text-xs md:text-sm text-slate-300">
+                                <li class="flex items-start justify-between border-b border-slate-800/50 pb-2">
+                                    <div><p class="font-semibold text-white">SMK Wahidin Kota Cirebon</p><p class="text-xs text-slate-400">Rekayasa Perangkat Lunak (RPL)</p></div>
+                                    <span class="text-xs font-mono text-cyan-400 bg-cyan-500/10 px-2 py-1 rounded border border-cyan-500/20">2024 - 2027</span>
+                                </li>
+                                <li class="flex items-start justify-between border-b border-slate-800/50 pb-2">
+                                    <div><p class="font-semibold text-white">SMP Negeri 15 Kota Cirebon</p></div>
+                                    <span class="text-xs font-mono text-slate-400 bg-slate-800 px-2 py-1 rounded">2021 - 2024</span>
+                                </li>
+                                <li class="flex items-start justify-between border-b border-slate-800/50 pb-2">
+                                    <div><p class="font-semibold text-white">SD Merapi Kota Cirebon</p></div>
+                                    <span class="text-xs font-mono text-slate-400 bg-slate-800 px-2 py-1 rounded">2015 - 2021</span>
+                                </li>
+                                <li class="flex items-start justify-between">
+                                    <div><p class="font-semibold text-white">TK Citra Giri</p></div>
+                                    <span class="text-xs font-mono text-slate-400 bg-slate-800 px-2 py-1 rounded">2013 - 2015</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Ringkasan Keahlian CV -->
+                        <div class="bg-slate-900/80 border border-slate-800 p-6 rounded-2xl space-y-3">
+                            <h3 class="text-lg font-bold text-white flex items-center gap-2.5 border-b border-slate-800 pb-3">
+                                <i class="fa-solid fa-gears text-emerald-400"></i> Keahlian & Kompetensi Utama
+                            </h3>
+                            <div class="flex flex-wrap gap-2 text-xs">
+                                <span class="bg-slate-950 border border-slate-800 text-emerald-400 px-3 py-1.5 rounded-lg">Web Development (HTML, CSS, JS)</span>
+                                <span class="bg-slate-950 border border-slate-800 text-emerald-400 px-3 py-1.5 rounded-lg">Basic Programming (PHP, Java)</span>
+                                <span class="bg-slate-950 border border-slate-800 text-emerald-400 px-3 py-1.5 rounded-lg">Database Management (MySQL)</span>
+                                <span class="bg-slate-950 border border-slate-800 text-emerald-400 px-3 py-1.5 rounded-lg">Software Troubleshooting</span>
+                                <span class="bg-slate-950 border border-slate-800 text-emerald-400 px-3 py-1.5 rounded-lg">Problem Solving & Logic</span>
+                                <span class="bg-slate-950 border border-slate-800 text-emerald-400 px-3 py-1.5 rounded-lg">Teamwork & Collaboration</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal Perbesar Gambar CV -->
+        <div id="cv-modal" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden flex items-center justify-center p-4">
+            <div class="relative max-w-4xl w-full max-h-[90vh] bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl flex flex-col">
+                <div class="flex justify-between items-center p-4 border-b border-slate-800 bg-slate-950">
+                    <h3 class="text-sm font-bold text-white flex items-center gap-2"><i class="fa-solid fa-file-invoice text-blue-400"></i> Pratinjau Full CV - Mochamad Rizky Ramadhan</h3>
+                    <button onclick="closeCvModal()" class="text-slate-400 hover:text-white text-lg w-8 h-8 flex items-center justify-center rounded-lg bg-slate-800 hover:bg-slate-700 transition">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="p-4 overflow-y-auto flex-1 flex justify-center bg-slate-950">
+                    <img src="CV Mochamad Rizky Ramadhan.jpeg" alt="Full CV Mochamad Rizky Ramadhan" class="max-w-full h-auto rounded-lg shadow-md border border-slate-800">
+                </div>
+                <div class="p-4 border-t border-slate-800 bg-slate-950 flex justify-end gap-3">
+                    <button onclick="closeCvModal()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-xl transition">Tutup</button>
+                    <a href="CV Mochamad Rizky Ramadhan.jpeg" download="CV_Mochamad_Rizky_Ramadhan.jpeg" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-xl transition flex items-center gap-2">
+                        <i class="fa-solid fa-download"></i> Unduh Gambar CV
+                    </a>
+                </div>
+            </div>
+        </div>
 
         <!-- Proyek -->
         <section id="projects" class="py-24 px-6 bg-slate-900/40 border-y border-slate-800/50">
@@ -416,7 +530,7 @@
             ['RZR Web — Jasa Pembuatan Website', 'Platform layanan pembuatan website kustom untuk UMKM, landing page pemasaran, hingga portofolio dengan performa cepat.', 'fa-solid fa-laptop-code', 'purple', 'services', ['Landing Page','SEO Ready','Vercel'], 'https://jasa-pembuatan-website.rzr.my.id/', 'Lihat Layanan', ['Pesan via WhatsApp', WA + 'Halo%20RZR%2C%20saya%20ingin%20memesan%20jasa%20pembuatan%20website.']],
             ['Jasa Pembuatan Laporan PKL', 'Layanan bantuan penyusunan dan penataan laporan PKL dengan format yang rapi dan harga terjangkau. Hubungi kami untuk konsultasi dan informasi layanan.', 'fa-solid fa-file-lines', 'cyan', 'services', ['Laporan PKL','Dokumen','Jasa'], 'https://website.jasa.pembuatan.laporan.pkl.rzr.my.id/', 'Lihat Layanan', ['Konsultasi via WhatsApp', WA + 'Halo%20RZR%2C%20saya%20ingin%20bertanya%20tentang%20jasa%20pembuatan%20laporan%20PKL.']],
             ['RPL Class — Portal Kelas', 'Portal kelas untuk mendukung kebutuhan informasi dan aktivitas pembelajaran siswa Rekayasa Perangkat Lunak.', 'fa-solid fa-graduation-cap', 'blue', 'system school', ['Portal Kelas','Education','Web App'], 'https://web-rpl.rzr.my.id/', 'Buka Portal Kelas'],
-            ['Movio Tube — Video Platform', 'Platform video berbasis web untuk menjelajahi dan menikmati konten video melalui tampilan yang praktis.', 'fa-brands fa-youtube', 'pink', 'tools', ['Video Platform','Streaming','Web App'], 'https://website-movio-tube.rzr.my.id/', 'Buka Movio Tube'],
+            ['Movio Tube — Video Platform', 'Platform video berbasis web untuk menjelajahi dan menikmati konten video melalui tampilan yang practical.', 'fa-brands fa-youtube', 'pink', 'tools', ['Video Platform','Streaming','Web App'], 'https://website-movio-tube.rzr.my.id/', 'Buka Movio Tube'],
             ['Website Video Link Ku', 'Tools sederhana untuk mengakses dan mengelola tautan video melalui satu halaman website.', 'fa-solid fa-link', 'cyan', 'tools', ['Video Links','Tools','Web App'], 'https://website-video-link-ku.rzr.my.id/', 'Buka Tools'],
             ['RZR Photobox — Virtual Photobox', 'Aplikasi photobox berbasis web interaktif. Mengambil foto strip, menerapkan bingkai custom, dan mengunduh hasilnya.', 'fa-solid fa-camera-retro', 'pink', 'tools', ['Webcam API','Interactive','Canvas'], 'https://photobox.rzr.my.id/', 'Coba Photobox'],
             ['Tebak Kata — Game Edukasi', 'Permainan asah otak interaktif berbasis web untuk menebak susunan kata. Dilengkapi sistem skor dan petunjuk.', 'fa-solid fa-gamepad', 'cyan', 'game', ['Interactive Game','JavaScript','Tailwind'], 'https://tebak-kata.rzr.my.id/', 'Mainkan Game'],
@@ -451,8 +565,18 @@
         function renderProjects(category = 'all') {
             const grid = document.getElementById('project-grid');
             const list = projects.filter(p => category === 'all' || p[4].split(' ').includes(category));
-            // Tampilkan setiap kartu satu kali saja dalam grid statis (tidak bergerak)
             grid.innerHTML = list.map(cardHTML).join('');
+        }
+
+        // ===== MODAL CV =====
+        function openCvModal() {
+            document.getElementById('cv-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCvModal() {
+            document.getElementById('cv-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
         }
 
         // ===== LOGIN / LOGOUT =====
@@ -460,7 +584,7 @@
             renderProjects();
             const savedName = localStorage.getItem('rzr_visitor_name');
             if (savedName && savedName.trim()) {
-                proceedToPortfolio(savedName.trim(), true); // true = tanpa notifikasi (sudah login sebelumnya)
+                proceedToPortfolio(savedName.trim(), true);
             }
         });
 
@@ -521,7 +645,7 @@
             const toast = document.getElementById('welcome-toast');
             document.getElementById('toast-name').textContent = name;
             toast.classList.remove('show');
-            void toast.offsetWidth; // reset animasi bila dipanggil ulang
+            void toast.offsetWidth;
             toast.classList.add('show');
             clearTimeout(toastTimer);
             toastTimer = setTimeout(() => toast.classList.remove('show'), 3500);
