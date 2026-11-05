@@ -51,6 +51,36 @@
             .marquee-track { animation: none; }
             .marquee { overflow-x: auto; }
         }
+
+        /* ===== NOTIFIKASI BERHASIL MASUK ===== */
+        #welcome-toast {
+            position: fixed;
+            top: 5rem;
+            left: 50%;
+            z-index: 100;
+            transform: translate(-50%, -150%);
+            opacity: 0;
+            transition: transform .5s cubic-bezier(.34, 1.56, .64, 1), opacity .4s ease;
+            pointer-events: none;
+            width: calc(100% - 2rem);
+            max-width: 24rem;
+        }
+        #welcome-toast.show {
+            transform: translate(-50%, 0);
+            opacity: 1;
+        }
+        #welcome-toast .toast-bar {
+            height: 3px;
+            background: #34d399;
+            transform-origin: left;
+        }
+        #welcome-toast.show .toast-bar {
+            animation: toastbar 3.5s linear forwards;
+        }
+        @keyframes toastbar {
+            from { transform: scaleX(1); }
+            to   { transform: scaleX(0); }
+        }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-blue-500 selection:text-white">
@@ -310,6 +340,22 @@
         </footer>
     </div>
 
+    <!-- ================= NOTIFIKASI BERHASIL MASUK ================= -->
+    <div id="welcome-toast" role="status" aria-live="polite">
+        <div class="bg-slate-900 border border-emerald-500/40 rounded-2xl shadow-2xl shadow-emerald-500/10 overflow-hidden">
+            <div class="flex items-center gap-3 px-4 py-3">
+                <div class="w-10 h-10 bg-emerald-500/10 text-emerald-400 rounded-xl flex items-center justify-center border border-emerald-500/30 flex-shrink-0">
+                    <i class="fa-solid fa-circle-check text-lg"></i>
+                </div>
+                <div class="min-w-0">
+                    <p class="text-sm font-bold text-white">Berhasil masuk!</p>
+                    <p class="text-xs text-slate-400 truncate">Selamat datang, <span id="toast-name" class="text-emerald-400 font-semibold"></span></p>
+                </div>
+            </div>
+            <div class="toast-bar"></div>
+        </div>
+    </div>
+
     <script>
         // ===== DATA PROYEK =====
         // [judul, deskripsi, ikon FontAwesome, warna Tailwind, kategori, tag[], url, teks tombol, (opsional) pesan WhatsApp]
@@ -384,7 +430,7 @@
             renderProjects();
             const savedName = localStorage.getItem('rzr_visitor_name');
             if (savedName && savedName.trim()) {
-                proceedToPortfolio(savedName.trim());
+                proceedToPortfolio(savedName.trim(), true); // true = tanpa notifikasi (sudah login sebelumnya)
             }
         });
 
@@ -430,13 +476,25 @@
             }
         }
 
-        function proceedToPortfolio(name) {
+        function proceedToPortfolio(name, silent = false) {
             document.getElementById('login-page').classList.add('hidden');
             document.getElementById('portfolio-content').classList.remove('hidden');
             document.getElementById('nav-visitor-name').innerText = name;
             const mobileName = document.getElementById('mobile-visitor-name');
             if (mobileName) mobileName.innerText = name;
             window.scrollTo(0, 0);
+            if (!silent) showWelcomeToast(name);
+        }
+
+        let toastTimer;
+        function showWelcomeToast(name) {
+            const toast = document.getElementById('welcome-toast');
+            document.getElementById('toast-name').textContent = name;
+            toast.classList.remove('show');
+            void toast.offsetWidth; // reset animasi bila dipanggil ulang
+            toast.classList.add('show');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => toast.classList.remove('show'), 3500);
         }
 
         function handleLogout() {
