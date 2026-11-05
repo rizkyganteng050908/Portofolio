@@ -102,16 +102,29 @@
         #about a { text-align: center; }
 
         @media (max-width: 639px) {
-            /* Kotak kontak lebih ramping di HP */
             #contact .grid > div,
             #contact .grid > form { padding: 1.5rem; }
-
-            /* Cegah iPhone zoom otomatis saat mengetik di form */
             input, textarea { font-size: 16px !important; }
+        }
+
+        /* ===== PROTEKSI GAMBAR CV (ANTI-SS & ANTI-FOTO/PRINT) ===== */
+        .protected-cv-img {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            pointer-events: none;
+        }
+        
+        /* Proteksi saat cetak / print screen halaman */
+        @media print {
+            body { display: none !important; }
         }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-blue-500 selection:text-white">
+<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-blue-500 selection:text-white" oncontextmenu="return false;">
 
     <!-- ================= LOGIN ================= -->
     <div id="login-page" class="fixed inset-0 z-50 bg-slate-950 flex items-center justify-center px-4">
@@ -148,7 +161,7 @@
 
                 <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
                     <a href="#about" class="hover:text-blue-400 transition-colors">Tentang</a>
-                    <a href="#cv" class="hover:text-blue-400 transition-colors">CV / Resume</a>
+                    <a href="#cv" class="hover:text-blue-400 transition-colors">CV Mochamad Rizky Ramadhan</a>
                     <a href="#projects" class="hover:text-blue-400 transition-colors">Proyek</a>
                     <a href="#skills" class="hover:text-blue-400 transition-colors">Keahlian</a>
                     <a href="#contact" class="hover:text-blue-400 transition-colors">Kontak</a>
@@ -168,7 +181,7 @@
             </div>
             <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-b border-slate-800 px-6 py-4 space-y-3">
                 <a href="#about" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-blue-400 font-medium">Tentang</a>
-                <a href="#cv" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-blue-400 font-medium">CV / Resume</a>
+                <a href="#cv" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-blue-400 font-medium">CV Mochamad Rizky Ramadhan</a>
                 <a href="#projects" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-blue-400 font-medium">Proyek</a>
                 <a href="#skills" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-blue-400 font-medium">Keahlian</a>
                 <a href="#contact" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-blue-400 font-medium">Kontak</a>
@@ -253,33 +266,35 @@
             </div>
         </section>
 
-        <!-- ================= SECTION CURRICULUM VITAE (CV) ================= -->
+        <!-- ================= SECTION CV MOCHAMAD RIZKY RAMADHAN ================= -->
         <section id="cv" class="py-24 px-6 bg-slate-950 border-t border-slate-800/80">
             <div class="max-w-6xl mx-auto space-y-12">
                 <div class="text-center space-y-4">
                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold">
-                        <i class="fa-solid fa-file-invoice"></i> Dokumentasi Resmi
+                        <i class="fa-solid fa-shield-halved"></i> Dokumen Terproteksi
                     </div>
-                    <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">Curriculum Vitae (CV)</h2>
+                    <!-- Mengubah judul sesuai instruksi -->
+                    <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">CV Mochamad Rizky Ramadhan</h2>
                     <p class="text-slate-400 max-w-xl mx-auto">Ringkasan profil profesional, riwayat pendidikan, keahlian teknis, dan data pribadi Mochamad Rizky Ramadhan.</p>
                 </div>
 
                 <div class="grid lg:grid-cols-12 gap-8 items-start">
-                    <!-- Tampilan Gambar CV -->
+                    <!-- Tampilan Gambar CV Proteksi Anti-SS & Foto -->
                     <div class="lg:col-span-6 bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-4 shadow-xl">
-                        <div class="relative group overflow-hidden rounded-xl bg-slate-950 border border-slate-800 flex justify-center items-center">
-                            <img src="CV Mochamad Rizky Ramadhan.jpeg" alt="Foto CV Mochamad Rizky Ramadhan" class="w-full h-auto object-cover max-h-[600px] transition duration-500 group-hover:scale-105">
-                            <div class="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
-                                <button onclick="openCvModal()" class="px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-semibold text-xs transition flex items-center gap-2 shadow-lg">
-                                    <i class="fa-solid fa-magnifying-glass-plus"></i> Perbesar Foto CV
+                        <div class="relative group overflow-hidden rounded-xl bg-slate-950 border border-slate-800 flex justify-center items-center select-none" oncontextmenu="return false;">
+                            <!-- Overlay Terproteksi Anti SS -->
+                            <div class="absolute inset-0 z-20 bg-transparent pointer-events-auto"></div>
+                            
+                            <img src="CV Mochamad Rizky Ramadhan.jpeg" alt="CV Mochamad Rizky Ramadhan" draggable="false" oncontextmenu="return false;" class="protected-cv-img w-full h-auto object-cover max-h-[600px] transition duration-500 group-hover:scale-105 filter group-hover:blur-[1px]">
+                            
+                            <div class="absolute inset-0 z-30 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <button onclick="openCvModal()" class="px-5 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-semibold text-xs transition flex items-center gap-2 shadow-lg transform group-hover:scale-105">
+                                    <i class="fa-solid fa-eye"></i> Lihat Pratinjau Aman
                                 </button>
-                                <a href="CV Mochamad Rizky Ramadhan.jpeg" download="CV_Mochamad_Rizky_Ramadhan.jpeg" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-white rounded-xl font-semibold text-xs transition flex items-center gap-2 border border-slate-700 shadow-lg">
-                                    <i class="fa-solid fa-download"></i> Unduh CV
-                                </a>
                             </div>
                         </div>
                         <div class="flex items-center justify-between px-2 text-xs text-slate-400">
-                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-image text-blue-400"></i> Format: JPG/JPEG Image</span>
+                            <span class="flex items-center gap-1.5 text-amber-400"><i class="fa-solid fa-lock"></i> Proteksi Anti Screenshot & Download Active</span>
                             <span class="flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-emerald-400"></i> Terverifikasi</span>
                         </div>
                     </div>
@@ -344,23 +359,23 @@
             </div>
         </section>
 
-        <!-- Modal Perbesar Gambar CV -->
+        <!-- Modal Perbesar Gambar CV (Proteksi Anti SS/Foto) -->
         <div id="cv-modal" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden flex items-center justify-center p-4">
-            <div class="relative max-w-4xl w-full max-h-[90vh] bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl flex flex-col">
+            <div class="relative max-w-4xl w-full max-h-[90vh] bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl flex flex-col select-none" oncontextmenu="return false;">
                 <div class="flex justify-between items-center p-4 border-b border-slate-800 bg-slate-950">
-                    <h3 class="text-sm font-bold text-white flex items-center gap-2"><i class="fa-solid fa-file-invoice text-blue-400"></i> Pratinjau Full CV - Mochamad Rizky Ramadhan</h3>
+                    <h3 class="text-sm font-bold text-white flex items-center gap-2"><i class="fa-solid fa-shield-halved text-blue-400"></i> CV Mochamad Rizky Ramadhan (Protected)</h3>
                     <button onclick="closeCvModal()" class="text-slate-400 hover:text-white text-lg w-8 h-8 flex items-center justify-center rounded-lg bg-slate-800 hover:bg-slate-700 transition">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                 </div>
-                <div class="p-4 overflow-y-auto flex-1 flex justify-center bg-slate-950">
-                    <img src="CV Mochamad Rizky Ramadhan.jpeg" alt="Full CV Mochamad Rizky Ramadhan" class="max-w-full h-auto rounded-lg shadow-md border border-slate-800">
+                <div class="p-4 overflow-y-auto flex-1 flex justify-center bg-slate-950 relative">
+                    <img src="CV Mochamad Rizky Ramadhan.jpeg" alt="Full CV Mochamad Rizky Ramadhan" draggable="false" oncontextmenu="return false;" class="protected-cv-img max-w-full h-auto rounded-lg shadow-md border border-slate-800 select-none">
                 </div>
-                <div class="p-4 border-t border-slate-800 bg-slate-950 flex justify-end gap-3">
-                    <button onclick="closeCvModal()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-xl transition">Tutup</button>
-                    <a href="CV Mochamad Rizky Ramadhan.jpeg" download="CV_Mochamad_Rizky_Ramadhan.jpeg" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-xl transition flex items-center gap-2">
-                        <i class="fa-solid fa-download"></i> Unduh Gambar CV
-                    </a>
+                <div class="p-4 border-t border-slate-800 bg-slate-950 flex justify-between items-center">
+                    <span class="text-xs text-slate-500"><i class="fa-solid fa-eye-slash mr-1"></i> Tampilan terlindungi dari screenshot</span>
+                    <button onclick="closeCvModal()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-xl transition">
+                        Tutup Pratinjau
+                    </button>
                 </div>
             </div>
         </div>
@@ -507,8 +522,21 @@
     </div>
 
     <script>
+        // ===== DETEKSI TOMBOL SS & SHORTCUT =====
+        window.addEventListener('keyup', (e) => {
+            if (e.key === 'PrintScreen') {
+                navigator.clipboard.writeText('');
+                alert('Mengambil gambar/screenshot tidak diizinkan pada dokumen ini.');
+            }
+        });
+        window.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && (e.key === 'p' || e.key === 'P' || e.key === 's' || e.key === 'S')) {
+                e.preventDefault();
+                alert('Fungsi ini ditutup demi keamanan dokumen.');
+            }
+        });
+
         // ===== DATA PROYEK =====
-        // [judul, deskripsi, ikon FontAwesome, warna Tailwind, kategori, tag[], url, teks tombol, (opsional) pesan WhatsApp]
         const WA = 'https://wa.me/62895401061300?text=';
         const projects = [
             ['Website Virus Simulator', 'Eksperimen web interaktif dan simulasi hiburan bertema sistem keamanan dengan antarmuka yang unik.', 'fa-solid fa-triangle-exclamation', 'red', 'tools', ['Simulation','Interactive','Web App'], 'https://website-virus.rzr.my.id/', 'Buka Website'],
@@ -537,7 +565,7 @@
             ['Memory Card — Game Asah Otak', 'Permainan mencocokkan kartu memori interaktif berbasis web dengan timer dan sistem hitung langkah.', 'fa-solid fa-brain', 'indigo', 'game', ['Memory Game','Gratis / Free','JavaScript'], 'https://game-memory.rzr.my.id/', 'Mainkan Gratis']
         ];
 
-        // ===== RENDER KARTU (GRID STATIS) =====
+        // ===== RENDER KARTU =====
         function cardHTML([title, desc, icon, c, cats, tags, url, cta, wa]) {
             return `
             <div class="project-card ${cats} group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-${c}-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-${c}-500/5">
