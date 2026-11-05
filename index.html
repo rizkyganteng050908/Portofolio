@@ -20,6 +20,38 @@
             }
         })();
     </script>
+
+    <style>
+        /* ===== MARQUEE KARTU PROYEK ===== */
+        .marquee {
+            overflow: hidden;
+            -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+                    mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+        }
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marquee var(--dur, 60s) linear infinite;
+        }
+        .marquee-track .project-card {
+            width: 320px;
+            flex-shrink: 0;
+            margin-right: 2rem;
+        }
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+        }
+
+        /* OPSIONAL: berhenti saat kursor di atas kartu (memudahkan klik tombol).
+           Hapus blok ini kalau mau benar-benar tidak pernah berhenti. */
+        .marquee:hover .marquee-track { animation-play-state: paused; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .marquee-track { animation: none; }
+            .marquee { overflow-x: auto; }
+        }
+    </style>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-blue-500 selection:text-white">
 
@@ -168,8 +200,10 @@
                     </div>
                 </div>
 
-                <!-- Kartu dibuat otomatis dari array "projects" di bagian script -->
-                <div id="project-grid" class="grid md:grid-cols-3 gap-8"></div>
+                <!-- Kartu dibuat otomatis dari array "projects" di bagian script, bergerak terus (marquee) -->
+                <div class="marquee">
+                    <div id="project-grid" class="marquee-track"></div>
+                </div>
             </div>
         </section>
 
@@ -307,29 +341,42 @@
             ['Memory Card — Game Asah Otak', 'Permainan mencocokkan kartu memori interaktif berbasis web dengan timer dan sistem hitung langkah.', 'fa-solid fa-brain', 'indigo', 'game', ['Memory Game','Gratis / Free','JavaScript'], 'https://game-memory.rzr.my.id/', 'Mainkan Gratis']
         ];
 
-        function renderProjects() {
+        // ===== RENDER KARTU (MARQUEE) =====
+        function cardHTML([title, desc, icon, c, cats, tags, url, cta, wa]) {
+            return `
+            <div class="project-card ${cats} group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-${c}-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-${c}-500/5">
+                <div class="space-y-4">
+                    <div class="w-12 h-12 bg-${c}-500/10 text-${c}-400 rounded-xl flex items-center justify-center text-xl font-bold border border-${c}-500/20">
+                        <i class="${icon}"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white group-hover:text-${c}-400 transition-colors">${title}</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">${desc}</p>
+                    <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-${c}-300">
+                        ${tags.map(t => `<span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">${t}</span>`).join('')}
+                    </div>
+                </div>
+                <div class="pt-6 border-t border-slate-800/80 mt-6 flex flex-col gap-2">
+                    <a href="${url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-${c}-400 hover:text-${c}-300 font-semibold transition-all">
+                        ${cta} <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                    ${wa ? `<a href="${wa[1]}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm rounded-xl transition-all">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> ${wa[0]}
+                    </a>` : ''}
+                </div>
+            </div>`;
+        }
+
+        function renderProjects(category = 'all') {
             const grid = document.getElementById('project-grid');
-            grid.innerHTML = projects.map(([title, desc, icon, c, cats, tags, url, cta, wa]) => `
-                <div class="project-card ${cats} group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-${c}-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-${c}-500/5">
-                    <div class="space-y-4">
-                        <div class="w-12 h-12 bg-${c}-500/10 text-${c}-400 rounded-xl flex items-center justify-center text-xl font-bold border border-${c}-500/20">
-                            <i class="${icon}"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-white group-hover:text-${c}-400 transition-colors">${title}</h3>
-                        <p class="text-sm text-slate-400 leading-relaxed">${desc}</p>
-                        <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-${c}-300">
-                            ${tags.map(t => `<span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">${t}</span>`).join('')}
-                        </div>
-                    </div>
-                    <div class="pt-6 border-t border-slate-800/80 mt-6 flex flex-col gap-2">
-                        <a href="${url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-${c}-400 hover:text-${c}-300 font-semibold transition-all">
-                            ${cta} <i class="fa-solid fa-arrow-right text-xs"></i>
-                        </a>
-                        ${wa ? `<a href="${wa[1]}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm rounded-xl transition-all">
-                            <i class="fa-brands fa-whatsapp text-lg"></i> ${wa[0]}
-                        </a>` : ''}
-                    </div>
-                </div>`).join('');
+            const list = projects.filter(p => category === 'all' || p[4].split(' ').includes(category));
+
+            // pastikan satu set cukup lebar supaya tidak ada celah kosong
+            let half = list.slice();
+            while (half.length < 6) half = half.concat(list);
+
+            const html = half.map(cardHTML).join('');
+            grid.innerHTML = html + html;                              // digandakan agar loop mulus
+            grid.style.setProperty('--dur', (half.length * 7) + 's');  // makin banyak kartu, durasi makin panjang
         }
 
         // ===== LOGIN / LOGOUT =====
@@ -412,9 +459,7 @@
             btn.classList.remove('bg-slate-800', 'text-slate-400');
             btn.classList.add('bg-blue-600', 'text-white');
 
-            document.querySelectorAll('.project-card').forEach(card => {
-                card.style.display = (category === 'all' || card.classList.contains(category)) ? 'flex' : 'none';
-            });
+            renderProjects(category);
         }
 
         // ===== KONTAK (via WhatsApp) =====
