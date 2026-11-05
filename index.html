@@ -2,7 +2,7 @@
 <html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Mochamad Rizky Ramadhan - Web Developer Portfolio</title>
 
     <link rel="icon" type="image/png" sizes="192x192" href="Orang Misterius.png">
@@ -80,6 +80,58 @@
         @keyframes toastbar {
             from { transform: scaleX(1); }
             to   { transform: scaleX(0); }
+        }
+
+        /* ===== RESPONSIF HP & LAPTOP ===== */
+        html { scroll-padding-top: 5rem; }          /* judul section tidak tertutup header saat klik menu */
+        body { overflow-x: hidden; }                /* cegah geser samping di HP */
+        header { padding-top: env(safe-area-inset-top, 0px); }  /* aman untuk HP berponi/notch */
+
+        /* Lebar kartu menyesuaikan layar: ~80% layar di HP, maksimal 340px di laptop */
+        .marquee-track .project-card { width: clamp(260px, 80vw, 340px); }
+        .marquee-track .project-card { margin-right: clamp(1rem, 3vw, 2rem); }
+
+        /* Di layar sentuh tidak ada hover, jadi berhenti saat disentuh/ditahan */
+        .marquee:active .marquee-track { animation-play-state: paused; }
+
+        /* Notifikasi turun sedikit di HP berponi */
+        #welcome-toast { top: calc(5rem + env(safe-area-inset-top, 0px)); }
+
+        /* Halaman login: bisa di-scroll di HP layar pendek / saat keyboard muncul */
+        #login-page {
+            align-items: flex-start !important;
+            justify-content: flex-start !important;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+        #login-page > .max-w-md { margin: auto; }
+
+        /* Teks panjang (email, alamat) tidak keluar kotak */
+        #contact .font-medium { overflow-wrap: anywhere; }
+        #contact .gap-4 > div:last-child { min-width: 0; }
+        #about h1 { overflow-wrap: anywhere; }
+
+        /* Nama visitor di menu HP dipotong rapi jika terlalu panjang */
+        #mobile-menu .text-xs.text-blue-400 {
+            min-width: 0;
+            margin-right: .75rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Tombol hero rata tengah saat tersusun vertikal di HP */
+        #about a { text-align: center; }
+
+        @media (max-width: 639px) {
+            /* Kotak kontak lebih ramping di HP */
+            #contact .grid > div,
+            #contact .grid > form { padding: 1.5rem; }
+
+            /* Cegah iPhone zoom otomatis saat mengetik di form */
+            input, textarea { font-size: 16px !important; }
         }
     </style>
 </head>
