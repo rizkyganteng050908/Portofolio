@@ -116,6 +116,7 @@
             -ms-user-select: none;
             user-select: none;
             pointer-events: none;
+            transition: filter 0.3s ease, opacity 0.3s ease;
         }
         
         /* Proteksi saat cetak / print screen halaman */
@@ -273,7 +274,6 @@
                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold">
                         <i class="fa-solid fa-shield-halved"></i> Dokumen Terproteksi
                     </div>
-                    <!-- Mengubah judul sesuai instruksi -->
                     <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">CV Mochamad Rizky Ramadhan</h2>
                     <p class="text-slate-400 max-w-xl mx-auto">Ringkasan profil profesional, riwayat pendidikan, keahlian teknis, dan data pribadi Mochamad Rizky Ramadhan.</p>
                 </div>
@@ -285,8 +285,15 @@
                             <!-- Overlay Terproteksi Anti SS -->
                             <div class="absolute inset-0 z-20 bg-transparent pointer-events-auto"></div>
                             
-                            <img src="CV Mochamad Rizky Ramadhan.jpeg" alt="CV Mochamad Rizky Ramadhan" draggable="false" oncontextmenu="return false;" class="protected-cv-img w-full h-auto object-cover max-h-[600px] transition duration-500 group-hover:scale-105 filter group-hover:blur-[1px]">
+                            <img src="CV Mochamad Rizky Ramadhan.jpeg" alt="CV Mochamad Rizky Ramadhan" draggable="false" oncontextmenu="return false;" class="protected-cv-img w-full h-auto object-cover max-h-[600px] transition duration-500 group-hover:scale-105">
                             
+                            <!-- Pesan Peringatan saat Layar Kehilangan Fokus -->
+                            <div id="cv-blur-warning" class="hidden absolute inset-0 z-40 bg-slate-950/90 backdrop-blur-xl flex flex-col items-center justify-center p-6 text-center space-y-3">
+                                <i class="fa-solid fa-eye-slash text-amber-400 text-3xl"></i>
+                                <p class="text-sm font-bold text-white">Tampilan Disembunyikan</p>
+                                <p class="text-xs text-slate-400">Dokumen terlindungi dari perekaman layar dan screenshot.</p>
+                            </div>
+
                             <div class="absolute inset-0 z-30 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                 <button onclick="openCvModal()" class="px-5 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-semibold text-xs transition flex items-center gap-2 shadow-lg transform group-hover:scale-105">
                                     <i class="fa-solid fa-eye"></i> Lihat Pratinjau Aman
@@ -522,17 +529,43 @@
     </div>
 
     <script>
-        // ===== DETEKSI TOMBOL SS & SHORTCUT =====
+        // ===== DETEKSI WINDOW BLUR / SCREENSHOT & SHORTCUT =====
+        // Saat pengunjung menekan tombol SS HP, membuka bar notifikasi, atau memindahkan jendela app, gambar akan otomatis buram total & hitam
+        window.addEventListener('blur', () => {
+            const warning = document.getElementById('cv-blur-warning');
+            if (warning) warning.classList.remove('hidden');
+            document.querySelectorAll('.protected-cv-img').forEach(img => {
+                img.style.filter = 'blur(40px) brightness(0)';
+                img.style.opacity = '0';
+            });
+        });
+
+        window.addEventListener('focus', () => {
+            const warning = document.getElementById('cv-blur-warning');
+            if (warning) warning.classList.add('hidden');
+            document.querySelectorAll('.protected-cv-img').forEach(img => {
+                img.style.filter = 'none';
+                img.style.opacity = '1';
+            });
+        });
+
         window.addEventListener('keyup', (e) => {
             if (e.key === 'PrintScreen') {
                 navigator.clipboard.writeText('');
-                alert('Mengambil gambar/screenshot tidak diizinkan pada dokumen ini.');
+                document.querySelectorAll('.protected-cv-img').forEach(img => {
+                    img.style.display = 'none';
+                });
+                setTimeout(() => {
+                    document.querySelectorAll('.protected-cv-img').forEach(img => {
+                        img.style.display = 'block';
+                    });
+                }, 2000);
             }
         });
+
         window.addEventListener('keydown', (e) => {
             if ((e.ctrlKey || e.metaKey) && (e.key === 'p' || e.key === 'P' || e.key === 's' || e.key === 'S')) {
                 e.preventDefault();
-                alert('Fungsi ini ditutup demi keamanan dokumen.');
             }
         });
 
