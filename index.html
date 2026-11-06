@@ -84,6 +84,16 @@
         }
         #login-page > .max-w-md { margin: auto; }
 
+        /* ===== VALIDASI LOGIN ===== */
+        #login-error:not(.hidden) { display: flex; }
+        #login-name.invalid { border-color: #f87171; }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-6px); }
+            40%, 80% { transform: translateX(6px); }
+        }
+        .shake { animation: shake .4s ease; }
+
         /* Teks panjang (email, alamat) tidak keluar kotak */
         #contact .font-medium { overflow-wrap: anywhere; }
         #contact .gap-4 > div:last-child { min-width: 0; }
@@ -139,19 +149,41 @@
                 <h1 class="text-2xl font-bold text-white tracking-tight">Akses Portofolio RZR</h1>
                 <p class="text-xs text-slate-400 leading-relaxed">Masukkan nama Anda untuk melanjutkan ke halaman portofolio resmi Mochamad Rizky Ramadhan.</p>
             </div>
-            <form id="login-form" onsubmit="handleLoginSubmit(event)" class="space-y-4">
+            <form id="login-form" onsubmit="handleLoginSubmit(event)" class="space-y-4" novalidate>
                 <div>
-                    <label class="block text-xs font-semibold text-slate-400 mb-1">Nama Lengkap Anda</label>
-                    <input type="text" id="login-name" required placeholder="Contoh: Andi Pratama"
-                        class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-blue-500 transition shadow-inner">
+                    <label for="login-name" class="flex items-center justify-between text-xs font-semibold text-slate-400 mb-1">
+                        <span>Nama Lengkap Anda <span class="text-red-400">*</span></span>
+                        <span id="login-counter" class="text-slate-600 font-normal">0/40</span>
+                    </label>
+                    <div class="relative">
+                        <i class="fa-solid fa-user absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm"></i>
+                        <input type="text" id="login-name" required minlength="3" maxlength="40" autocomplete="name" autofocus
+                            oninput="validateLoginName()"
+                            placeholder="Wajib isi nama lengkap sebelum masuk"
+                            class="w-full bg-slate-950 border border-slate-800 rounded-xl pl-11 pr-4 py-3 text-sm text-white focus:outline-none focus:border-blue-500 transition shadow-inner">
+                    </div>
+                    <p id="login-error" class="hidden mt-1.5 text-xs text-red-400 items-center gap-1.5">
+                        <i class="fa-solid fa-circle-exclamation"></i><span></span>
+                    </p>
                 </div>
-                <button type="submit" id="login-btn"
-                    class="w-full py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl shadow-lg shadow-blue-600/25 transition flex items-center justify-center gap-2">
+
+                <label class="flex items-start gap-2.5 text-[11px] text-slate-400 leading-relaxed cursor-pointer">
+                    <input type="checkbox" id="login-consent" onchange="validateLoginName()" class="mt-0.5 accent-blue-500">
+                    <span>Saya setuju nama saya dikirim ke pemilik portofolio sebagai catatan kunjungan.</span>
+                </label>
+
+                <button type="submit" id="login-btn" disabled
+                    class="w-full py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl shadow-lg shadow-blue-600/25 transition flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-blue-600">
                     <span>Masuk ke Portofolio</span>
                     <i class="fa-solid fa-arrow-right text-xs"></i>
                 </button>
             </form>
-            <p class="text-center text-[11px] text-slate-500 leading-relaxed">Nama Anda akan dikirim ke pemilik portofolio sebagai catatan kunjungan.</p>
+
+            <div class="grid grid-cols-3 gap-2 text-[10px] text-slate-500 text-center">
+                <div class="bg-slate-950/60 border border-slate-800 rounded-lg py-2"><i class="fa-solid fa-key text-blue-400 block mb-1"></i>Tanpa Password</div>
+                <div class="bg-slate-950/60 border border-slate-800 rounded-lg py-2"><i class="fa-solid fa-bolt text-emerald-400 block mb-1"></i>Cepat</div>
+                <div class="bg-slate-950/60 border border-slate-800 rounded-lg py-2"><i class="fa-solid fa-shield-halved text-amber-400 block mb-1"></i>Data Aman</div>
+            </div>
         </div>
     </div>
 
@@ -652,6 +684,35 @@
             document.body.style.overflow = 'auto';
         }
 
+        // ===== VALIDASI LOGIN =====
+        function validateLoginName(showShake = false) {
+            const input = document.getElementById('login-name');
+            const err = document.getElementById('login-error');
+            const btn = document.getElementById('login-btn');
+            const consent = document.getElementById('login-consent').checked;
+            const val = input.value.trim();
+            document.getElementById('login-counter').textContent = `${input.value.length}/40`;
+
+            let msg = '';
+            if (!val) msg = 'Nama lengkap wajib diisi sebelum masuk.';
+            else if (val.length < 3) msg = 'Nama minimal 3 huruf.';
+            else if (!/^[\p{L}\s.'-]+$/u.test(val)) msg = 'Gunakan huruf saja (tanpa angka atau simbol).';
+
+            // pesan error hanya tampil setelah pengguna mulai mengetik atau menekan Masuk
+            const touched = input.value.length > 0 || showShake;
+            err.classList.toggle('hidden', !msg || !touched);
+            err.querySelector('span').textContent = msg;
+            input.classList.toggle('invalid', !!msg && touched);
+
+            const ok = !msg && consent;
+            btn.disabled = !ok;
+            if (showShake && !ok) {
+                const card = input.closest('.max-w-md');
+                card.classList.remove('shake'); void card.offsetWidth; card.classList.add('shake');
+            }
+            return !msg;
+        }
+
         // ===== LOGIN / LOGOUT =====
         window.addEventListener('DOMContentLoaded', () => {
             renderProjects();
@@ -664,6 +725,7 @@
 
         function handleLoginSubmit(event) {
             event.preventDefault();
+            if (!validateLoginName(true) || !document.getElementById('login-consent').checked) return;
             const visitorName = document.getElementById('login-name').value.trim();
             if (!visitorName) return;
 
@@ -730,6 +792,8 @@
             document.getElementById('portfolio-content').classList.add('hidden');
             document.getElementById('login-page').classList.remove('hidden');
             document.getElementById('login-name').value = '';
+            document.getElementById('login-consent').checked = false;
+            validateLoginName();
         }
 
         function toggleMobileMenu() {
