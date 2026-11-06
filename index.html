@@ -131,6 +131,20 @@
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='350' height='200' viewBox='0 0 350 200'%3E%3Ctext x='50%25' y='50%25' fill='rgba(255, 255, 255, 0.18)' font-size='14' font-weight='bold' font-family='sans-serif' text-anchor='middle' transform='rotate(-25 175 100)'%3EFOR PREVIEW ONLY %E2%80%A2 RZR.DEV%3C/text%3E%3C/svg%3E");
         }
 
+        /* ===== MUSIK LATAR ===== */
+        #yt-player { position: fixed; left: -9999px; top: 0; width: 200px; height: 200px; pointer-events: none; }
+        #music-widget {
+            position: fixed;
+            right: 1rem;
+            bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: .5rem;
+            max-width: calc(100% - 2rem);
+        }
+
         @media print {
             body { display: none !important; }
         }
@@ -596,6 +610,92 @@
             <div class="toast-bar"></div>
         </div>
     </div>
+
+    <!-- ================= MUSIK LATAR (YouTube) ================= -->
+    <div id="yt-player" aria-hidden="true"></div>
+    <div id="music-widget">
+        <p id="music-hint" class="bg-slate-900/95 border border-slate-700 text-slate-300 text-[11px] px-3 py-1.5 rounded-lg shadow-lg">
+            <i class="fa-solid fa-hand-pointer text-blue-400 mr-1"></i>Ketuk di mana saja untuk menyalakan suara
+        </p>
+        <button id="music-btn" type="button" aria-label="Nyalakan atau matikan musik"
+            class="flex items-center gap-2 px-4 py-2.5 bg-slate-900/95 hover:bg-slate-800 border border-slate-700 text-white text-xs font-semibold rounded-full shadow-xl backdrop-blur transition">
+            <i id="music-icon" class="fa-solid fa-volume-xmark text-blue-400"></i>
+            <span id="music-label">Musik</span>
+        </button>
+    </div>
+
+    <script>
+        // ===== MUSIK LATAR: otomatis jalan di halaman login & portofolio =====
+        (function () {
+            const VIDEO_ID = 'RO75uUZiAw0';
+            let player = null, ready = false, soundOn = false, userOff = false, wantSound = false;
+            try { userOff = localStorage.getItem('rzr_music') === 'off'; } catch (e) {}
+
+            const btn = document.getElementById('music-btn');
+            const icon = document.getElementById('music-icon');
+            const label = document.getElementById('music-label');
+            const hint = document.getElementById('music-hint');
+
+            function ui() {
+                icon.className = soundOn ? 'fa-solid fa-volume-high text-emerald-400 animate-pulse' : 'fa-solid fa-volume-xmark text-blue-400';
+                label.textContent = soundOn ? 'Musik: Nyala' : (userOff ? 'Musik: Mati' : 'Nyalakan Musik');
+                hint.classList.toggle('hidden', soundOn || userOff);
+            }
+
+            function save(v) { try { localStorage.setItem('rzr_music', v); } catch (e) {} }
+
+            function enableSound() {
+                if (!ready) { wantSound = true; return; }
+                player.unMute();
+                player.setVolume(60);
+                player.playVideo();
+                soundOn = true; userOff = false; save('on'); ui();
+            }
+
+            function disableSound() {
+                if (ready) player.pauseVideo();
+                soundOn = false; userOff = true; wantSound = false; save('off'); ui();
+            }
+
+            btn.addEventListener('click', () => { soundOn ? disableSound() : enableSound(); });
+
+            // Browser memblokir suara otomatis, jadi suara menyala saat sentuhan/klik pertama
+            const unlock = (e) => {
+                if (e.target.closest && e.target.closest('#music-btn')) return;
+                if (userOff) return;
+                enableSound();
+                if (soundOn || wantSound) {
+                    ['click', 'touchend', 'keydown'].forEach(ev => document.removeEventListener(ev, unlock, true));
+                }
+            };
+            ['click', 'touchend', 'keydown'].forEach(ev => document.addEventListener(ev, unlock, true));
+
+            window.onYouTubeIframeAPIReady = function () {
+                player = new YT.Player('yt-player', {
+                    width: 200, height: 200, videoId: VIDEO_ID,
+                    playerVars: { autoplay: 1, controls: 0, loop: 1, playlist: VIDEO_ID, playsinline: 1, rel: 0, disablekb: 1, fs: 0, modestbranding: 1 },
+                    events: {
+                        onReady: (e) => {
+                            ready = true;
+                            e.target.mute();
+                            e.target.setVolume(60);
+                            if (wantSound && !userOff) { enableSound(); }
+                            else if (!userOff) { e.target.playVideo(); }
+                            ui();
+                        },
+                        onStateChange: (e) => {
+                            if (e.data === YT.PlayerState.ENDED && !userOff) player.playVideo();
+                        }
+                    }
+                });
+            };
+
+            const s = document.createElement('script');
+            s.src = 'https://www.youtube.com/iframe_api';
+            document.head.appendChild(s);
+            ui();
+        })();
+    </script>
 
     <script>
         // ===== RENDER GAMBAR KE CANVAS (CEGAH SAVE IMAGE DI HP) =====
