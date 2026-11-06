@@ -629,7 +629,8 @@
         (function () {
             const VIDEO_ID = 'RO75uUZiAw0';
             let player = null, ready = false, soundOn = false, userOff = false, wantSound = false;
-            try { userOff = localStorage.getItem('rzr_music') === 'off'; } catch (e) {}
+            // Musik selalu menyala lagi setiap halaman dibuka (pilihan "mati" tidak disimpan permanen)
+            try { localStorage.removeItem('rzr_music'); } catch (e) {}
 
             const btn = document.getElementById('music-btn');
             const icon = document.getElementById('music-icon');
@@ -684,11 +685,23 @@
                             ui();
                         },
                         onStateChange: (e) => {
-                            if (e.data === YT.PlayerState.ENDED && !userOff) player.playVideo();
+                            // Jika berhenti/terjeda sendiri (selesai, buffering, dll.), lanjutkan lagi
+                            const S = YT.PlayerState;
+                            if (!userOff && (e.data === S.ENDED || e.data === S.PAUSED || e.data === S.CUED)) {
+                                setTimeout(() => { if (!userOff) player.playVideo(); }, 300);
+                            }
                         }
                     }
                 });
             };
+
+            // Lanjutkan musik saat pengunjung kembali ke tab / membuka layar HP lagi
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden && ready && !userOff) player.playVideo();
+            });
+            window.addEventListener('focus', () => {
+                if (ready && !userOff) player.playVideo();
+            });
 
             const s = document.createElement('script');
             s.src = 'https://www.youtube.com/iframe_api';
