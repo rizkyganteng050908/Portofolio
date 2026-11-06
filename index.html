@@ -318,6 +318,9 @@
                     <a href="https://github.com/rizkyganteng050908" target="_blank" class="px-8 py-3.5 bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 font-semibold rounded-xl transition-all">
                         <i class="fa-brands fa-github mr-2"></i> GitHub Profile
                     </a>
+                    <a href="https://www.tiktok.com/@priamisterius050908" target="_blank" rel="noopener noreferrer" class="px-8 py-3.5 bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 font-semibold rounded-xl transition-all">
+                        <i class="fa-brands fa-tiktok mr-2"></i> TikTok
+                    </a>
                 </div>
             </div>
         </section>
@@ -535,6 +538,10 @@
                                     <div><p class="text-xs text-slate-400">WhatsApp</p><p class="font-medium text-white">+62 895-4010-61300</p></div>
                                 </div>
                                 <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 bg-pink-500/10 text-pink-400 rounded-xl flex items-center justify-center border border-pink-500/20 flex-shrink-0"><i class="fa-brands fa-tiktok"></i></div>
+                                    <div><p class="text-xs text-slate-400">TikTok</p><a href="https://www.tiktok.com/@priamisterius050908" target="_blank" rel="noopener noreferrer" class="font-medium text-white hover:text-pink-400 transition">@priamisterius050908</a></div>
+                                </div>
+                                <div class="flex items-center gap-4">
                                     <div class="w-10 h-10 bg-violet-500/10 text-violet-400 rounded-xl flex items-center justify-center border border-violet-500/20 flex-shrink-0"><i class="fa-solid fa-location-dot"></i></div>
                                     <div><p class="text-xs text-slate-400">Lokasi</p><p class="font-medium text-white">Perumahan Bumi Cirebon Adipura Indah 8, Blok AB40, Cirebon, Jawa Barat</p></div>
                                 </div>
@@ -543,6 +550,7 @@
                         <div class="pt-6 border-t border-slate-800 flex gap-4">
                             <a href="https://github.com/rizkyganteng050908" target="_blank" class="w-10 h-10 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl flex items-center justify-center transition"><i class="fa-brands fa-github"></i></a>
                             <a href="https://wa.me/62895401061300" target="_blank" class="w-10 h-10 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl flex items-center justify-center transition"><i class="fa-brands fa-whatsapp"></i></a>
+                            <a href="https://www.tiktok.com/@priamisterius050908" target="_blank" rel="noopener noreferrer" title="TikTok Mochamad Rizky Ramadhan" class="w-10 h-10 bg-pink-600 hover:bg-pink-500 text-white rounded-xl flex items-center justify-center transition"><i class="fa-brands fa-tiktok"></i></a>
                         </div>
                     </div>
 
@@ -611,65 +619,73 @@
         </div>
     </div>
 
-    <!-- ================= MUSIK LATAR (YouTube) ================= -->
+    <!-- ================= MUSIK LATAR (YouTube) - SELALU MENYALA ================= -->
     <div id="yt-player" aria-hidden="true"></div>
-    <div id="music-widget">
+    <div id="music-widget" style="pointer-events:none;">
         <p id="music-hint" class="bg-slate-900/95 border border-slate-700 text-slate-300 text-[11px] px-3 py-1.5 rounded-lg shadow-lg">
             <i class="fa-solid fa-hand-pointer text-blue-400 mr-1"></i>Ketuk di mana saja untuk menyalakan suara
         </p>
-        <button id="music-btn" type="button" aria-label="Nyalakan atau matikan musik"
-            class="flex items-center gap-2 px-4 py-2.5 bg-slate-900/95 hover:bg-slate-800 border border-slate-700 text-white text-xs font-semibold rounded-full shadow-xl backdrop-blur transition">
+        <div id="music-badge" class="flex items-center gap-2 px-4 py-2.5 bg-slate-900/95 border border-slate-700 text-white text-xs font-semibold rounded-full shadow-xl backdrop-blur select-none">
             <i id="music-icon" class="fa-solid fa-volume-xmark text-blue-400"></i>
             <span id="music-label">Musik</span>
-        </button>
+        </div>
     </div>
 
     <script>
-        // ===== MUSIK LATAR: otomatis jalan di halaman login & portofolio =====
+        // ===== MUSIK LATAR: SELALU MENYALA (tidak ada tombol untuk mematikan) =====
         (function () {
             const VIDEO_ID = 'RO75uUZiAw0';
-            let player = null, ready = false, soundOn = false, userOff = false, wantSound = false;
-            // Musik selalu menyala lagi setiap halaman dibuka (pilihan "mati" tidak disimpan permanen)
-            try { localStorage.removeItem('rzr_music'); } catch (e) {}
+            const VOLUME = 60;
+            let player = null, ready = false, soundOn = false, wantSound = false;
 
-            const btn = document.getElementById('music-btn');
             const icon = document.getElementById('music-icon');
             const label = document.getElementById('music-label');
             const hint = document.getElementById('music-hint');
 
-            function ui() {
-                icon.className = soundOn ? 'fa-solid fa-volume-high text-emerald-400 animate-pulse' : 'fa-solid fa-volume-xmark text-blue-400';
-                label.textContent = soundOn ? 'Musik: Nyala' : (userOff ? 'Musik: Mati' : 'Nyalakan Musik');
-                hint.classList.toggle('hidden', soundOn || userOff);
-            }
+            try { localStorage.removeItem('rzr_music'); } catch (e) {}
 
-            function save(v) { try { localStorage.setItem('rzr_music', v); } catch (e) {} }
+            function ui() {
+                icon.className = soundOn
+                    ? 'fa-solid fa-music text-emerald-400 animate-pulse'
+                    : 'fa-solid fa-volume-xmark text-blue-400';
+                label.textContent = soundOn ? 'Musik Menyala' : 'Musik (ketuk untuk suara)';
+                hint.classList.toggle('hidden', soundOn);
+            }
 
             function enableSound() {
                 if (!ready) { wantSound = true; return; }
                 player.unMute();
-                player.setVolume(60);
+                player.setVolume(VOLUME);
                 player.playVideo();
-                soundOn = true; userOff = false; save('on'); ui();
+                soundOn = true;
+                ui();
             }
 
-            function disableSound() {
-                if (ready) player.pauseVideo();
-                soundOn = false; userOff = true; wantSound = false; save('off'); ui();
-            }
-
-            btn.addEventListener('click', () => { soundOn ? disableSound() : enableSound(); });
-
-            // Browser memblokir suara otomatis, jadi suara menyala saat sentuhan/klik pertama
-            const unlock = (e) => {
-                if (e.target.closest && e.target.closest('#music-btn')) return;
-                if (userOff) return;
+            // Browser memblokir suara otomatis, jadi suara menyala pada sentuhan/klik pertama
+            const unlock = () => {
                 enableSound();
                 if (soundOn || wantSound) {
                     ['click', 'touchend', 'keydown'].forEach(ev => document.removeEventListener(ev, unlock, true));
                 }
             };
             ['click', 'touchend', 'keydown'].forEach(ev => document.addEventListener(ev, unlock, true));
+
+            // Penjaga: paksa musik terus jalan dan tidak bisa dimatikan/dibisukan
+            setInterval(() => {
+                if (!ready) return;
+                try {
+                    if (player.getPlayerState() !== YT.PlayerState.PLAYING) player.playVideo();
+                    if (soundOn) {
+                        if (player.isMuted()) player.unMute();
+                        if (player.getVolume() < VOLUME) player.setVolume(VOLUME);
+                    }
+                } catch (e) {}
+            }, 1500);
+
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden && ready) player.playVideo();
+            });
+            window.addEventListener('focus', () => { if (ready) player.playVideo(); });
 
             window.onYouTubeIframeAPIReady = function () {
                 player = new YT.Player('yt-player', {
@@ -679,29 +695,19 @@
                         onReady: (e) => {
                             ready = true;
                             e.target.mute();
-                            e.target.setVolume(60);
-                            if (wantSound && !userOff) { enableSound(); }
-                            else if (!userOff) { e.target.playVideo(); }
+                            e.target.setVolume(VOLUME);
+                            if (wantSound) enableSound(); else e.target.playVideo();
                             ui();
                         },
                         onStateChange: (e) => {
-                            // Jika berhenti/terjeda sendiri (selesai, buffering, dll.), lanjutkan lagi
                             const S = YT.PlayerState;
-                            if (!userOff && (e.data === S.ENDED || e.data === S.PAUSED || e.data === S.CUED)) {
-                                setTimeout(() => { if (!userOff) player.playVideo(); }, 300);
+                            if (e.data === S.ENDED || e.data === S.PAUSED || e.data === S.CUED) {
+                                setTimeout(() => player.playVideo(), 300);
                             }
                         }
                     }
                 });
             };
-
-            // Lanjutkan musik saat pengunjung kembali ke tab / membuka layar HP lagi
-            document.addEventListener('visibilitychange', () => {
-                if (!document.hidden && ready && !userOff) player.playVideo();
-            });
-            window.addEventListener('focus', () => {
-                if (ready && !userOff) player.playVideo();
-            });
 
             const s = document.createElement('script');
             s.src = 'https://www.youtube.com/iframe_api';
