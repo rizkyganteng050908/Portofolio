@@ -184,6 +184,11 @@
                 <div class="bg-slate-950/60 border border-slate-800 rounded-lg py-2"><i class="fa-solid fa-bolt text-emerald-400 block mb-1"></i>Cepat</div>
                 <div class="bg-slate-950/60 border border-slate-800 rounded-lg py-2"><i class="fa-solid fa-shield-halved text-amber-400 block mb-1"></i>Data Aman</div>
             </div>
+
+            <p class="text-center text-[10px] text-slate-600 leading-relaxed border-t border-slate-800 pt-4">
+                &copy; <span class="copyright-year">2026</span> <span class="text-slate-400 font-semibold">RZR.DEV</span>. Hak Cipta Dilindungi.<br>
+                Seluruh konten, desain, dan kode di situs ini milik Mochamad Rizky Ramadhan.
+            </p>
         </div>
     </div>
 
@@ -547,7 +552,8 @@
         </section>
 
         <footer class="py-8 text-center text-xs text-slate-500 border-t border-slate-900 bg-slate-950">
-            <p>&copy; 2026 Mochamad Rizky Ramadhan (RZR.DEV). All rights reserved.</p>
+            <p>&copy; <span class="copyright-year">2026</span> <span class="font-semibold text-slate-400">RZR.DEV</span> &mdash; Mochamad Rizky Ramadhan. Hak Cipta Dilindungi. All rights reserved.</p>
+            <p class="mt-1 text-[11px] text-slate-600">Dilarang menyalin, memperbanyak, atau menggunakan konten, desain, dan kode tanpa izin tertulis dari pemilik.</p>
         </footer>
     </div>
 
@@ -717,6 +723,7 @@
         window.addEventListener('DOMContentLoaded', () => {
             renderProjects();
             loadCvCanvas('cv-canvas');
+            document.querySelectorAll('.copyright-year').forEach(el => el.textContent = new Date().getFullYear());
             const savedName = localStorage.getItem('rzr_visitor_name');
             if (savedName && savedName.trim()) {
                 proceedToPortfolio(savedName.trim(), true);
