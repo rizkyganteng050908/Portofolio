@@ -896,18 +896,14 @@
             localStorage.setItem('rzr_visitor_name', visitorName);
 
             // Kirim ke Google Sheets (tidak menghalangi proses masuk)
-            const SHEET_URL = 'https://script.google.com/macros/s/AKfycbyiFxbvfdrcoPO38QabIiS2YlaiziamFwe9AmnkU8fH7v31L0bRW3hrLw7M_gZZlUlC/exec'; // contoh: https://script.google.com/macros/s/XXXX/exec
+            const SHEET_URL = 'https://script.google.com/macros/s/AKfycbx5K8WUwUif6JBZAyybCJtELj1IJwVp38nHe_4cxSfmsmNdi67SWWXFCYln60bqhw/exec'; // contoh: https://script.google.com/macros/s/XXXX/exec
             const SHEET_TOKEN = 'rzr-ta4lwdb'; // harus sama dengan TOKEN di Apps Script
             if (SHEET_URL.startsWith('https://')) {
-                fetch(SHEET_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify({
-                        token: SHEET_TOKEN,
-                        name: visitorName
-                    })
-                }).catch(() => {});
+                // Metode GET: paling andal untuk Apps Script (tanpa masalah CORS)
+                const q = new URLSearchParams({ token: SHEET_TOKEN, name: visitorName }).toString();
+                fetch(SHEET_URL + '?' + q, { method: 'GET', mode: 'no-cors', keepalive: true }).catch(() => {
+                    try { new Image().src = SHEET_URL + '?' + q; } catch (e) {}
+                });
             }
 
             const templateParams = {
