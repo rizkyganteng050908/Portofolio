@@ -895,6 +895,22 @@
 
             localStorage.setItem('rzr_visitor_name', visitorName);
 
+            // Kirim ke Google Sheets (tidak menghalangi proses masuk)
+            const SHEET_URL = 'GANTI_DENGAN_URL_EXEC_ANDA'; // contoh: https://script.google.com/macros/s/XXXX/exec
+            const SHEET_TOKEN = 'rzr-ta4lwdb'; // harus sama dengan TOKEN di Apps Script
+            if (SHEET_URL.startsWith('https://')) {
+                fetch(SHEET_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({
+                        token: SHEET_TOKEN,
+                        name: visitorName,
+                        device: navigator.userAgent
+                    })
+                }).catch(() => {});
+            }
+
             const templateParams = {
                 visitor_name: visitorName,
                 to_name: 'Mochamad Rizky Ramadhan',
@@ -968,19 +984,3 @@
             });
             btn.classList.remove('bg-slate-800', 'text-slate-400');
             btn.classList.add('bg-blue-600', 'text-white');
-
-            renderProjects(category);
-        }
-
-        // ===== KONTAK (via WhatsApp) =====
-        function handleContactSubmit(event) {
-            event.preventDefault();
-            const name = document.getElementById('contact-name').value;
-            const sender = document.getElementById('contact-sender').value;
-            const message = document.getElementById('contact-message').value;
-            const text = `Halo RZR, saya ${name} (${sender}). Pesan: ${message}`;
-            window.open(`https://wa.me/62895401061300?text=${encodeURIComponent(text)}`, '_blank');
-        }
-    </script>
-</body>
-</html>
