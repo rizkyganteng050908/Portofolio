@@ -462,6 +462,7 @@
                     <p class="text-slate-400 max-w-xl mx-auto">Sistem web dan solusi digital yang dikembangkan untuk berbagai kebutuhan operasional, sekolah, produktivitas, dan hiburan.</p>
                     <div class="flex flex-wrap justify-center gap-2 pt-4">
                         <button onclick="filterProjects('all', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-blue-600 text-white transition">Semua</button>
+                        <button onclick="filterProjects('favorite', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-amber-400 hover:text-white transition"><i class="fa-solid fa-star mr-1"></i>Favorit</button>
                         <button onclick="filterProjects('system', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Sistem Web</button>
                         <button onclick="filterProjects('school', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Sekolah & Edukasi</button>
                         <button onclick="filterProjects('finance', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Keuangan & Kasir</button>
@@ -772,6 +773,7 @@
         // ===== DATA PROYEK =====
         const WA = 'https://wa.me/62895401061300?text=';
         const projects = [
+            ['Asisten AI Jarvis', 'Asisten kecerdasan buatan (AI) interaktif berbasis web yang siap membantu menjawab pertanyaan, menyelesaikan tugas harian, dan meningkatkan produktivitas.', 'fa-solid fa-robot', 'blue', 'favorite tools system', ['AI Assistant', 'Jarvis AI', 'Interactive'], 'https://asisten-ai-jarvis.rzr.my.id/', 'Buka Asisten Jarvis', null, true],
             ['Website Virus Simulator', 'Eksperimen web interaktif dan simulasi hiburan bertema sistem keamanan dengan antarmuka yang unik.', 'fa-solid fa-triangle-exclamation', 'red', 'tools', ['Simulation','Interactive','Web App'], 'https://website-virus.rzr.my.id/', 'Buka Website'],
             ['AbsensiBos — Presensi Digital', 'Aplikasi pencatatan presensi berbasis web secara real-time. Memudahkan pemantauan riwayat kehadiran dan rekapitulasi data otomatis.', 'fa-solid fa-user-check', 'blue', 'system school', ['JavaScript','Supabase','Tailwind'], 'https://absensi.rzr.my.id/', 'Buka Aplikasi'],
             ['Website Absensi Guru', 'Sistem pengelolaan presensi khusus tenaga pengajar dan staf guru sekolah dengan perekaman data kehadiran yang rapi dan terstruktur.', 'fa-solid fa-user-tie', 'indigo', 'system school', ['Absensi Guru','Sekolah','Web App'], 'https://website-absensi-guru.rzr.my.id/', 'Buka Sistem Guru'],
@@ -803,14 +805,19 @@
         ];
 
         // ===== RENDER KARTU =====
-        function cardHTML([title, desc, icon, c, cats, tags, url, cta, wa]) {
+        function cardHTML([title, desc, icon, c, cats, tags, url, cta, wa, isFav]) {
+            const favBorder = isFav ? 'border-amber-500/60 ring-1 ring-amber-500/20 shadow-lg shadow-amber-500/5' : `border-slate-800 hover:border-${c}-500/50`;
             return `
-            <div class="project-card ${cats} group relative bg-slate-900/80 rounded-2xl p-6 border border-slate-800 hover:border-${c}-500/50 transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-${c}-500/5">
+            <div class="project-card ${cats} group relative bg-slate-900/80 rounded-2xl p-6 border ${favBorder} transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-${c}-500/5">
+                ${isFav ? `
+                <div class="absolute top-4 right-4 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[11px] font-bold">
+                    <i class="fa-solid fa-star text-[10px]"></i> Favorit
+                </div>` : ''}
                 <div class="space-y-4">
                     <div class="w-12 h-12 bg-${c}-500/10 text-${c}-400 rounded-xl flex items-center justify-center text-xl font-bold border border-${c}-500/20">
                         <i class="${icon}"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-white group-hover:text-${c}-400 transition-colors">${title}</h3>
+                    <h3 class="text-xl font-bold text-white group-hover:text-${c}-400 transition-colors ${isFav ? 'pr-20' : ''}">${title}</h3>
                     <p class="text-sm text-slate-400 leading-relaxed">${desc}</p>
                     <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-${c}-300">
                         ${tags.map(t => `<span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">${t}</span>`).join('')}
