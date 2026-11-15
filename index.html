@@ -1,4 +1,492 @@
-<!-- Keahlian -->
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Mochamad Rizky Ramadhan - Web Developer Portfolio</title>
+
+    <link rel="icon" type="image/png" sizes="192x192" href="Orang Misterius.png">
+    <link rel="shortcut icon" type="image/png" href="Orang Misterius.png">
+    <link rel="apple-touch-icon" href="Orang Misterius.png">
+    <meta name="google-site-verification" content="Sh2njlrFvj3e6tG1Jjo3tlO9cOv5TUlcwpwBrlynrv0" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            if (window.emailjs) {
+                emailjs.init({ publicKey: "DeJsJa87SCRhQ2oCe" });
+            }
+        })();
+    </script>
+
+    <style>
+        /* ===== GRID KARTU PROYEK (STATIS, TIDAK BERGERAK) ===== */
+        #project-grid {
+            display: grid;
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
+        @media (min-width: 640px) {
+            #project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        @media (min-width: 1024px) {
+            #project-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        }
+
+        /* ===== NOTIFIKASI BERHASIL MASUK ===== */
+        #welcome-toast {
+            position: fixed;
+            top: 5rem;
+            left: 50%;
+            z-index: 100;
+            transform: translate(-50%, -150%);
+            opacity: 0;
+            transition: transform .5s cubic-bezier(.34, 1.56, .64, 1), opacity .4s ease;
+            pointer-events: none;
+            width: calc(100% - 2rem);
+            max-width: 24rem;
+        }
+        #welcome-toast.show {
+            transform: translate(-50%, 0);
+            opacity: 1;
+        }
+        #welcome-toast .toast-bar {
+            height: 3px;
+            background: #34d399;
+            transform-origin: left;
+        }
+        #welcome-toast.show .toast-bar {
+            animation: toastbar 3.5s linear forwards;
+        }
+        @keyframes toastbar {
+            from { transform: scaleX(1); }
+            to   { transform: scaleX(0); }
+        }
+
+        /* ===== RESPONSIF HP & LAPTOP ===== */
+        html { scroll-padding-top: 5rem; }          /* judul section tidak tertutup header saat klik menu */
+        body { overflow-x: hidden; }                /* cegah geser samping di HP */
+        header { padding-top: env(safe-area-inset-top, 0px); }  /* aman untuk HP berponi/notch */
+
+        /* Notifikasi turun sedikit di HP berponi */
+        #welcome-toast { top: calc(5rem + env(safe-area-inset-top, 0px)); }
+
+        /* Halaman login: bisa di-scroll di HP layar pendek / saat keyboard muncul */
+        #login-page {
+            align-items: flex-start !important;
+            justify-content: flex-start !important;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+        #login-page > .max-w-md { margin: auto; }
+
+        /* ===== VALIDASI LOGIN ===== */
+        #login-error:not(.hidden) { display: flex; }
+        #login-name.invalid { border-color: #f87171; }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-6px); }
+            40%, 80% { transform: translateX(6px); }
+        }
+        .shake { animation: shake .4s ease; }
+
+        /* Teks panjang (email, alamat) tidak keluar kotak */
+        #contact .font-medium { overflow-wrap: anywhere; }
+        #contact .gap-4 > div:last-child { min-width: 0; }
+        #about h1 { overflow-wrap: anywhere; }
+
+        /* Nama visitor di menu HP dipotong rapi jika terlalu panjang */
+        #mobile-menu .text-xs.text-blue-400 {
+            min-width: 0;
+            margin-right: .75rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Tombol hero rata tengah saat tersusun vertikal di HP */
+        #about a { text-align: center; }
+
+        @media (max-width: 639px) {
+            #contact .grid > div,
+            #contact .grid > form { padding: 1.5rem; }
+            input, textarea { font-size: 16px !important; }
+        }
+
+        /* ===== PROTEKSI CV & WATERMARK ===== */
+        .cv-container {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .watermark-overlay {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='350' height='200' viewBox='0 0 350 200'%3E%3Ctext x='50%25' y='50%25' fill='rgba(255, 255, 255, 0.18)' font-size='14' font-weight='bold' font-family='sans-serif' text-anchor='middle' transform='rotate(-25 175 100)'%3EFOR PREVIEW ONLY %E2%80%A2 RZR.DEV%3C/text%3E%3C/svg%3E");
+        }
+
+        /* ===== MUSIK LATAR ===== */
+        #yt-player { position: fixed; left: -9999px; top: 0; width: 200px; height: 200px; pointer-events: none; }
+        #music-widget {
+            position: fixed;
+            right: 1rem;
+            bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: .5rem;
+            max-width: calc(100% - 2rem);
+        }
+
+        @media print {
+            body { display: none !important; }
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-blue-500 selection:text-white" oncontextmenu="return false;">
+
+    <!-- ================= LOGIN ================= -->
+    <div id="login-page" class="fixed inset-0 z-50 bg-slate-950 flex items-center justify-center px-4">
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="bg-slate-900 border border-slate-800 p-8 rounded-3xl max-w-md w-full space-y-6 shadow-2xl relative z-10">
+            <div class="text-center space-y-3">
+                <div class="w-16 h-16 bg-blue-500/10 text-blue-400 rounded-2xl mx-auto flex items-center justify-center text-2xl border border-blue-500/20 shadow-inner">
+                    <i class="fa-solid fa-lock-open"></i>
+                </div>
+                <h1 class="text-2xl font-bold text-white tracking-tight">Akses Portofolio RZR</h1>
+                <p class="text-xs text-slate-400 leading-relaxed">Masukkan nama Anda untuk melanjutkan ke halaman portofolio resmi Mochamad Rizky Ramadhan.</p>
+            </div>
+            <form id="login-form" onsubmit="handleLoginSubmit(event)" class="space-y-4" novalidate>
+                <div>
+                    <label for="login-name" class="flex items-center justify-between text-xs font-semibold text-slate-400 mb-1">
+                        <span>Nama Lengkap Anda <span class="text-red-400">*</span></span>
+                        <span id="login-counter" class="text-slate-600 font-normal">0/40</span>
+                    </label>
+                    <div class="relative">
+                        <i class="fa-solid fa-user absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm"></i>
+                        <input type="text" id="login-name" required minlength="3" maxlength="40" autocomplete="name" autofocus
+                            oninput="validateLoginName()"
+                            placeholder="Wajib isi nama lengkap sebelum masuk"
+                            class="w-full bg-slate-950 border border-slate-800 rounded-xl pl-11 pr-4 py-3 text-sm text-white focus:outline-none focus:border-blue-500 transition shadow-inner">
+                    </div>
+                    <p id="login-error" class="hidden mt-1.5 text-xs text-red-400 items-center gap-1.5">
+                        <i class="fa-solid fa-circle-exclamation"></i><span></span>
+                    </p>
+                </div>
+
+                <label class="flex items-start gap-2.5 text-[11px] text-slate-400 leading-relaxed cursor-pointer">
+                    <input type="checkbox" id="login-consent" onchange="validateLoginName()" class="mt-0.5 accent-blue-500">
+                    <span>Saya setuju nama saya dikirim ke pemilik portofolio sebagai catatan kunjungan.</span>
+                </label>
+
+                <button type="submit" id="login-btn" disabled
+                    class="w-full py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl shadow-lg shadow-blue-600/25 transition flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-blue-600">
+                    <span>Masuk ke Portofolio</span>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </button>
+            </form>
+
+            <div class="grid grid-cols-3 gap-2 text-[10px] text-slate-500 text-center">
+                <div class="bg-slate-950/60 border border-slate-800 rounded-lg py-2"><i class="fa-solid fa-key text-blue-400 block mb-1"></i>Tanpa Password</div>
+                <div class="bg-slate-950/60 border border-slate-800 rounded-lg py-2"><i class="fa-solid fa-bolt text-emerald-400 block mb-1"></i>Cepat</div>
+                <div class="bg-slate-950/60 border border-slate-800 rounded-lg py-2"><i class="fa-solid fa-shield-halved text-amber-400 block mb-1"></i>Data Aman</div>
+            </div>
+
+            <p class="text-center text-[10px] text-slate-600 leading-relaxed border-t border-slate-800 pt-4">
+                &copy; <span class="copyright-year">2026</span> <span class="text-slate-400 font-semibold">RZR.DEV</span>. Hak Cipta Dilindungi.<br>
+                Seluruh konten, desain, dan kode di situs ini milik Mochamad Rizky Ramadhan.
+            </p>
+            <p class="text-center text-[10px] text-red-400/80 leading-relaxed -mt-3">
+                <i class="fa-solid fa-triangle-exclamation mr-1"></i>Menduplikat tanpa izin dapat dipidana berdasarkan UU Hak Cipta (Pasal 113 ayat 3) dan UU ITE (Pasal 32 jo. Pasal 48).
+            </p>
+        </div>
+    </div>
+
+    <!-- ================= PORTOFOLIO ================= -->
+    <div id="portfolio-content" class="hidden">
+        <header class="fixed top-0 w-full bg-slate-950/80 backdrop-blur-md z-40 border-b border-slate-800/80">
+            <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="#" class="text-xl font-black tracking-wider text-white">RZR<span class="text-blue-500">.DEV</span></a>
+
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
+                    <a href="#about" class="hover:text-blue-400 transition-colors">Tentang</a>
+                    <a href="#cv" class="hover:text-blue-400 transition-colors">CV Mochamad Rizky Ramadhan</a>
+                    <a href="#projects" class="hover:text-blue-400 transition-colors">Proyek</a>
+                    <a href="#skills" class="hover:text-blue-400 transition-colors">Keahlian</a>
+                    <a href="#contact" class="hover:text-blue-400 transition-colors">Kontak</a>
+                </nav>
+                <div class="hidden md:flex items-center gap-3">
+                    <span class="text-xs font-medium text-blue-400 bg-blue-500/10 px-3 py-1.5 rounded-lg border border-blue-500/20">
+                        Visitor: <span id="nav-visitor-name" class="font-bold"></span>
+                    </span>
+                    <button onclick="handleLogout()" title="Keluar / Logout"
+                        class="px-3 py-1.5 bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 text-xs font-semibold rounded-lg transition-all flex items-center gap-1.5">
+                        <i class="fa-solid fa-right-from-bracket"></i> Logout
+                    </button>
+                </div>
+                <button id="menu-btn" onclick="toggleMobileMenu()" class="md:hidden text-slate-300 hover:text-white focus:outline-none">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-b border-slate-800 px-6 py-4 space-y-3">
+                <a href="#about" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-blue-400 font-medium">Tentang</a>
+                <a href="#cv" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-blue-400 font-medium">CV Mochamad Rizky Ramadhan</a>
+                <a href="#projects" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-blue-400 font-medium">Proyek</a>
+                <a href="#skills" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-blue-400 font-medium">Keahlian</a>
+                <a href="#contact" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-blue-400 font-medium">Kontak</a>
+                <div class="pt-2 border-t border-slate-800 flex items-center justify-between">
+                    <span class="text-xs text-blue-400">Visitor: <strong id="mobile-visitor-name"></strong></span>
+                    <button onclick="handleLogout()" class="px-3 py-1.5 bg-red-500/10 text-red-400 text-xs font-semibold rounded-lg border border-red-500/20">
+                        <i class="fa-solid fa-right-from-bracket"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Tentang -->
+        <section id="about" class="relative min-h-screen flex items-center justify-center pt-28 pb-12 px-6 overflow-hidden">
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="max-w-4xl text-center space-y-6 relative z-10 flex flex-col items-center">
+
+                <div class="relative group mb-2">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
+                    <img src="Orang Misterius.png" alt="Foto Profil Mochamad Rizky Ramadhan"
+                        class="relative w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-slate-800 shadow-2xl">
+                </div>
+
+                <h1 class="text-4xl md:text-7xl font-extrabold text-white tracking-tight leading-tight">Mochamad Rizky Ramadhan</h1>
+
+                <p class="text-lg md:text-2xl text-slate-400 font-light max-w-2xl mx-auto leading-relaxed">
+                    Web Developer & Digital Solutions Specialist yang fokus membangun aplikasi web fungsional, responsif, dan terintegrasi basis data modern.
+                </p>
+
+                <!-- Tentang RPL -->
+                <div class="w-full max-w-4xl text-left bg-slate-900/70 border border-slate-800 rounded-2xl p-6 md:p-8 space-y-5 mt-4">
+                    <h2 class="text-xl md:text-2xl font-bold text-white">Tentang RPL (Rekayasa Perangkat Lunak)</h2>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        RPL adalah bidang yang mempelajari cara merancang, membangun, menguji, dan merawat perangkat lunak secara terstruktur, mulai dari ide sampai aplikasi siap dipakai.
+                    </p>
+                    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-3 text-sm text-slate-300">
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-4"><i class="fa-solid fa-code text-blue-400 mr-2"></i>Pemrograman Web (HTML, CSS, JavaScript, PHP)</div>
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-4"><i class="fa-solid fa-mobile-screen-button text-blue-400 mr-2"></i>Pengembangan Mobile (Flutter)</div>
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-4"><i class="fa-solid fa-terminal text-blue-400 mr-2"></i>Pemrograman Dasar & Sistem (C, C++)</div>
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-4"><i class="fa-solid fa-database text-blue-400 mr-2"></i>Basis Data (MySQL, Supabase)</div>
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-4"><i class="fa-solid fa-server text-blue-400 mr-2"></i>Local Server & Container (Laragon, XAMPP, Docker)</div>
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-4"><i class="fa-solid fa-object-group text-blue-400 mr-2"></i>Desain UI/UX & Responsif</div>
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-4"><i class="fa-solid fa-diagram-project text-blue-400 mr-2"></i>Analisis & Perancangan Sistem</div>
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-4"><i class="fa-solid fa-bug text-blue-400 mr-2"></i>Pengujian & Debugging</div>
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-4"><i class="fa-brands fa-git-alt text-blue-400 mr-2"></i>Version Control (Git & GitHub)</div>
+                    </div>
+
+                    <h3 class="text-lg font-bold text-white pt-2">Yang Saya Kerjakan di Setiap Proyek</h3>
+                    <ol class="grid sm:grid-cols-2 gap-3 text-sm text-slate-300 list-decimal list-inside">
+                        <li>Menganalisis kebutuhan pengguna</li>
+                        <li>Merancang tampilan & struktur database</li>
+                        <li>Membangun fitur (coding)</li>
+                        <li>Menguji fungsi di berbagai perangkat</li>
+                        <li>Deploy ke domain & hosting</li>
+                        <li>Pemeliharaan & perbaikan berkelanjutan</li>
+                    </ol>
+                </div>
+
+                <!-- Pengalaman PKL -->
+                <div class="w-full max-w-4xl text-left bg-slate-900/70 border border-slate-800 rounded-2xl p-6 md:p-8 space-y-4 mt-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-11 h-11 bg-cyan-500/10 text-cyan-400 rounded-xl flex items-center justify-center text-lg border border-cyan-500/20 flex-shrink-0">
+                            <i class="fa-solid fa-building-columns"></i>
+                        </div>
+                        <h2 class="text-xl md:text-2xl font-bold text-white">Pengalaman PKL</h2>
+                    </div>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Saya pernah melaksanakan Praktik Kerja Lapangan (PKL) di <span class="text-white font-semibold">Dinas Komunikasi, Informatika, dan Statistik Kota Cirebon</span>. Kegiatan ini memberikan kesempatan langsung untuk memahami bagaimana instansi pemerintah mengelola layanan informasi, sistem teknologi komunikasi, serta pengolahan data statististik dalam mendukung pelaksanaan tugas-tugas pemerintahan di Kota Cirebon.
+                    </p>
+                    <div class="grid sm:grid-cols-3 gap-3 text-sm text-slate-300">
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-4"><i class="fa-solid fa-building text-cyan-400 mr-2"></i>Instansi: Pemerintah Kota Cirebon</div>
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-4"><i class="fa-solid fa-briefcase text-cyan-400 mr-2"></i>Bidang: Komunikasi, Informatika & Statistik</div>
+                        <div class="bg-slate-950 border border-slate-800 rounded-xl p-4"><i class="fa-solid fa-graduation-cap text-cyan-400 mr-2"></i>Jenis: Praktik Kerja Lapangan (PKL)</div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row justify-center gap-4 pt-4">
+                    <a href="#projects" class="px-8 py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl shadow-lg shadow-blue-600/25 transition-all transform hover:-translate-y-0.5">
+                        Lihat Portofolio <i class="fa-solid fa-arrow-down ml-2 text-sm"></i>
+                    </a>
+                    <a href="https://github.com/rizkyganteng050908" target="_blank" class="px-8 py-3.5 bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 font-semibold rounded-xl transition-all">
+                        <i class="fa-brands fa-github mr-2"></i> GitHub Profile
+                    </a>
+                    <a href="https://www.tiktok.com/@priamisterius050908" target="_blank" rel="noopener noreferrer" class="px-8 py-3.5 bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 font-semibold rounded-xl transition-all">
+                        <i class="fa-brands fa-tiktok mr-2"></i> TikTok
+                    </a>
+                    <a href="https://www.youtube.com/@KikiRamadhan-20" target="_blank" rel="noopener noreferrer" class="px-8 py-3.5 bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 font-semibold rounded-xl transition-all">
+                        <i class="fa-brands fa-youtube mr-2 text-red-500"></i> YouTube
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION CV MOCHAMAD RIZKY RAMADHAN ================= -->
+        <section id="cv" class="py-24 px-6 bg-slate-950 border-t border-slate-800/80">
+            <div class="max-w-6xl mx-auto space-y-12">
+                <div class="text-center space-y-4">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold">
+                        <i class="fa-solid fa-shield-halved"></i> Dokumen Terproteksi Watermark
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">CV Mochamad Rizky Ramadhan</h2>
+                    <p class="text-slate-400 max-w-xl mx-auto">Ringkasan profil profesional, riwayat pendidikan, keahlian teknis, dan data pribadi Mochamad Rizky Ramadhan.</p>
+                </div>
+
+                <div class="grid lg:grid-cols-12 gap-8 items-start">
+                    <!-- Canvas Container & Watermark Overlay -->
+                    <div class="lg:col-span-6 bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-4 shadow-xl cv-container">
+                        <div class="relative group overflow-hidden rounded-xl bg-slate-950 border border-slate-800 flex justify-center items-center">
+                            
+                            <!-- Canvas Render (Bukan Tag IMG Biasa) -->
+                            <canvas id="cv-canvas" class="w-full h-auto max-h-[600px] rounded-lg transition duration-500 group-hover:scale-105 pointer-events-none"></canvas>
+                            
+                            <!-- Watermark Layer Melintang -->
+                            <div class="absolute inset-0 z-10 watermark-overlay pointer-events-none"></div>
+                            
+                            <!-- Overlay Terproteksi -->
+                            <div class="absolute inset-0 z-20 bg-transparent"></div>
+
+                            <!-- Peringatan Blur Otomatis saat Window Blur -->
+                            <div id="cv-blur-warning" class="hidden absolute inset-0 z-40 bg-slate-950/95 backdrop-blur-xl flex flex-col items-center justify-center p-6 text-center space-y-3">
+                                <i class="fa-solid fa-eye-slash text-amber-400 text-3xl"></i>
+                                <p class="text-sm font-bold text-white">Tampilan Disembunyikan</p>
+                                <p class="text-xs text-slate-400">Dokumen terlindungi dari perekaman layar dan screenshot HP.</p>
+                            </div>
+
+                            <div class="absolute inset-0 z-30 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <button onclick="openCvModal()" class="px-5 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-semibold text-xs transition flex items-center gap-2 shadow-lg transform group-hover:scale-105">
+                                    <i class="fa-solid fa-eye"></i> Lihat Pratinjau Aman
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between px-2 text-xs text-slate-400">
+                            <span class="flex items-center gap-1.5 text-amber-400"><i class="fa-solid fa-lock"></i> Watermark & Canvas Protection</span>
+                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-emerald-400"></i> Terverifikasi</span>
+                        </div>
+                    </div>
+
+                    <!-- Informasi Rinci CV -->
+                    <div class="lg:col-span-6 space-y-6">
+                        <!-- Personal Details -->
+                        <div class="bg-slate-900/80 border border-slate-800 p-6 rounded-2xl space-y-4">
+                            <h3 class="text-lg font-bold text-white flex items-center gap-2.5 border-b border-slate-800 pb-3">
+                                <i class="fa-solid fa-id-card text-blue-400"></i> Data Pribadi (Personal Details)
+                            </h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs md:text-sm">
+                                <div><p class="text-slate-500">Nama Lengkap</p><p class="font-semibold text-white">Mochamad Rizky Ramadhan</p></div>
+                                <div><p class="text-slate-500">Jenis Kelamin</p><p class="font-semibold text-white">Laki-Laki (Male)</p></div>
+                                <div><p class="text-slate-500">Tempat, Tanggal Lahir</p><p class="font-semibold text-white">Cirebon, 05 September 2008</p></div>
+                                <div><p class="text-slate-500">Kewarganegaraan</p><p class="font-semibold text-white">Indonesia</p></div>
+                                <div class="sm:col-span-2"><p class="text-slate-500">Alamat</p><p class="font-semibold text-white">Jln. Pamujudan III No. 26 RT 02 RW 02, Kota Cirebon</p></div>
+                            </div>
+                        </div>
+
+                        <!-- Educational Background -->
+                        <div class="bg-slate-900/80 border border-slate-800 p-6 rounded-2xl space-y-4">
+                            <h3 class="text-lg font-bold text-white flex items-center gap-2.5 border-b border-slate-800 pb-3">
+                                <i class="fa-solid fa-graduation-cap text-cyan-400"></i> Riwayat Pendidikan
+                            </h3>
+                            <ul class="space-y-3 text-xs md:text-sm text-slate-300">
+                                <li class="flex items-start justify-between border-b border-slate-800/50 pb-2">
+                                    <div><p class="font-semibold text-white">SMK Wahidin Kota Cirebon</p><p class="text-xs text-slate-400">Rekayasa Perangkat Lunak (RPL)</p></div>
+                                    <span class="text-xs font-mono text-cyan-400 bg-cyan-500/10 px-2 py-1 rounded border border-cyan-500/20">2024 - 2027</span>
+                                </li>
+                                <li class="flex items-start justify-between border-b border-slate-800/50 pb-2">
+                                    <div><p class="font-semibold text-white">SMP Negeri 15 Kota Cirebon</p></div>
+                                    <span class="text-xs font-mono text-slate-400 bg-slate-800 px-2 py-1 rounded">2021 - 2024</span>
+                                </li>
+                                <li class="flex items-start justify-between border-b border-slate-800/50 pb-2">
+                                    <div><p class="font-semibold text-white">SD Merapi Kota Cirebon</p></div>
+                                    <span class="text-xs font-mono text-slate-400 bg-slate-800 px-2 py-1 rounded">2015 - 2021</span>
+                                </li>
+                                <li class="flex items-start justify-between">
+                                    <div><p class="font-semibold text-white">TK Citra Giri</p></div>
+                                    <span class="text-xs font-mono text-slate-400 bg-slate-800 px-2 py-1 rounded">2013 - 2015</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Ringkasan Keahlian CV -->
+                        <div class="bg-slate-900/80 border border-slate-800 p-6 rounded-2xl space-y-3">
+                            <h3 class="text-lg font-bold text-white flex items-center gap-2.5 border-b border-slate-800 pb-3">
+                                <i class="fa-solid fa-gears text-emerald-400"></i> Keahlian & Kompetensi Utama
+                            </h3>
+                            <div class="flex flex-wrap gap-2 text-xs">
+                                <span class="bg-slate-950 border border-slate-800 text-emerald-400 px-3 py-1.5 rounded-lg">Web Development (HTML, CSS, JS)</span>
+                                <span class="bg-slate-950 border border-slate-800 text-emerald-400 px-3 py-1.5 rounded-lg">Basic Programming (PHP, Java)</span>
+                                <span class="bg-slate-950 border border-slate-800 text-emerald-400 px-3 py-1.5 rounded-lg">Mobile Development (Flutter)</span>
+                                <span class="bg-slate-950 border border-slate-800 text-emerald-400 px-3 py-1.5 rounded-lg">System Programming (C, C++)</span>
+                                <span class="bg-slate-950 border border-slate-800 text-emerald-400 px-3 py-1.5 rounded-lg">Database Management (MySQL)</span>
+                                <span class="bg-slate-950 border border-slate-800 text-emerald-400 px-3 py-1.5 rounded-lg">Local Server & DevOps (Laragon, XAMPP, Docker)</span>
+                                <span class="bg-slate-950 border border-slate-800 text-emerald-400 px-3 py-1.5 rounded-lg">Software Troubleshooting</span>
+                                <span class="bg-slate-950 border border-slate-800 text-emerald-400 px-3 py-1.5 rounded-lg">Problem Solving & Logic</span>
+                                <span class="bg-slate-950 border border-slate-800 text-emerald-400 px-3 py-1.5 rounded-lg">Teamwork & Collaboration</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal Perbesar Gambar CV (With Watermark Protection) -->
+        <div id="cv-modal" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden flex items-center justify-center p-4">
+            <div class="relative max-w-4xl w-full max-h-[90vh] bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl flex flex-col select-none" oncontextmenu="return false;">
+                <div class="flex justify-between items-center p-4 border-b border-slate-800 bg-slate-950">
+                    <h3 class="text-sm font-bold text-white flex items-center gap-2"><i class="fa-solid fa-shield-halved text-blue-400"></i> CV Mochamad Rizky Ramadhan (Watermarked)</h3>
+                    <button onclick="closeCvModal()" class="text-slate-400 hover:text-white text-lg w-8 h-8 flex items-center justify-center rounded-lg bg-slate-800 hover:bg-slate-700 transition">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="p-4 overflow-y-auto flex-1 flex justify-center bg-slate-950 relative">
+                    <canvas id="modal-cv-canvas" class="max-w-full h-auto rounded-lg shadow-md border border-slate-800 pointer-events-none"></canvas>
+                    <div class="absolute inset-4 watermark-overlay pointer-events-none rounded-lg"></div>
+                </div>
+                <div class="p-4 border-t border-slate-800 bg-slate-950 flex justify-between items-center">
+                    <span class="text-xs text-slate-500"><i class="fa-solid fa-shield-halved mr-1"></i> Dilengkapi watermark keamanan</span>
+                    <button onclick="closeCvModal()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-xl transition">
+                        Tutup Pratinjau
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Proyek -->
+        <section id="projects" class="py-24 px-6 bg-slate-900/40 border-y border-slate-800/50">
+            <div class="max-w-6xl mx-auto space-y-12">
+                <div class="text-center space-y-4">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">Proyek Pilihan</h2>
+                    <p class="text-slate-400 max-w-xl mx-auto">Sistem web dan solusi digital yang dikembangkan untuk berbagai kebutuhan operasional, sekolah, produktivitas, dan hiburan.</p>
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold">
+                        <i class="fa-solid fa-layer-group"></i> Total <span id="project-total">0</span> Proyek
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-2 pt-4">
+                        <button onclick="filterProjects('all', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-blue-600 text-white transition">Semua</button>
+                        <button onclick="filterProjects('favorite', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-amber-400 hover:text-white transition"><i class="fa-solid fa-star mr-1"></i>Favorit</button>
+                        <button onclick="filterProjects('system', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Sistem Web</button>
+                        <button onclick="filterProjects('school', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Sekolah & Edukasi</button>
+                        <button onclick="filterProjects('finance', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Keuangan & Kasir</button>
+                        <button onclick="filterProjects('services', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Layanan Jasa</button>
+                        <button onclick="filterProjects('tools', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Tools & Media</button>
+                        <button onclick="filterProjects('game', this)" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition">Game & Fun</button>
+                    </div>
+                </div>
+
+                <!-- Kartu proyek statis (grid responsif, tidak bergerak) -->
+                <div id="project-grid"></div>
+            </div>
+        </section>
+
+        <!-- Keahlian -->
         <section id="skills" class="py-24 px-6 bg-slate-950 border-t border-slate-800/50">
             <div class="max-w-5xl mx-auto space-y-12">
                 <div class="text-center space-y-4">
@@ -38,8 +526,6 @@
                         <i class="fa-brands fa-git-alt text-4xl text-red-500 group-hover:scale-110 transition-transform"></i>
                         <span class="font-semibold text-sm text-slate-200">Git & GitHub</span>
                     </div>
-
-                    <!-- TAMBAHAN BARU -->
                     <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex flex-col items-center justify-center gap-3 hover:border-blue-500/50 transition group">
                         <i class="fa-solid fa-server text-4xl text-sky-400 group-hover:scale-110 transition-transform"></i>
                         <span class="font-semibold text-sm text-slate-200">Laragon</span>
@@ -67,3 +553,489 @@
                 </div>
             </div>
         </section>
+
+        <!-- Kontak -->
+        <section id="contact" class="py-24 px-6 bg-slate-900/40 border-t border-slate-800/80">
+            <div class="max-w-4xl mx-auto space-y-12">
+                <div class="text-center space-y-4">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">Hubungi Saya</h2>
+                    <p class="text-slate-400 max-w-lg mx-auto">Tertarik bekerja sama, memesan jasa pembuatan website, atau berdiskusi seputar proyek IT? Mari terhubung!</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-slate-900/80 p-8 rounded-2xl border border-slate-800 space-y-6 flex flex-col justify-between">
+                        <div class="space-y-6">
+                            <h3 class="text-xl font-bold text-white">Informasi Kontak</h3>
+                            <div class="space-y-4 text-sm text-slate-300">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 bg-blue-500/10 text-blue-400 rounded-xl flex items-center justify-center border border-blue-500/20 flex-shrink-0"><i class="fa-solid fa-envelope"></i></div>
+                                    <div><p class="text-xs text-slate-400">Email</p><p class="font-medium text-white">rizkyganteng050981@gmail.com</p></div>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 bg-emerald-500/10 text-emerald-400 rounded-xl flex items-center justify-center border border-emerald-500/20 flex-shrink-0"><i class="fa-brands fa-whatsapp"></i></div>
+                                    <div><p class="text-xs text-slate-400">WhatsApp</p><p class="font-medium text-white">+62 895-4010-61300</p></div>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 bg-pink-500/10 text-pink-400 rounded-xl flex items-center justify-center border border-pink-500/20 flex-shrink-0"><i class="fa-brands fa-tiktok"></i></div>
+                                    <div><p class="text-xs text-slate-400">TikTok</p><a href="https://www.tiktok.com/@priamisterius050908" target="_blank" rel="noopener noreferrer" class="font-medium text-white hover:text-pink-400 transition">@priamisterius050908</a></div>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 bg-red-500/10 text-red-400 rounded-xl flex items-center justify-center border border-red-500/20 flex-shrink-0"><i class="fa-brands fa-youtube"></i></div>
+                                    <div><p class="text-xs text-slate-400">YouTube</p><a href="https://www.youtube.com/@KikiRamadhan-20" target="_blank" rel="noopener noreferrer" class="font-medium text-white hover:text-red-400 transition">@KikiRamadhan-20</a></div>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 bg-violet-500/10 text-violet-400 rounded-xl flex items-center justify-center border border-violet-500/20 flex-shrink-0"><i class="fa-solid fa-location-dot"></i></div>
+                                    <div><p class="text-xs text-slate-400">Lokasi</p><p class="font-medium text-white">Perumahan Bumi Cirebon Adipura Indah 8, Blok AB40, Cirebon, Jawa Barat</p></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-6 border-t border-slate-800 flex gap-4">
+                            <a href="https://github.com/rizkyganteng050908" target="_blank" class="w-10 h-10 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl flex items-center justify-center transition"><i class="fa-brands fa-github"></i></a>
+                            <a href="https://wa.me/62895401061300" target="_blank" class="w-10 h-10 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl flex items-center justify-center transition"><i class="fa-brands fa-whatsapp"></i></a>
+                            <a href="https://www.tiktok.com/@priamisterius050908" target="_blank" rel="noopener noreferrer" title="TikTok Mochamad Rizky Ramadhan" class="w-10 h-10 bg-pink-600 hover:bg-pink-500 text-white rounded-xl flex items-center justify-center transition"><i class="fa-brands fa-tiktok"></i></a>
+                            <a href="https://www.youtube.com/@KikiRamadhan-20" target="_blank" rel="noopener noreferrer" title="YouTube" class="w-10 h-10 bg-red-600 hover:bg-red-500 text-white rounded-xl flex items-center justify-center transition"><i class="fa-brands fa-youtube"></i></a>
+                        </div>
+                    </div>
+
+                    <form onsubmit="handleContactSubmit(event)" class="bg-slate-900/80 p-8 rounded-2xl border border-slate-800 space-y-4">
+                        <h3 class="text-xl font-bold text-white mb-2">Kirim Pesan</h3>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1">Nama Lengkap</label>
+                            <input type="text" id="contact-name" required placeholder="Masukkan nama Anda" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-blue-500 transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1">Email / WhatsApp</label>
+                            <input type="text" id="contact-sender" required placeholder="Email atau nomor WhatsApp Anda" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-blue-500 transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-1">Pesan / Detail Proyek</label>
+                            <textarea id="contact-message" rows="4" required placeholder="Tuliskan pesan atau kebutuhan website Anda..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-blue-500 transition resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl shadow-lg shadow-blue-600/25 transition">
+                            Kirim Pesan Sekarang <i class="fa-solid fa-paper-plane ml-2 text-xs"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <footer class="py-8 text-center text-xs text-slate-500 border-t border-slate-900 bg-slate-950">
+            <p>&copy; <span class="copyright-year">2026</span> <span class="font-semibold text-slate-400">RZR.DEV</span> &mdash; Mochamad Rizky Ramadhan. Hak Cipta Dilindungi. All rights reserved.</p>
+            <p class="mt-1 text-[11px] text-slate-600">Dilarang menyalin, memperbanyak, atau menggunakan konten, desain, dan kode tanpa izin tertulis dari pemilik.</p>
+
+            <div class="max-w-3xl mx-auto mt-6 px-6 text-left">
+                <div class="bg-red-500/5 border border-red-500/20 rounded-2xl p-5 space-y-3">
+                    <h4 class="text-sm font-bold text-red-400 flex items-center gap-2">
+                        <i class="fa-solid fa-triangle-exclamation"></i> Peringatan Hukum
+                    </h4>
+                    <p class="text-[11px] md:text-xs text-slate-400 leading-relaxed">
+                        Siapa pun yang menduplikat, menyalin, memperbanyak, atau menggunakan website, desain, kode, maupun konten portofolio ini tanpa izin tertulis dapat dikenai sanksi sesuai peraturan perundang-undangan yang berlaku di Indonesia, antara lain:
+                    </p>
+                    <ul class="space-y-2 text-[11px] md:text-xs text-slate-400 leading-relaxed list-disc list-inside">
+                        <li><span class="text-slate-200 font-semibold">UU No. 28 Tahun 2014 tentang Hak Cipta, Pasal 9 ayat (3)</span> melarang penggandaan dan/atau penggunaan secara komersial suatu ciptaan tanpa izin Pencipta atau pemegang Hak Cipta.</li>
+                        <li><span class="text-slate-200 font-semibold">Pasal 113 ayat (3) UU Hak Cipta</span>: pidana penjara paling lama 4 (empat) tahun dan/atau denda paling banyak Rp1.000.000.000,00 (satu miliar rupiah).</li>
+                        <li><span class="text-slate-200 font-semibold">Pasal 96 UU Hak Cipta</span>: pemegang hak dapat menuntut ganti rugi secara perdata.</li>
+                        <li><span class="text-slate-200 font-semibold">UU ITE (UU No. 11 Tahun 2008 dan perubahannya), Pasal 25</span> menyatakan situs internet beserta karya intelektual di dalamnya dilindungi sebagai Hak Kekayaan Intelektual.</li>
+                        <li><span class="text-slate-200 font-semibold">Pasal 32 ayat (1) dan (2) UU ITE</span> mengatur larangan mengubah, memindahkan, atau mentransfer Informasi dan/atau Dokumen Elektronik milik orang lain tanpa hak. Sanksinya pada <span class="text-slate-200 font-semibold">Pasal 48 ayat (1)</span>: penjara paling lama 8 tahun dan/atau denda paling banyak Rp2 miliar; dan <span class="text-slate-200 font-semibold">Pasal 48 ayat (2)</span>: penjara paling lama 9 tahun dan/atau denda paling banyak Rp3 miliar.</li>
+                    </ul>
+                    <p class="text-[10px] text-slate-500 leading-relaxed">
+                        Pemilik berhak menempuh jalur hukum terhadap setiap pelanggaran. Untuk menggunakan sebagian karya ini, silakan hubungi pemilik terlebih dahulu melalui halaman Kontak.
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ================= NOTIFIKASI BERHASIL MASUK ================= -->
+    <div id="welcome-toast" role="status" aria-live="polite">
+        <div class="bg-slate-900 border border-emerald-500/40 rounded-2xl shadow-2xl shadow-emerald-500/10 overflow-hidden">
+            <div class="flex items-center gap-3 px-4 py-3">
+                <div class="w-10 h-10 bg-emerald-500/10 text-emerald-400 rounded-xl flex items-center justify-center border border-emerald-500/30 flex-shrink-0">
+                    <i class="fa-solid fa-circle-check text-lg"></i>
+                </div>
+                <div class="min-w-0">
+                    <p class="text-sm font-bold text-white">Berhasil masuk!</p>
+                    <p class="text-xs text-slate-400 truncate">Selamat datang, <span id="toast-name" class="text-emerald-400 font-semibold"></span></p>
+                </div>
+            </div>
+            <div class="toast-bar"></div>
+        </div>
+    </div>
+
+    <!-- ================= MUSIK LATAR (YouTube) - SELALU MENYALA ================= -->
+    <div id="yt-player" aria-hidden="true"></div>
+    <div id="music-widget" style="pointer-events:none;">
+        <p id="music-hint" class="bg-slate-900/95 border border-slate-700 text-slate-300 text-[11px] px-3 py-1.5 rounded-lg shadow-lg">
+            <i class="fa-solid fa-hand-pointer text-blue-400 mr-1"></i>Ketuk di mana saja untuk menyalakan suara
+        </p>
+        <div id="music-badge" class="flex items-center gap-2 px-4 py-2.5 bg-slate-900/95 border border-slate-700 text-white text-xs font-semibold rounded-full shadow-xl backdrop-blur select-none">
+            <i id="music-icon" class="fa-solid fa-volume-xmark text-blue-400"></i>
+            <span id="music-label">Musik</span>
+        </div>
+    </div>
+
+    <script>
+        // ===== MUSIK LATAR: SELALU MENYALA (tidak ada tombol untuk mematikan) =====
+        (function () {
+            const VIDEO_ID = 'RO75uUZiAw0';
+            const VOLUME = 60;
+            let player = null, ready = false, soundOn = false, wantSound = false;
+
+            const icon = document.getElementById('music-icon');
+            const label = document.getElementById('music-label');
+            const hint = document.getElementById('music-hint');
+
+            try { localStorage.removeItem('rzr_music'); } catch (e) {}
+
+            function ui() {
+                icon.className = soundOn
+                    ? 'fa-solid fa-music text-emerald-400 animate-pulse'
+                    : 'fa-solid fa-volume-xmark text-blue-400';
+                label.textContent = soundOn ? 'Musik Menyala' : 'Musik (ketuk untuk suara)';
+                hint.classList.toggle('hidden', soundOn);
+            }
+
+            function enableSound() {
+                if (!ready) { wantSound = true; return; }
+                player.unMute();
+                player.setVolume(VOLUME);
+                player.playVideo();
+                soundOn = true;
+                ui();
+            }
+
+            // Browser memblokir suara otomatis, jadi suara menyala pada sentuhan/klik pertama
+            const unlock = () => {
+                enableSound();
+                if (soundOn || wantSound) {
+                    ['click', 'touchend', 'keydown'].forEach(ev => document.removeEventListener(ev, unlock, true));
+                }
+            };
+            ['click', 'touchend', 'keydown'].forEach(ev => document.addEventListener(ev, unlock, true));
+
+            // Penjaga: paksa musik terus jalan dan tidak bisa dimatikan/dibisukan
+            setInterval(() => {
+                if (!ready) return;
+                try {
+                    if (player.getPlayerState() !== YT.PlayerState.PLAYING) player.playVideo();
+                    if (soundOn) {
+                        if (player.isMuted()) player.unMute();
+                        if (player.getVolume() < VOLUME) player.setVolume(VOLUME);
+                    }
+                } catch (e) {}
+            }, 1500);
+
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden && ready) player.playVideo();
+            });
+            window.addEventListener('focus', () => { if (ready) player.playVideo(); });
+
+            window.onYouTubeIframeAPIReady = function () {
+                player = new YT.Player('yt-player', {
+                    width: 200, height: 200, videoId: VIDEO_ID,
+                    playerVars: { autoplay: 1, controls: 0, loop: 1, playlist: VIDEO_ID, playsinline: 1, rel: 0, disablekb: 1, fs: 0, modestbranding: 1 },
+                    events: {
+                        onReady: (e) => {
+                            ready = true;
+                            e.target.mute();
+                            e.target.setVolume(VOLUME);
+                            if (wantSound) enableSound(); else e.target.playVideo();
+                            ui();
+                        },
+                        onStateChange: (e) => {
+                            const S = YT.PlayerState;
+                            if (e.data === S.ENDED || e.data === S.PAUSED || e.data === S.CUED) {
+                                setTimeout(() => player.playVideo(), 300);
+                            }
+                        }
+                    }
+                });
+            };
+
+            const s = document.createElement('script');
+            s.src = 'https://www.youtube.com/iframe_api';
+            document.head.appendChild(s);
+            ui();
+        })();
+    </script>
+
+    <script>
+        // ===== RENDER GAMBAR KE CANVAS (CEGAH SAVE IMAGE DI HP) =====
+        function loadCvCanvas(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
+            img.src = 'CV Mochamad Rizky Ramadhan.jpeg';
+            img.onload = () => {
+                canvas.width = img.naturalWidth;
+                canvas.height = img.naturalHeight;
+                ctx.drawImage(img, 0, 0);
+            };
+        }
+
+        // ===== DETEKSI WINDOW BLUR & SHORTCUT KEYBOARD =====
+        window.addEventListener('blur', () => {
+            const warning = document.getElementById('cv-blur-warning');
+            if (warning) warning.classList.remove('hidden');
+            const canvas = document.getElementById('cv-canvas');
+            if (canvas) canvas.style.opacity = '0';
+        });
+
+        window.addEventListener('focus', () => {
+            const warning = document.getElementById('cv-blur-warning');
+            if (warning) warning.classList.add('hidden');
+            const canvas = document.getElementById('cv-canvas');
+            if (canvas) canvas.style.opacity = '1';
+        });
+
+        window.addEventListener('keyup', (e) => {
+            if (e.key === 'PrintScreen') {
+                navigator.clipboard.writeText('');
+                const canvas = document.getElementById('cv-canvas');
+                if (canvas) canvas.style.display = 'none';
+                setTimeout(() => { if (canvas) canvas.style.display = 'block'; }, 2000);
+            }
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && (e.key === 'p' || e.key === 'P' || e.key === 's' || e.key === 'S')) {
+                e.preventDefault();
+            }
+        });
+
+        // ===== DATA PROYEK =====
+        const WA = 'https://wa.me/62895401061300?text=';
+        const projects = [
+            ['Asisten AI Jarvis', 'Asisten kecerdasan buatan (AI) interaktif berbasis web. Untuk menggunakan layanan ini, pengguna wajib membeli API Key terlebih dahulu melalui WhatsApp.', 'fa-solid fa-robot', 'blue', 'favorite tools system', ['AI Assistant', 'API Key Berbayar', 'Jarvis AI'], 'https://asisten-ai-jarvis.rzr.my.id/', 'Buka Asisten Jarvis', ['Beli API Key via WhatsApp', WA + 'Halo%20RZR%2C%20saya%20ingin%20membeli%20API%20Key%20untuk%20Asisten%20AI%20Jarvis.'], true],
+            ['Website Virus Simulator', 'Eksperimen web interaktif dan simulasi hiburan bertema sistem keamanan dengan antarmuka yang unik.', 'fa-solid fa-triangle-exclamation', 'red', 'tools', ['Simulation','Interactive','Web App'], 'https://website-virus.rzr.my.id/', 'Buka Website'],
+            ['AbsensiBos — Presensi Digital', 'Aplikasi pencatatan presensi berbasis web secara real-time. Memudahkan pemantauan riwayat kehadiran dan rekapitulasi data otomatis.', 'fa-solid fa-user-check', 'blue', 'system school', ['JavaScript','Supabase','Tailwind'], 'https://absensi.rzr.my.id/', 'Buka Aplikasi'],
+            ['Website Absensi Guru', 'Sistem pengelolaan presensi khusus tenaga pengajar dan staf guru sekolah dengan perekaman data kehadiran yang rapi dan terstruktur.', 'fa-solid fa-user-tie', 'indigo', 'system school', ['Absensi Guru','Sekolah','Web App'], 'https://website-absensi-guru.rzr.my.id/', 'Buka Sistem Guru'],
+            ['Absensi Online Siswa', 'Portal absensi harian online untuk siswa sekolah. Memfasilitasi konfirmasi kehadiran secara fleksibel dan akurat.', 'fa-solid fa-users', 'sky', 'system school', ['Absensi Siswa','Real-time','Tailwind'], 'https://absensi-online-siswa.rzr.my.id/', 'Buka Absensi Siswa'],
+            ['Sistem Informasi BK', 'Aplikasi Manajemen Bimbingan Konseling (BK) untuk mencatat poin pelanggaran, konseling siswa, dan rekapitulasi perkembangan perilaku murid.', 'fa-solid fa-clipboard-user', 'teal', 'system school', ['Konseling','Sistem BK','Web App'], 'https://sistem-bk.rzr.my.id/', 'Buka Sistem BK'],
+            ['Website Perpustakaan', 'Sistem Informasi Perpustakaan Digital untuk pencarian katalog buku, manajemen peminjaman, serta pengembalian koleksi literatur.', 'fa-solid fa-book', 'amber', 'system school', ['Perpustakaan','Katalog Buku','Database'], 'https://website-perpustakaan.rzr.my.id/', 'Buka Perpustakaan'],
+            ['Exambrowser Web', 'Platform ujian online berbasis web yang aman untuk mencegah kecurangan saat pengerjaan evaluasi dan tes siswa.', 'fa-solid fa-shield-halved', 'red', 'school system', ['Exambrowser','Ujian Online','Security'], 'https://exambrowser.rzr.my.id/', 'Buka Exambrowser'],
+            ['Website Pengingat PR', 'Aplikasi pengingat tugas sekolah dan Pekerjaan Rumah (PR) interaktif untuk manajemen waktu belajar siswa yang disiplin.', 'fa-solid fa-bell', 'yellow', 'school tools', ['Task Tracker','Pengingat PR','Web App'], 'https://website-pengingat-pr.rzr.my.id/', 'Buka Pengingat PR'],
+            ['Simulasi TKA IT', 'Platform simulasi Tes Kemampuan Akademik (TKA) bidang Teknologi Informasi untuk latihan soal dan pemetaan kompetensi pengembang.', 'fa-solid fa-laptop-code', 'cyan', 'school tools', ['Simulasi TKA','IT Exam','Interactive'], 'https://website-simulasi-tka-it.rzr.my.id/', 'Mulai Simulasi'],
+            ['Kasir Kantin Sekolah', 'Sistem kasir Point of Sale (POS) digital untuk membantu transaksi penjualan kantin sekolah secara cepat dan praktis.', 'fa-solid fa-cash-register', 'emerald', 'finance school', ['POS Kantin','Kasir Digital','V1'], 'https://kasir-kantin.rzr.my.id/', 'Buka Kasir Kantin'],
+            ['Website Kasir Kantin', 'Versi website kasir kantin untuk mengelola penjualan dan transaksi kantin melalui aplikasi berbasis web.', 'fa-solid fa-store', 'teal', 'finance school', ['Web App','Point of Sale','V2'], 'https://website-kasir-kantin.rzr.my.id/', 'Buka Website Kasir'],
+            ['Website Kasir Alat', 'Sistem kasir Point of Sale (POS) berbasis web untuk mengelola penjualan, stok barang, dan transaksi toko alat secara praktis dan cepat.', 'fa-solid fa-toolbox', 'emerald', 'finance system', ['POS Alat','Kasir Digital','Web App'], 'https://website-kasir-alat.rzr.my.id/', 'Buka Kasir Alat'],
+            ['TabunganKu — Manajemen Tabungan', 'Platform pencatatan keuangan mandiri dan pelacakan target tabungan. Dilengkapi visualisasi grafik pemasukan/pengeluaran.', 'fa-solid fa-wallet', 'emerald', 'finance', ['Web App','Database','Chart UI'], 'https://tabungan.rzr.my.id/', 'Buka Aplikasi'],
+            ['Website Utang Ku — Pencatat Utang', 'Aplikasi web untuk mencatat dan memantau utang piutang secara rapi, lengkap dengan daftar transaksi dan status pelunasan.', 'fa-solid fa-hand-holding-dollar', 'orange', 'finance tools', ['Utang Piutang','Pencatatan','Web App'], 'https://website-utang-ku.rzr.my.id/', 'Buka Utang Ku'],
+            ['Kalkulator Digital Web', 'Alat hitung digital modern berbasis web untuk perhitungan matematis praktis dengan antarmuka yang clean.', 'fa-solid fa-calculator', 'purple', 'tools finance', ['Kalkulator','JavaScript','Web Utility'], 'https://kalkulator-digital.rzr.my.id/', 'Buka Kalkulator'],
+            ['RZR Tools — Kumpulan Tools Online', 'Kumpulan alat bantu online untuk kebutuhan sehari-hari dan pekerjaan developer, praktis digunakan langsung melalui browser.', 'fa-solid fa-screwdriver-wrench', 'cyan', 'tools', ['Online Tools','Developer Tools','Web Utility'], 'https://tools.rzr.my.id/', 'Buka RZR Tools'],
+            ['Movio — Streaming Movie Hub', 'Platform eksplorasi dan katalog film interaktif dengan tampilan modern untuk mencari judul film populer.', 'fa-solid fa-film', 'pink', 'tools', ['Movio','Movie API','Streaming UI'], 'https://movio.rzr.my.id/', 'Jelajahi Movio'],
+            ['Sonjaya — Portofolio Spesialis PLN', 'Website portofolio profesional buatan kustom untuk Muhammad Sonjaya, spesialis teknis sistem kelistrikan & energi PLN.', 'fa-solid fa-bolt', 'yellow', 'services', ['Custom Web','Client Portfolio','PLN Expert'], 'https://sonjaya.rzr.my.id/', 'Lihat Portofolio Sonjaya'],
+            ['RZR Web — Jasa Pembuatan Website', 'Platform layanan pembuatan website kustom untuk UMKM, landing page pemasaran, hingga portofolio dengan performa cepat.', 'fa-solid fa-laptop-code', 'purple', 'services', ['Landing Page','SEO Ready','Vercel'], 'https://jasa-pembuatan-website.rzr.my.id/', 'Lihat Layanan', ['Pesan via WhatsApp', WA + 'Halo%20RZR%2C%20saya%20ingin%20memesan%20jasa%20pembuatan%20website.']],
+            ['Jasa Pembuatan Laporan PKL', 'Layanan bantuan penyusunan dan penataan laporan PKL dengan format yang rapi dan harga terjangkau. Hubungi kami untuk konsultasi dan informasi layanan.', 'fa-solid fa-file-lines', 'cyan', 'services', ['Laporan PKL','Dokumen','Jasa'], 'https://website.jasa.pembuatan.laporan.pkl.rzr.my.id/', 'Lihat Layanan', ['Konsultasi via WhatsApp', WA + 'Halo%20RZR%2C%20saya%20ingin%20bertanya%20tentang%20jasa%20pembuatan%20laporan%20PKL.']],
+            ['RPL Class — Portal Kelas', 'Portal kelas untuk mendukung kebutuhan informasi dan aktivitas pembelajaran siswa Rekayasa Perangkat Lunak.', 'fa-solid fa-graduation-cap', 'blue', 'system school', ['Portal Kelas','Education','Web App'], 'https://web-rpl.rzr.my.id/', 'Buka Portal Kelas'],
+            ['Movio Tube — Video Platform', 'Platform video berbasis web untuk menjelajahi dan menikmati konten video melalui tampilan yang practical.', 'fa-brands fa-youtube', 'pink', 'tools', ['Video Platform','Streaming','Web App'], 'https://website-movio-tube.rzr.my.id/', 'Buka Movio Tube'],
+            ['Website Video Link Ku', 'Tools sederhana untuk mengakses dan mengelola tautan video melalui satu halaman website.', 'fa-solid fa-link', 'cyan', 'tools', ['Video Links','Tools','Web App'], 'https://website-video-link-ku.rzr.my.id/', 'Buka Tools'],
+            ['RZR Photobox — Virtual Photobox', 'Aplikasi photobox berbasis web interaktif. Mengambil foto strip, menerapkan bingkai custom, dan mengunduh hasilnya.', 'fa-solid fa-camera-retro', 'pink', 'tools', ['Webcam API','Interactive','Canvas'], 'https://photobox.rzr.my.id/', 'Coba Photobox'],
+            ['Tebak Kata — Game Edukasi', 'Permainan asah otak interaktif berbasis web untuk menebak susunan kata. Dilengkapi sistem skor dan petunjuk.', 'fa-solid fa-gamepad', 'cyan', 'game', ['Interactive Game','JavaScript','Tailwind'], 'https://tebak-kata.rzr.my.id/', 'Mainkan Game'],
+            ['Memory Card — Game Asah Otak', 'Permainan mencocokkan kartu memori interaktif berbasis web dengan timer dan sistem hitung langkah.', 'fa-solid fa-brain', 'indigo', 'game', ['Memory Game','Gratis / Free','JavaScript'], 'https://game-memory.rzr.my.id/', 'Mainkan Gratis'],
+            ['Website Siswa', 'Website untuk kebutuhan siswa sekolah, dibangun responsif agar mudah diakses lewat HP maupun laptop.', 'fa-solid fa-user-graduate', 'orange', 'system school', ['Siswa','Sekolah','Web App'], 'https://website-siswa.rzr.my.id/', 'Buka Website Siswa'],
+            ['Website Sistem Parkir', 'Sistem parkir berbasis web untuk membantu pencatatan kendaraan masuk dan keluar secara lebih rapi dan terstruktur.', 'fa-solid fa-square-parking', 'lime', 'system', ['Sistem Parkir','Pencatatan','Web App'], 'https://website-sistem-parkir.rzr.my.id/', 'Buka Sistem Parkir'],
+            ['Website Sistem RS', 'Sistem informasi manajemen rumah sakit berbasis web untuk pengelolaan data medis, antrean pasien, dan administrasi fasilitas kesehatan.', 'fa-solid fa-hospital', 'rose', 'system', ['Sistem RS','Kesehatan','Web App'], 'https://website-sistem-rs.rzr.my.id/', 'Buka Sistem RS']
+        ];
+
+        // ===== RENDER KARTU =====
+        function cardHTML([title, desc, icon, c, cats, tags, url, cta, wa, isFav]) {
+            const favBorder = isFav ? 'border-amber-500/60 ring-1 ring-amber-500/20 shadow-lg shadow-amber-500/5' : `border-slate-800 hover:border-${c}-500/50`;
+            return `
+            <div class="project-card ${cats} group relative bg-slate-900/80 rounded-2xl p-6 border ${favBorder} transition-all duration-300 flex flex-col justify-between hover:shadow-xl hover:shadow-${c}-500/5">
+                ${isFav ? `
+                <div class="absolute top-4 right-4 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[11px] font-bold">
+                    <i class="fa-solid fa-star text-[10px]"></i> Favorit
+                </div>` : ''}
+                <div class="space-y-4">
+                    <div class="w-12 h-12 bg-${c}-500/10 text-${c}-400 rounded-xl flex items-center justify-center text-xl font-bold border border-${c}-500/20">
+                        <i class="${icon}"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white group-hover:text-${c}-400 transition-colors ${isFav ? 'pr-20' : ''}">${title}</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed">${desc}</p>
+                    <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-${c}-300">
+                        ${tags.map(t => `<span class="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-md">${t}</span>`).join('')}
+                    </div>
+                </div>
+                <div class="pt-6 border-t border-slate-800/80 mt-6 flex flex-col gap-2">
+                    <a href="${url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm text-${c}-400 hover:text-${c}-300 font-semibold transition-all">
+                        ${cta} <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                    ${wa ? `<a href="${wa[1]}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm rounded-xl transition-all">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> ${wa[0]}
+                    </a>` : ''}
+                </div>
+            </div>`;
+        }
+
+        function renderProjects(category = 'all') {
+            const grid = document.getElementById('project-grid');
+            const list = projects.filter(p => category === 'all' || p[4].split(' ').includes(category));
+            grid.innerHTML = list.map(cardHTML).join('');
+        }
+
+        // ===== MODAL CV =====
+        function openCvModal() {
+            document.getElementById('cv-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            loadCvCanvas('modal-cv-canvas');
+        }
+
+        function closeCvModal() {
+            document.getElementById('cv-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // ===== VALIDASI LOGIN =====
+        function validateLoginName(showShake = false) {
+            const input = document.getElementById('login-name');
+            const err = document.getElementById('login-error');
+            const btn = document.getElementById('login-btn');
+            const consent = document.getElementById('login-consent').checked;
+            const val = input.value.trim();
+            document.getElementById('login-counter').textContent = `${input.value.length}/40`;
+
+            let msg = '';
+            if (!val) msg = 'Nama lengkap wajib diisi sebelum masuk.';
+            else if (val.length < 3) msg = 'Nama minimal 3 huruf.';
+            else if (!/^[\p{L}\s.'-]+$/u.test(val)) msg = 'Gunakan huruf saja (tanpa angka atau simbol).';
+
+            // pesan error hanya tampil setelah pengguna mulai mengetik atau menekan Masuk
+            const touched = input.value.length > 0 || showShake;
+            err.classList.toggle('hidden', !msg || !touched);
+            err.querySelector('span').textContent = msg;
+            input.classList.toggle('invalid', !!msg && touched);
+
+            const ok = !msg && consent;
+            btn.disabled = !ok;
+            if (showShake && !ok) {
+                const card = input.closest('.max-w-md');
+                card.classList.remove('shake'); void card.offsetWidth; card.classList.add('shake');
+            }
+            return !msg;
+        }
+
+        // ===== LOGIN / LOGOUT =====
+        window.addEventListener('DOMContentLoaded', () => {
+            renderProjects();
+            document.getElementById('project-total').textContent = projects.length;
+            loadCvCanvas('cv-canvas');
+            document.querySelectorAll('.copyright-year').forEach(el => el.textContent = new Date().getFullYear());
+            const savedName = localStorage.getItem('rzr_visitor_name');
+            if (savedName && savedName.trim()) {
+                proceedToPortfolio(savedName.trim(), true);
+            }
+        });
+
+        function handleLoginSubmit(event) {
+            event.preventDefault();
+            if (!validateLoginName(true) || !document.getElementById('login-consent').checked) return;
+            const visitorName = document.getElementById('login-name').value.trim();
+            if (!visitorName) return;
+
+            const btn = document.getElementById('login-btn');
+            btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-2"></i> Mengirim data & masuk...`;
+            btn.disabled = true;
+
+            localStorage.setItem('rzr_visitor_name', visitorName);
+
+            // Kirim ke Google Sheets (tidak menghalangi proses masuk)
+            const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzmDLqFVJGyceVDaE6sLXBbGKZN3XFRRdn7YyRlxqdHiOCD_SW88SDmlXMXLeeBFsem/exec';
+            const SHEET_TOKEN = 'rzr-ta4lwdb'; // harus sama dengan TOKEN di Apps Script
+            if (SHEET_URL.startsWith('https://')) {
+                // Metode GET: paling andal untuk Apps Script (tanpa masalah CORS)
+                const q = new URLSearchParams({ token: SHEET_TOKEN, name: visitorName }).toString();
+                fetch(SHEET_URL + '?' + q, { method: 'GET', mode: 'no-cors', keepalive: true }).catch(() => {
+                    try { new Image().src = SHEET_URL + '?' + q; } catch (e) {}
+                });
+            }
+
+            const templateParams = {
+                visitor_name: visitorName,
+                to_name: 'Mochamad Rizky Ramadhan',
+                to_email: 'rizkyganteng050981@gmail.com',
+                recipient_email: 'rizkyganteng050981@gmail.com',
+                login_time: new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' }),
+                message: `Pengunjung bernama ${visitorName} baru saja masuk ke portofolio RZR.DEV.`
+            };
+
+            const SERVICE_ID = "service_vc5gb3w";
+            const TEMPLATE_ID = "template_cl3ycsx";
+            const resetBtn = () => {
+                btn.innerHTML = `<span>Masuk ke Portofolio</span> <i class="fa-solid fa-arrow-right text-xs"></i>`;
+                btn.disabled = false;
+            };
+
+            if (window.emailjs && typeof emailjs.send === 'function') {
+                emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
+                    .then(() => { resetBtn(); proceedToPortfolio(visitorName); })
+                    .catch((error) => {
+                        console.error('Email gagal dikirim:', error);
+                        resetBtn();
+                        proceedToPortfolio(visitorName);
+                    });
+            } else {
+                console.error('EmailJS tidak tersedia.');
+                resetBtn();
+                proceedToPortfolio(visitorName);
+            }
+        }
+
+        function proceedToPortfolio(name, silent = false) {
+            document.getElementById('login-page').classList.add('hidden');
+            document.getElementById('portfolio-content').classList.remove('hidden');
+            document.getElementById('nav-visitor-name').innerText = name;
+            const mobileName = document.getElementById('mobile-visitor-name');
+            if (mobileName) mobileName.innerText = name;
+            window.scrollTo(0, 0);
+            if (!silent) showWelcomeToast(name);
+        }
+
+        let toastTimer;
+        function showWelcomeToast(name) {
+            const toast = document.getElementById('welcome-toast');
+            document.getElementById('toast-name').textContent = name;
+            toast.classList.remove('show');
+            void toast.offsetWidth;
+            toast.classList.add('show');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => toast.classList.remove('show'), 3500);
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('rzr_visitor_name');
+            document.getElementById('portfolio-content').classList.add('hidden');
+            document.getElementById('login-page').classList.remove('hidden');
+            document.getElementById('login-name').value = '';
+            document.getElementById('login-consent').checked = false;
+            validateLoginName();
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        // ===== FILTER PROYEK =====
+        function filterProjects(category, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                b.classList.remove('bg-blue-600', 'text-white');
+                b.classList.add('bg-slate-800', 'text-slate-400');
+            });
+            btn.classList.remove('bg-slate-800', 'text-slate-400');
+            btn.classList.add('bg-blue-600', 'text-white');
+
+            renderProjects(category);
+        }
+
+        // ===== KONTAK (via WhatsApp) =====
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('contact-name').value;
+            const sender = document.getElementById('contact-sender').value;
+            const message = document.getElementById('contact-message').value;
+            const text = `Halo RZR, saya ${name} (${sender}). Pesan: ${message}`;
+            window.open(`https://wa.me/62895401061300?text=${encodeURIComponent(text)}`, '_blank');
+        }
+    </script>
+</body>
+</html>
